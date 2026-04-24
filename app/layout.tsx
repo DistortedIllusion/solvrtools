@@ -1,0 +1,23 @@
+import type { Metadata } from "next";
+import { SiteShell } from "@/components/site-shell";
+import { siteConfig } from "@/config/site";
+import "./globals.css";
+
+export const metadata: Metadata = {
+  title: siteConfig.name,
+  description: siteConfig.description,
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" className="h-full antialiased">
+      <body className="min-h-full bg-slate-950 font-sans text-slate-100">
+        <SiteShell>{children}</SiteShell>
+      </body>
+    </html>
+  );
+}
