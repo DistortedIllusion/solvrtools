@@ -344,6 +344,10 @@ export const toolDefinitions: ToolDefinition[] = [
     title: "Date Difference Calculator",
     category: "time",
     description: "Measure the number of days and weeks between two dates.",
+    intro: [
+      "Use this date difference calculator to find the number of days, weeks, or other elapsed time between two calendar dates. This tool is useful for planning schedules, measuring project timelines, tracking deadlines, and answering everyday date-based questions quickly.",
+      "By entering a start date and an end date, you can instantly see the time between them without counting days manually.",
+    ],
     keywords: ["date difference calculator", "days between dates"],
     inputs: [
       {
@@ -374,12 +378,42 @@ export const toolDefinitions: ToolDefinition[] = [
         question: "Why show weeks too?",
         answer: "Weeks give a quick planning view for longer spans.",
       },
+      {
+        question: "How do you calculate the difference between two dates?",
+        answer: "The difference between two dates is calculated by measuring the elapsed time from the start date to the end date. A date difference calculator does this automatically and can present the result in days, weeks, or other supported units.",
+      },
+      {
+        question: "Does this calculator include both the start date and end date?",
+        answer: "That depends on the calculator’s implementation. Many date difference tools measure the elapsed time between the two dates rather than counting both dates inclusively, so the result reflects the gap between them.",
+      },
+      {
+        question: "Why is date difference harder to calculate by hand?",
+        answer: "Date calculations can be tricky because months have different lengths and leap years can affect totals. A calculator helps avoid manual counting mistakes.",
+      },
+      {
+        question: "Can I use this calculator for deadlines and project timelines?",
+        answer: "Yes, this calculator is useful for project planning, deadlines, scheduling, event preparation, and any situation where you need to know the amount of time between two dates.",
+      },
+      {
+        question: "What is the difference between days and approximate weeks?",
+        answer: "Days show the exact elapsed total in days, while approximate weeks divide that total by 7 to give a more general time estimate.",
+      },
+      {
+        question: "Can this calculator be used for future dates?",
+        answer: "Yes, you can use it for both past and future date ranges as long as you want to measure the time between two calendar dates.",
+      },
     ],
     relatedTools: ["age-calculator", "time-duration-calculator"],
-    formulaSummary: "The calculator subtracts one date from the other and converts the difference into days and weeks.",
+    formulaSummary:
+      "This calculator compares two calendar dates and measures the elapsed time between them. Depending on the tool’s output format, the result may be shown in total days, approximate weeks, or other easy-to-read units.\n\nIn general, the calculation works like this:\n\n- A start date is selected\n- An end date is selected\n- The calculator measures the time that passes between those two points on the calendar\n- The result is then displayed in the supported output format\n\nThis is helpful because date differences are not always easy to calculate by hand. Month lengths vary, leap years can affect totals, and even a short range can be harder to count accurately than it first appears.\n\nThat makes this calculator useful for planning events, project work, travel timing, contracts, or any situation where you need a quick elapsed-date estimate.",
     example: {
       inputs: { startDate: "2026-01-01", endDate: "2026-02-15" },
-      explanation: "This shows the elapsed days and approximate weeks between two calendar dates.",
+      explanation:
+        "Find the elapsed time between January 1, 2026 and February 15, 2026. This example shows how the calculator converts the gap between two calendar dates into a practical elapsed-time result. Instead of counting day by day, you can immediately see the total difference.",
+      results: [
+        { label: "Difference", value: "45 days" },
+        { label: "Approximate weeks", value: "6.43 weeks" },
+      ],
     },
   },
   {
