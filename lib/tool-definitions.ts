@@ -231,6 +231,10 @@ export const toolDefinitions: ToolDefinition[] = [
     title: "Compound Interest Calculator",
     category: "finance",
     description: "Estimate growth and interest earned from compounding over time.",
+    intro: [
+      "Use this compound interest calculator to estimate how a balance can grow over time based on the starting principal, annual interest rate, compounding frequency, and number of years. This tool is useful for projecting savings growth, investment balances, and other scenarios where interest is added repeatedly over time.",
+      "By adjusting the inputs, you can quickly compare how different rates, time periods, and compounding schedules affect your future balance.",
+    ],
     keywords: ["compound interest calculator", "investment growth"],
     inputs: [
       {
@@ -297,13 +301,42 @@ export const toolDefinitions: ToolDefinition[] = [
         question: "What does compounds per year mean?",
         answer: "It is how often interest is added to the balance each year, such as 12 for monthly compounding.",
       },
+      {
+        question: "What is compound interest?",
+        answer: "Compound interest is interest calculated on both the original principal and the interest already earned over time. This allows the balance to grow faster than simple interest.",
+      },
+      {
+        question: "How does compounding frequency affect results?",
+        answer: "Compounding frequency determines how often interest is added to the balance. More frequent compounding can slightly increase the final amount because interest begins earning additional interest sooner.",
+      },
+      {
+        question: "What affects compound growth the most?",
+        answer: "The most important factors are the starting balance, the interest rate, the compounding frequency, and the amount of time the money remains invested. In many cases, time has the greatest long-term impact.",
+      },
+      {
+        question: "Is compound interest the same as simple interest?",
+        answer: "No. Simple interest is calculated only on the original principal, while compound interest is calculated on the principal plus previously earned interest.",
+      },
+      {
+        question: "Can I use this calculator for savings and investments?",
+        answer: "Yes, this calculator can be used for savings accounts, investments, and other balances that grow through compound interest.",
+      },
+      {
+        question: "Why does money grow faster over longer periods?",
+        answer: "Over longer time periods, each round of earned interest has more opportunities to generate additional interest. That compounding effect becomes more noticeable the longer the balance remains invested.",
+      },
     ],
     relatedTools: ["loan-payment-calculator", "percentage-calculator"],
     formulaSummary:
-      "Compound growth uses principal × (1 + rate ÷ compounds per year) raised to compounds per year × years.",
+      "This calculator estimates future value using the standard compound interest formula:\n\nA = P(1 + r / n)^(nt)\n\nWhere:\n\n- A = final amount\n- P = starting principal\n- r = annual interest rate as a decimal\n- n = number of compounding periods per year\n- t = number of years\n\nCompound interest works by applying interest not only to the original principal, but also to interest that has already been added in previous periods. Over time, this causes growth to build on itself.\n\nIn general:\n\n- A larger starting principal increases the base amount that earns interest\n- A higher interest rate increases the growth rate\n- More frequent compounding can increase the ending balance\n- A longer time period usually has the biggest impact because the balance has more time to compound",
     example: {
       inputs: { principal: 10000, annualRate: 5, timesPerYear: 12, years: 10 },
-      explanation: "This shows how a starting balance grows with regular monthly compounding over a decade.",
+      explanation:
+        "Estimate the future value of a $10,000 starting balance at 5% annual interest, compounded monthly, over 10 years. This example shows how a starting balance grows when interest is compounded monthly over a long period. Even without additional contributions, compounding increases the total balance because each interest calculation builds on the previous one.",
+      results: [
+        { label: "Final balance", value: "approximately $16,470.09" },
+        { label: "Interest earned", value: "approximately $6,470.09" },
+      ],
     },
   },
   {
