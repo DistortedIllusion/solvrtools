@@ -663,6 +663,10 @@ export const toolDefinitions: ToolDefinition[] = [
     title: "Length Converter",
     category: "conversions",
     description: "Convert common distance and length units quickly.",
+    intro: [
+      "Use this length converter to quickly convert distances between common units such as meters, feet, kilometers, inches, and yards. This is helpful for travel planning, construction and DIY projects, fitness tracking, and any situation where measurements appear in a different unit than you’re used to.",
+      "By entering a value and choosing the from/to units, you can instantly convert lengths without having to remember or manually apply conversion formulas.",
+    ],
     keywords: ["length converter", "meters to feet"],
     inputs: [
       {
@@ -718,12 +722,35 @@ export const toolDefinitions: ToolDefinition[] = [
         question: "Can I use decimals?",
         answer: "Yes. Decimal values are useful for precise measurement conversions.",
       },
+      {
+        question: "What units can I convert between?",
+        answer: "This tool converts between common length units such as millimeters, centimeters, meters, kilometers, inches, feet, and yards, depending on which units are enabled in the current interface.",
+      },
+      {
+        question: "When would I use a length converter?",
+        answer: "A length converter is useful when working with international measurements, reading building or engineering drawings, planning travel distances, checking sports field dimensions, or converting specs from online stores.",
+      },
+      {
+        question: "Why do metric and imperial units give such different numbers?",
+        answer: "Metric units like meters and kilometers and imperial units like feet and yards use different base measurements, so the numbers will not match. A converter applies the correct factor so the physical distance stays the same even though the number and unit change.",
+      },
+      {
+        question: "Does this tool round the result?",
+        answer: "The converter may round results to a practical number of decimal places so they are easier to read. The underlying conversion factors are standard, and only the displayed value is rounded.",
+      },
+      {
+        question: "Is this accurate enough for technical work?",
+        answer: "For everyday use, planning, and most projects, the level of precision provided is more than sufficient. For high-precision engineering or scientific work, you may want to confirm the required number of decimal places or significant figures for your specific application.",
+      },
     ],
     relatedTools: ["temperature-converter"],
-    formulaSummary: "The calculator converts the input into meters, then converts meters into the selected target unit.",
+    formulaSummary:
+      "This converter uses standard length conversion factors to translate a value from one unit to another.\n\nFor example:\n\n- Meters to feet: feet = meters × 3.28084\n- Kilometers to yards: yards = kilometers × 1093.61\n\nWhen you enter a value and select the from and to units, the tool:\n\n- takes your input value\n- multiplies it by the correct conversion factor\n- returns the converted distance in the target unit\n\nThis makes it easy to understand distances in the units you are most comfortable with, without doing the math by hand.",
     example: {
       inputs: { value: 10, fromUnit: "meters", toUnit: "feet" },
-      explanation: "10 meters converts to approximately 32.8084 feet.",
+      explanation:
+        "Convert a distance from meters to feet. This example shows how a metric distance translates into imperial units. Knowing that 10 meters is a bit over 32 feet can help when reading building plans, equipment specs, or sports measurements that use different unit systems.",
+      results: [{ label: "Converted length", value: "10 meters converts to approximately 32.8084 feet." }],
     },
   },
   {
