@@ -887,6 +887,10 @@ export const toolDefinitions: ToolDefinition[] = [
     title: "Square Footage Calculator",
     category: "home",
     description: "Calculate area from length and width for rooms, flooring, and planning projects.",
+    intro: [
+      "Use this square footage calculator to find the area of a room, wall, floor, or other rectangular space. This tool is useful for estimating flooring, paint, tile, carpet, and other material needs during planning, renovation, or home improvement projects.",
+      "By entering the length and width of a space, you can quickly calculate its total square footage without doing the math manually.",
+    ],
     keywords: ["square footage calculator", "room area calculator"],
     inputs: [
       {
@@ -922,12 +926,39 @@ export const toolDefinitions: ToolDefinition[] = [
         question: "Can I use decimals?",
         answer: "Yes. Decimal measurements help when working with real rooms and materials.",
       },
+      {
+        question: "How do I calculate square footage?",
+        answer: "To calculate square footage, multiply the length of the space by its width. For example, a room that is 12 feet by 15 feet has an area of 180 square feet.",
+      },
+      {
+        question: "What is square footage used for?",
+        answer: "Square footage is commonly used for estimating flooring, tile, carpet, paint coverage, and other renovation or home improvement materials. It is also useful for understanding the size of a room or area.",
+      },
+      {
+        question: "Can I use this calculator for flooring estimates?",
+        answer: "Yes, this calculator is useful for basic flooring estimates because it helps you determine the area of the floor surface.",
+      },
+      {
+        question: "Does this work for walls and paint projects?",
+        answer: "Yes, if you measure a wall’s height and width, this calculator can be used to estimate wall area. That can help with paint, wallpaper, or paneling calculations.",
+      },
+      {
+        question: "What if the room is not a perfect rectangle?",
+        answer: "If the space is not rectangular, you can break it into smaller rectangles, calculate each section separately, and then add the totals together.",
+      },
+      {
+        question: "Why is square footage important for home projects?",
+        answer: "Square footage helps you estimate how much material you need, compare costs, and avoid overbuying or underbuying supplies for a project.",
+      },
     ],
     relatedTools: ["paint-calculator"],
-    formulaSummary: "Square footage is length multiplied by width.",
+    formulaSummary:
+      "This calculator finds the area of a rectangular space using a simple formula:\n\nArea = length × width\n\nThe result is expressed in square units, such as square feet, when the measurements are entered in feet.\n\nThis type of calculation is commonly used for:\n\n- flooring estimates\n- paint and wall coverage planning\n- tile and carpet measurement\n- room sizing\n- basic renovation planning\n\nSquare footage is one of the most common ways to estimate the size of a space, and even a simple room measurement can be useful when planning materials, pricing, or layout decisions.",
     example: {
       inputs: { length: 12, width: 15 },
-      explanation: "A 12 by 15 foot room has 180 square feet of area.",
+      explanation:
+        "Find the square footage of a room that is 12 feet long and 15 feet wide. This example shows how square footage is calculated by multiplying length by width. The result can then be used to estimate materials such as flooring, paint coverage, or carpet for the space.",
+      results: [{ label: "Area", value: "180 square feet" }],
     },
   },
 ];
