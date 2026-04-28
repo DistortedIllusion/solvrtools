@@ -769,6 +769,10 @@ export const toolDefinitions: ToolDefinition[] = [
     title: "Case Converter",
     category: "text",
     description: "Convert text into uppercase, lowercase, title case, or sentence case.",
+    intro: [
+      "Use this case converter to quickly change text into different capitalization styles such as uppercase, lowercase, title case, and other supported formats. This tool is useful for cleaning up copied text, formatting headings, editing content, and preparing writing for documents, websites, or social posts.",
+      "By entering text and choosing a conversion mode, you can instantly reformat the text without manually editing each word.",
+    ],
     keywords: ["case converter", "uppercase lowercase converter"],
     inputs: [
       {
@@ -805,12 +809,35 @@ export const toolDefinitions: ToolDefinition[] = [
         question: "Can I convert long text?",
         answer: "Yes. The converter can handle full paragraphs for quick formatting changes.",
       },
+      {
+        question: "What is a case converter?",
+        answer: "A case converter is a tool that changes the capitalization style of text. It can quickly reformat text into uppercase, lowercase, title case, or other supported letter-case styles.",
+      },
+      {
+        question: "When would I use a case converter?",
+        answer: "A case converter is useful when cleaning up copied text, formatting headings, preparing labels, editing documents, or making text more consistent across a project.",
+      },
+      {
+        question: "Can I convert text without retyping it?",
+        answer: "Yes, you can paste text into the converter and apply the selected formatting mode automatically instead of editing each word manually.",
+      },
+      {
+        question: "Does this tool preserve the original meaning of the text?",
+        answer: "Yes, a case converter changes the capitalization pattern of the text, not the underlying words or meaning.",
+      },
+      {
+        question: "Why is title case useful?",
+        answer: "Title case can make headings, titles, and labels look cleaner and more professional, especially when text is copied in all lowercase or inconsistent capitalization.",
+      },
     ],
     relatedTools: ["word-counter"],
-    formulaSummary: "The calculator applies the selected text transformation mode to the input string.",
+    formulaSummary:
+      "This tool transforms the capitalization pattern of the text you enter based on the selected conversion mode.\n\nDepending on the mode, the converter can:\n\n- change all letters to uppercase\n- change all letters to lowercase\n- convert text into title case\n- apply other supported capitalization formats in the current tool\n\nThis is useful when text has inconsistent formatting or when you need to quickly prepare content for headings, labels, buttons, articles, notes, or other writing tasks.\n\nInstead of rewriting text by hand, a case converter applies the selected formatting pattern automatically.",
     example: {
       inputs: { text: "solvrtools makes text cleanup easy", mode: "titlecase" },
-      explanation: "Title case transforms the sentence into a more headline-ready format.",
+      explanation:
+        "Convert the text 'solvrtools makes text cleanup easy' into title case. This example shows how title case changes the text into a more heading-ready format by capitalizing the main words in the sentence.",
+      results: [{ label: "Converted text", value: "Solvrtools Makes Text Cleanup Easy" }],
     },
   },
   {
