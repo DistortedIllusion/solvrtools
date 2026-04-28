@@ -700,6 +700,10 @@ export const toolDefinitions: ToolDefinition[] = [
     title: "Word Counter",
     category: "text",
     description: "Count words, characters, and characters without spaces in text instantly.",
+    intro: [
+      "Use this word counter to quickly count words and characters in a block of text. This tool is useful for writing checks, article drafts, assignments, social posts, and any situation where you need a fast text-length overview.",
+      "By pasting or typing your text into the input area, you can instantly see word count and character totals without counting manually.",
+    ],
     keywords: ["word counter", "character count"],
     inputs: [
       {
@@ -718,19 +722,46 @@ export const toolDefinitions: ToolDefinition[] = [
     ],
     faq: [
       {
-        question: "How are words counted?",
-        answer: "Words are counted by splitting the text on whitespace after trimming leading and trailing spaces.",
-      },
-      {
         question: "Can I use this for essays and posts?",
         answer: "Yes. It is useful for writing limits, summaries, and social posts.",
       },
+      {
+        question: "What does a word counter do?",
+        answer: "A word counter measures the number of words in a block of text. Many word counters also show character totals and other basic writing metrics.",
+      },
+      {
+        question: "How are words counted?",
+        answer: "Words are generally counted by separating text into individual units based on spaces and punctuation boundaries, according to the tool’s counting logic.",
+      },
+      {
+        question: "What is the difference between characters with spaces and without spaces?",
+        answer: "Characters with spaces include every visible letter, number, punctuation mark, and space. Characters without spaces exclude the spaces between words.",
+      },
+      {
+        question: "Can I use this for essays, articles, or assignments?",
+        answer: "Yes, a word counter is useful for checking text length in essays, blog posts, assignments, summaries, and many other writing tasks.",
+      },
+      {
+        question: "Why would I need a character count?",
+        answer: "Character count is helpful when working with forms, headlines, social posts, metadata fields, and other spaces where a text-length limit matters.",
+      },
+      {
+        question: "Does punctuation count as characters?",
+        answer: "Yes, punctuation marks are usually included in the character total because they are part of the text.",
+      },
     ],
     relatedTools: ["case-converter"],
-    formulaSummary: "The calculator counts words by whitespace, then separately counts all characters and non-space characters.",
+    formulaSummary:
+      "This calculator analyzes the text you enter and returns basic writing metrics such as total word count and character totals.\n\nIn general:\n\n- Words are counted by identifying separate text units divided by spaces or punctuation boundaries, depending on the tool’s logic\n- Character totals measure the number of characters in the text\n- Some counters distinguish between characters with spaces and characters without spaces\n\nThese numbers are useful for writing tasks where length matters, such as articles, essays, summaries, ad copy, form fields, and social content.\n\nA word counter can help you stay within limits, compare draft lengths, and quickly check whether a piece of writing is too short, too long, or approximately on target.",
     example: {
       inputs: { text: "SolvrTools makes utility pages easier to launch." },
-      explanation: "This returns the word count plus two character totals for quick writing checks.",
+      explanation:
+        "Count the words and characters in this sentence. This example shows how the calculator gives a quick writing-length summary from a short piece of text. These totals can help when checking draft size, field limits, or simple writing requirements.",
+      results: [
+        { label: "Word count", value: "7" },
+        { label: "Characters (with spaces)", value: "48" },
+        { label: "Characters (without spaces)", value: "42" },
+      ],
     },
   },
   {
