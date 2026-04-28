@@ -353,7 +353,11 @@ export const toolDefinitions: ToolDefinition[] = [
     slug: "age-calculator",
     title: "Age Calculator",
     category: "time",
-    description: "Calculate age in full years from a birth date.",
+    description: "Calculate exact age in years, months, and days from a birth date and as-of date.",
+    intro: [
+      "Use this age calculator to find an exact age in years, months, and days based on a birth date and a chosen as-of date. This tool is useful for personal reference, forms, records, school or work requirements, and any situation where you need a precise age instead of a rough estimate.",
+      "By entering a birth date and an as-of date, you can quickly calculate a clear age breakdown and avoid doing calendar math by hand.",
+    ],
     keywords: ["age calculator", "calculate age"],
     inputs: [
       {
@@ -381,18 +385,45 @@ export const toolDefinitions: ToolDefinition[] = [
     faq: [
       {
         question: "Can I leave the as-of date blank?",
-        answer: "Yes. If blank in the UI later, it can default to today.",
+        answer: "This version of the tool expects an explicit as-of date so the result reflects the exact date you want to measure against.",
       },
       {
         question: "Does it handle birthdays that have not happened yet this year?",
-        answer: "Yes. The calculator subtracts a year when the current date is before the birthday.",
+        answer: "Yes. The calculator adjusts the result when the as-of date falls before the birthday in the selected year.",
+      },
+      {
+        question: "How is age calculated?",
+        answer: "Age is calculated by finding the difference between a birth date and an as-of date, then expressing that difference in completed years, remaining months, and remaining days.",
+      },
+      {
+        question: "Why do I need an as-of date?",
+        answer: "The as-of date tells the calculator the exact date on which age should be measured. This is helpful if you want to know your age today, on a future date, or on a past date for a form or record.",
+      },
+      {
+        question: "Is exact age different from age in completed years?",
+        answer: "Yes. Completed years only tell you how many full birthdays have passed. Exact age includes the additional months and days beyond the last birthday.",
+      },
+      {
+        question: "Does this calculator account for leap years?",
+        answer: "Yes, an exact age calculation should account for real calendar differences such as leap years and varying month lengths to produce a more accurate result.",
+      },
+      {
+        question: "Can I calculate age for a future date?",
+        answer: "Yes, you can enter a future as-of date to estimate how old someone will be on that date.",
+      },
+      {
+        question: "Why not just subtract the birth year from the current year?",
+        answer: "Subtracting the years gives only a rough result. It does not account for whether the birthday has occurred yet in the selected year, and it does not include the remaining months and days.",
       },
     ],
     relatedTools: ["date-difference-calculator", "time-duration-calculator"],
-    formulaSummary: "Age is the year difference adjusted based on whether the birthday has occurred yet.",
+    formulaSummary:
+      "This calculator finds the difference between a date of birth and a selected as-of date, then breaks that difference into completed years, remaining months, and remaining days.\n\nIn general, the calculation works like this:\n\n- First, it determines the number of completed years between the two dates\n- Then it calculates the remaining full months\n- Finally, it calculates the remaining days after those years and months are accounted for\n\nThis produces a more precise result than simply subtracting one year from another. Exact age calculations need to account for month lengths, whether a birthday has already occurred, and leap years when applicable.\n\nThat makes this calculator useful when you need a clear calendar-based age result rather than just an approximate age in years.",
     example: {
       inputs: { birthDate: "1990-06-15", asOfDate: "2026-04-19" },
-      explanation: "This shows age in completed years as of a chosen date.",
+      explanation:
+        "Find the exact age for someone born on June 15, 1990, as of April 19, 2026. This example shows how the calculator measures completed years first, then adds the remaining months and days to give a more exact age result.",
+      results: [{ label: "Age", value: "35 years, 10 months, 4 days" }],
     },
   },
   {
