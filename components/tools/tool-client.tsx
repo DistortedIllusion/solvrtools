@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import { trackEvent } from "@/lib/analytics";
 import type { ToolDefinition } from "@/lib/tool-definitions";
 import { runToolCalculation } from "@/lib/tool-runner";
 import {
@@ -215,6 +216,12 @@ export function ToolLayoutWrapper({
   );
 
   function handleSubmit() {
+    trackEvent("calculate_click", {
+      tool_slug: definition.slug,
+      category_slug: definition.category,
+      page_path: `/tools/${definition.category}/${definition.slug}`,
+    });
+
     try {
       const nextResults = runToolCalculation(definition.category, definition.slug, values);
       setResults(nextResults);

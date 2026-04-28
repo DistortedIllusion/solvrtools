@@ -35,3 +35,11 @@ export function pageview(url: string, measurementId: string) {
     page_path: url,
   });
 }
+
+export function trackEvent(eventName: string, parameters?: Record<string, string | number | boolean>) {
+  if (typeof window === "undefined" || !window.gtag) {
+    return;
+  }
+
+  window.gtag("event", eventName, parameters);
+}
