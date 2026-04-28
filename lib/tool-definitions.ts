@@ -146,6 +146,10 @@ export const toolDefinitions: ToolDefinition[] = [
     title: "Percentage Calculator",
     category: "finance",
     description: "Find a percentage of a number quickly for discounts, increases, and comparisons.",
+    intro: [
+      "Use this percentage calculator to quickly find percentages, percentage values, and proportional amounts. Whether you are calculating discounts, tips, markups, tax amounts, grades, or everyday math problems, this tool helps you work out percentage-based values in seconds.",
+      "By entering a percentage and a value, you can instantly see the resulting amount and better understand how percentages apply in practical situations.",
+    ],
     keywords: ["percentage calculator", "percent of a number"],
     inputs: [
       {
@@ -191,12 +195,35 @@ export const toolDefinitions: ToolDefinition[] = [
         question: "Can I use decimals?",
         answer: "Yes. Both the base value and the percentage can include decimals.",
       },
+      {
+        question: "What is a percentage?",
+        answer: "A percentage is a way of expressing a number as a part of 100. For example, 25% means 25 out of 100, or one-quarter of the total.",
+      },
+      {
+        question: "How do I calculate a percentage of a number?",
+        answer: "To calculate a percentage of a number, divide the percentage by 100 and multiply the result by the total number. For example, 15% of 240 is 0.15 × 240 = 36.",
+      },
+      {
+        question: "What can I use a percentage calculator for?",
+        answer: "A percentage calculator can be used for many everyday calculations, including discounts, taxes, tips, commissions, test scores, markups, and comparing changes in value.",
+      },
+      {
+        question: "Why do I need to divide the percentage by 100?",
+        answer: "Percent means ‘per hundred,’ so dividing by 100 converts the percentage into a decimal that can be multiplied by the total value.",
+      },
+      {
+        question: "Can this calculator be used for discounts and sales tax?",
+        answer: "Yes, this calculator can help estimate discounts, sales tax amounts, tips, and similar percentage-based values. For example, you can calculate 20% off a price or find the tax amount on a purchase.",
+      },
     ],
     relatedTools: ["loan-payment-calculator", "compound-interest-calculator"],
-    formulaSummary: "The result is value × percentage ÷ 100.",
+    formulaSummary:
+      "This calculator solves a basic percentage problem using a standard percentage formula:\n\nPercentage value = percentage ÷ 100 × total value\n\nIn simple terms, the calculator takes the percentage you enter, converts it into a decimal, and multiplies it by the total value.\n\nFor example:\n\n- 10% of 200 = 0.10 × 200 = 20\n- 25% of 80 = 0.25 × 80 = 20\n- 15% of 240 = 0.15 × 240 = 36\n\nThis type of calculation is commonly used for discounts, taxes, commissions, tips, grades, interest estimates, and many other day-to-day calculations.",
     example: {
       inputs: { value: 240, percentage: 15 },
-      explanation: "15% of 240 equals 36.",
+      explanation:
+        "Find 15% of 240. This example shows how a percentage can be converted into a usable number. Instead of thinking of 15% as an abstract rate, the calculator shows the actual amount represented by that percentage.",
+      results: [{ label: "15% of 240", value: "36" }],
     },
   },
   {
