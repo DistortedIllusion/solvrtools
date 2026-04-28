@@ -498,6 +498,10 @@ export const toolDefinitions: ToolDefinition[] = [
     title: "Time Duration Calculator",
     category: "time",
     description: "Find the elapsed time between two clock times, including overnight spans.",
+    intro: [
+      "Use this time duration calculator to find the elapsed time between a start time and an end time. This tool is useful for shift lengths, travel timing, work logs, scheduling, and any everyday situation where you need to know how much time passes between two clock times.",
+      "It can also help with time ranges that cross midnight, making it easier to calculate overnight durations without doing the math manually.",
+    ],
     keywords: ["time duration calculator", "hours between times"],
     inputs: [
       {
@@ -529,12 +533,39 @@ export const toolDefinitions: ToolDefinition[] = [
         question: "What is total minutes for?",
         answer: "It helps when converting the duration into payroll or planning workflows.",
       },
+      {
+        question: "How do I calculate the time between two times?",
+        answer: "To calculate the time between two times, subtract the start time from the end time and account for any borrowed minutes. If the end time is earlier than the start time, the duration may cross midnight.",
+      },
+      {
+        question: "What if the time range crosses midnight?",
+        answer: "If the end time is earlier than the start time, the calculator can treat the range as continuing into the next day. That allows it to return the correct elapsed time for overnight periods.",
+      },
+      {
+        question: "Can I use this for work shifts?",
+        answer: "Yes, this calculator is useful for estimating shift durations, work sessions, overnight coverage, and other scheduled time blocks.",
+      },
+      {
+        question: "Why is time duration harder to calculate by hand?",
+        answer: "Time calculations often involve carrying or borrowing minutes, and overnight time ranges can be especially confusing. A calculator helps avoid mistakes and gives a faster answer.",
+      },
+      {
+        question: "Can I use this for travel or event timing?",
+        answer: "Yes, this calculator can be used for travel durations, event schedules, appointments, and any other time-based planning.",
+      },
+      {
+        question: "What does elapsed time mean?",
+        answer: "Elapsed time is the total amount of time that passes from a starting point to an ending point.",
+      },
     ],
     relatedTools: ["date-difference-calculator", "age-calculator"],
-    formulaSummary: "The calculator converts both times to minutes, adjusts for overnight spans, and subtracts start from end.",
+    formulaSummary:
+      "This calculator compares a start time and an end time to determine the elapsed duration between them.\n\nIn general, the calculation works like this:\n\n- A start time is entered\n- An end time is entered\n- The calculator measures how much time passes between the two\n- If the end time is earlier than the start time, the calculator treats the range as crossing midnight\n\nThis is useful because time calculations can get confusing when minutes need to be carried over or when a duration continues into the next day. The calculator handles those cases automatically and returns the elapsed time in a clear format.",
     example: {
       inputs: { startTime: "22:15", endTime: "01:45" },
-      explanation: "This shows a duration that crosses midnight and still returns the correct elapsed time.",
+      explanation:
+        "Find the duration from 22:15 to 01:45. This example shows how the calculator handles a time range that crosses midnight. Instead of producing a negative result, it correctly treats the end time as occurring on the next day.",
+      results: [{ label: "Duration", value: "3 hours 30 minutes" }],
     },
   },
   {
