@@ -658,6 +658,10 @@ export const toolDefinitions: ToolDefinition[] = [
     title: "Paint Calculator",
     category: "home",
     description: "Estimate paint needed based on wall dimensions, coats, coverage rate, and openings.",
+    intro: [
+      "Use this paint calculator to estimate how much paint you need for a wall or room surface based on its size, the number of coats, and common openings such as doors and windows. This tool helps you avoid buying too little or too much paint when planning a painting project.",
+      "By adjusting the wall dimensions, number of coats, and paint coverage rate, you can get a quick estimate of the amount of paint required for both small touch-ups and larger home improvement projects.",
+    ],
     keywords: ["paint calculator", "paint needed calculator"],
     inputs: [
       {
@@ -745,12 +749,39 @@ export const toolDefinitions: ToolDefinition[] = [
         question: "Why enter coats?",
         answer: "Extra coats increase the total paint required.",
       },
+      {
+        question: "How do I estimate how much paint I need?",
+        answer: "To estimate paint needed, calculate the total wall area, subtract any areas that will not be painted such as doors and windows, multiply by the number of coats, and divide by the paint coverage rate. This calculator does those steps for you automatically.",
+      },
+      {
+        question: "Should I include doors and windows in my paint estimate?",
+        answer: "In many cases, no. Doors and windows reduce the paintable area, so excluding them can give you a more accurate estimate. This calculator accounts for them using simple default opening areas.",
+      },
+      {
+        question: "Why does the number of coats matter?",
+        answer: "Each coat requires additional paint. If you plan to apply two coats instead of one, the total paint needed will increase because the paintable area is effectively covered twice.",
+      },
+      {
+        question: "What is paint coverage rate?",
+        answer: "Paint coverage rate is the amount of surface area one gallon or litre of paint can cover. The actual number depends on the product, surface texture, and application method, but manufacturers usually provide a recommended coverage estimate.",
+      },
+      {
+        question: "Is this paint calculator exact?",
+        answer: "No, it is an estimate. Real paint usage can vary depending on surface texture, paint thickness, surface preparation, porosity, and whether you are using a brush, roller, or sprayer.",
+      },
+      {
+        question: "Can I use this calculator for metric measurements?",
+        answer: "Yes, the calculator supports both imperial and metric workflows so you can estimate paint needs using the unit system that matches your project.",
+      },
     ],
     relatedTools: ["square-footage-calculator"],
-    formulaSummary: "The calculator multiplies width by height, subtracts standard door and window area, then scales the remaining area by the number of coats and the selected coverage rate.",
+    formulaSummary:
+      "This calculator estimates paint needed by first calculating the total wall area, subtracting the area taken up by doors and windows, and then multiplying the remaining paintable surface by the number of coats.\n\nThe calculation takes into account:\n- Wall width and height\n- Number of doors\n- Number of windows\n- Number of coats\n- Paint coverage rate\n- Unit system (imperial or metric)\n\nIn general, the process works like this:\n\n- Wall area = width × height\n- Opening area is subtracted for doors and windows\n- Remaining paintable area is multiplied by the number of coats\n- Total paintable area is divided by the paint coverage rate\n\nThis gives an estimated amount of paint needed for the project. Because real-world coverage can vary by paint type, surface texture, and application method, the result should be treated as a practical estimate rather than an exact guarantee.",
     example: {
       inputs: { unitSystem: "imperial", width: 20, height: 8, doors: 1, windows: 2, coats: 2, coveragePerGallon: 350 },
-      explanation: "A 20 by 8 foot wall with one door, two windows, two coats, and typical imperial coverage needs about 0.63 gallons of paint.",
+      explanation:
+        "Estimate paint for a 20 by 8 foot wall with one door, two windows, two coats, and typical imperial paint coverage. This example shows how the calculator accounts for wall size, openings, and multiple coats. Even a fairly large wall may require less paint than expected once doors and windows are excluded from the total paintable surface.",
+      results: [{ label: "Estimated paint needed", value: "about 0.63 gallons" }],
     },
   },
   {
