@@ -573,6 +573,10 @@ export const toolDefinitions: ToolDefinition[] = [
     title: "Temperature Converter",
     category: "conversions",
     description: "Convert between Celsius, Fahrenheit, and Kelvin.",
+    intro: [
+      "Use this temperature converter to quickly convert values between common temperature scales such as Celsius and Fahrenheit. This tool is useful for cooking, weather checks, science problems, travel, and any situation where you need to see what a temperature means in another unit.",
+      "By entering a value and choosing the from/to units, you can instantly convert temperatures without having to remember or manually apply conversion formulas.",
+    ],
     keywords: ["temperature converter", "celsius to fahrenheit"],
     inputs: [
       {
@@ -619,12 +623,39 @@ export const toolDefinitions: ToolDefinition[] = [
         question: "Why use Kelvin?",
         answer: "Kelvin is commonly used in scientific and engineering contexts.",
       },
+      {
+        question: "How do I convert Celsius to Fahrenheit?",
+        answer: "To convert Celsius to Fahrenheit, multiply the Celsius value by 9/5 and then add 32. For example, 100°C becomes 212°F.",
+      },
+      {
+        question: "How do I convert Fahrenheit to Celsius?",
+        answer: "To convert Fahrenheit to Celsius, subtract 32 from the Fahrenheit value and then multiply the result by 5/9.",
+      },
+      {
+        question: "When would I need a temperature converter?",
+        answer: "A temperature converter is useful when cooking with recipes from other countries, checking weather forecasts in different units, solving science or math problems, or translating technical information.",
+      },
+      {
+        question: "What are the most common temperature units?",
+        answer: "Celsius and Fahrenheit are the most frequently used in everyday life. Some scientific contexts also use Kelvin, but everyday weather and cooking typically rely on Celsius or Fahrenheit.",
+      },
+      {
+        question: "Why do Celsius and Fahrenheit have different zero points?",
+        answer: "Celsius and Fahrenheit use different reference points and scale sizes. For example, water freezes at 0°C and 32°F, and boils at 100°C and 212°F, which is why conversion formulas are needed.",
+      },
+      {
+        question: "Does this tool round the result?",
+        answer: "Depending on the implementation, the converter may round the result to a practical number of decimal places for easier reading. The underlying formula remains the same.",
+      },
     ],
     relatedTools: ["length-converter"],
-    formulaSummary: "The calculator converts the input to Celsius first, then from Celsius to the selected target unit.",
+    formulaSummary:
+      "This calculator uses standard temperature conversion formulas to translate values from one unit to another.\n\nFor example:\n\n- Celsius to Fahrenheit: F = C × 9/5 + 32\n- Fahrenheit to Celsius: C = (F − 32) × 5/9\n\nThe converter:\n\n- takes your input value\n- applies the appropriate formula based on the selected from and to units\n- returns the converted temperature in the target unit\n\nThis is helpful when recipes, weather reports, or technical materials use a different temperature scale than you are familiar with.",
     example: {
       inputs: { value: 100, fromUnit: "celsius", toUnit: "fahrenheit" },
-      explanation: "100°C converts to 212°F.",
+      explanation:
+        "Convert boiling water temperature from Celsius to Fahrenheit. This example shows one of the most common conversions. At standard pressure, water boils at 100 degrees Celsius, which is equal to 212 degrees Fahrenheit.",
+      results: [{ label: "Converted temperature", value: "100°C converts to 212°F" }],
     },
   },
   {
