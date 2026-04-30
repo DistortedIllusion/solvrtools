@@ -13,6 +13,7 @@ export const metadata = buildMetadata({
   title: "Utility Tools and Calculators",
   description:
     "A dark, mobile-first homepage shell for SEO-focused calculators, utilities, and solver tools.",
+  pathname: "/",
 });
 
 export default function Home() {

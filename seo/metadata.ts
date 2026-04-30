@@ -4,9 +4,11 @@ import { siteConfig } from "@/config/site";
 export function buildMetadata({
   title,
   description,
+  pathname,
 }: {
   title: string;
   description: string;
+  pathname: string;
 }): Metadata {
   const fullTitle = `${title} | ${siteConfig.name}`;
 
@@ -15,12 +17,12 @@ export function buildMetadata({
     description,
     metadataBase: new URL(siteConfig.url),
     alternates: {
-      canonical: siteConfig.url,
+      canonical: pathname,
     },
     openGraph: {
       title: fullTitle,
       description,
-      url: siteConfig.url,
+      url: pathname,
       siteName: siteConfig.name,
       type: "website",
     },

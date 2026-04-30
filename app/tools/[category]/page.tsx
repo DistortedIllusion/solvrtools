@@ -26,12 +26,14 @@ export async function generateMetadata({
     return buildMetadata({
       title: "Category Not Found",
       description: "The requested tool category does not exist.",
+      pathname: `/tools/${category}`,
     });
   }
 
   return buildMetadata({
     title: categoryData.name,
     description: categoryData.description,
+    pathname: `/tools/${category}`,
   });
 }
 
