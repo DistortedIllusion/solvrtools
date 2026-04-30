@@ -85,17 +85,6 @@ export default async function CategoryLandingPage({
         </div>
       </section>
 
-      <section className="mt-14">
-        <SectionHeader
-          title="Popular tool types"
-          description="Here are some of the common tool types and topics covered in this category."
-        />
-        <ul className="mt-6 list-disc space-y-2 pl-5 text-sm leading-7 text-slate-400">
-          {categoryData.examples.map((example) => (
-            <li key={example}>{example}</li>
-          ))}
-        </ul>
-      </section>
 
       <section className="mt-14">
         <SectionHeader
