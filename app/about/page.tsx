@@ -26,7 +26,7 @@ export default function AboutPage() {
         <SurfaceCard>
           <h2 className="text-xl font-semibold text-white">What comes next</h2>
           <p className="mt-3 text-sm leading-6 text-slate-400">
-            More calculators, better launch polish, stronger SEO coverage, and continued expansion into high-value everyday tools.
+            More calculators, broader category coverage, and ongoing improvements to make each tool faster, clearer, and more useful.
           </p>
         </SurfaceCard>
       </div>

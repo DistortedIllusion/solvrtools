@@ -12,7 +12,7 @@ import { buildMetadata } from "@/seo/metadata";
 export const metadata = buildMetadata({
   title: "Utility Tools and Calculators",
   description:
-    "A dark, mobile-first homepage shell for SEO-focused calculators, utilities, and solver tools.",
+    "Fast, free online calculators and practical tools for finance, time, conversions, text, home projects, and everyday problem-solving.",
   pathname: "/",
 });
 
@@ -56,7 +56,7 @@ export default function Home() {
         <Container>
           <SectionHeader
             title="Most popular tools"
-            description="Placeholder popular-tool cards to validate the shared homepage and card layout before tool implementation begins."
+            description="Start with some of the most useful calculators and everyday tools people reach for most often."
           />
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {popularTools.map((tool) => (

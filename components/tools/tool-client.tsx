@@ -255,7 +255,7 @@ export function ToolLayoutWrapper({
             <SurfaceCard>
               <SectionHeader
                 title="Before you calculate"
-                description="Quick context to help you use this tool with confidence."
+                description="A quick overview to help you understand what this tool does and how to use it well."
               />
               <div className="mt-4 space-y-4 text-sm leading-7 text-slate-400">
                 {definition.intro.map((paragraph) => (
@@ -277,7 +277,7 @@ export function ToolLayoutWrapper({
           <SurfaceCard>
             <SectionHeader
               title="How it works"
-              description="Short formula and logic summary for this tool."
+              description="See the formula, calculation method, and reasoning behind the result."
             />
             <div className="mt-4 space-y-4 text-sm leading-7 text-slate-400">
               {definition.formulaSummary.split("\n\n").map((paragraph) => (
