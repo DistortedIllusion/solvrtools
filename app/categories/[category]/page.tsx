@@ -62,15 +62,15 @@ export default async function CategoryLandingPage({
       />
 
       <PageHeader
-        eyebrow="Category landing page"
+        eyebrow="Category"
         title={`${categoryData.name} tools`}
         description={categoryData.description}
       />
 
       <section className="mt-12">
         <SectionHeader
-          title="Included tools"
-          description="Category pages should introduce the topic, then route users into the most useful specific tools."
+          title="Tools in this category"
+          description={`Explore ${categoryData.name.toLowerCase()} calculators and utilities designed to help with common tasks and decisions.`}
         />
         <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {tools.map((tool) => (
@@ -85,22 +85,11 @@ export default async function CategoryLandingPage({
         </div>
       </section>
 
-      <section className="mt-14">
-        <SectionHeader
-          title="Example tools for scale"
-          description="These examples show how each category can expand without overlapping with the others."
-        />
-        <ul className="mt-6 list-disc space-y-2 pl-5 text-sm leading-7 text-slate-400">
-          {categoryData.examples.map((example) => (
-            <li key={example}>{example}</li>
-          ))}
-        </ul>
-      </section>
 
       <section className="mt-14">
         <SectionHeader
-          title="Related navigation"
-          description="Category pages should connect users to the tool index and sibling category discovery."
+          title="Keep exploring"
+          description="Browse more categories or jump to the full tools directory to find exactly what you need."
         />
         <div className="mt-6">
           <RelatedLinksSection
