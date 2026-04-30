@@ -23,12 +23,14 @@ export async function generateMetadata({
     return buildMetadata({
       title: "Tool Not Found",
       description: "The requested tool page does not exist.",
+      pathname: `/tools/${category}/${slug}`,
     });
   }
 
   return buildMetadata({
     title: tool.title,
     description: tool.description,
+    pathname: `/tools/${category}/${slug}`,
   });
 }
 

@@ -4,6 +4,7 @@ import { buildMetadata } from "@/seo/metadata";
 export const metadata = buildMetadata({
   title: "About",
   description: "Learn what SolvrTools offers and how it helps with everyday calculations and practical decisions.",
+  pathname: "/about",
 });
 
 export default function AboutPage() {

@@ -6,6 +6,7 @@ import { buildMetadata } from "@/seo/metadata";
 export const metadata = buildMetadata({
   title: "All Tools",
   description: "Browse calculators and utilities for finance, time, conversions, text, home projects, and everyday tasks.",
+  pathname: "/tools",
 });
 
 export default function ToolsPage() {

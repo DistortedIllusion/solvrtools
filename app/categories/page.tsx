@@ -6,6 +6,7 @@ import { buildMetadata } from "@/seo/metadata";
 export const metadata = buildMetadata({
   title: "Categories",
   description: "Browse SolvrTools categories for finance, time, conversions, text, home projects, and other everyday tasks.",
+  pathname: "/categories",
 });
 
 export default function CategoriesPage() {
