@@ -4,7 +4,7 @@ import { siteConfig } from "../config/site.ts";
 import { toolDefinitions } from "../lib/tool-definitions.ts";
 
 test("canonical tool catalog contains all current tool definitions", () => {
-  assert.equal(toolDefinitions.length, 12);
+  assert.equal(toolDefinitions.length, 25);
 
   for (const tool of toolDefinitions) {
     assert.ok(tool.slug);

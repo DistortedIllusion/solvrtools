@@ -82,6 +82,28 @@ export const siteConfig = {
         "Concrete Calculator",
       ],
     },
+    {
+      slug: "health",
+      name: "Health",
+      description: "Health and wellness tools for body measurements, daily planning, and simple fitness-related calculations.",
+      examples: [
+        "BMI Calculator",
+        "Calorie Calculator",
+        "Water Intake Calculator",
+        "Body Fat Calculator",
+      ],
+    },
+    {
+      slug: "utility",
+      name: "Utility",
+      description: "Simple utility tools for quick randomization, small decisions, and everyday helper actions.",
+      examples: [
+        "Random Number Generator",
+        "Dice Roller",
+        "Coin Flipper",
+        "Simple Picker",
+      ],
+    },
   ] satisfies CategoryDefinition[],
   featuredTools: [
     {
@@ -101,6 +123,18 @@ export const siteConfig = {
       featured: true,
     },
     {
+      slug: "tip-calculator",
+      category: "finance",
+      name: "Tip Calculator",
+      summary: "Calculate how much to tip from a bill total and tip percentage.",
+    },
+    {
+      slug: "savings-goal-calculator",
+      category: "finance",
+      name: "Savings Goal Calculator",
+      summary: "Estimate how long it will take to reach a savings goal using recurring contributions.",
+    },
+    {
       slug: "time-duration-calculator",
       category: "time",
       name: "Time Duration Calculator",
@@ -114,6 +148,18 @@ export const siteConfig = {
       name: "Date Difference Calculator",
       summary: "Measure the time between two calendar dates in practical units.",
       featured: true,
+    },
+    {
+      slug: "time-zone-calculator",
+      category: "time",
+      name: "Time Zone Calculator",
+      summary: "Compare the live current time in two time zones and see the hour difference instantly.",
+    },
+    {
+      slug: "timesheet-calculator",
+      category: "time",
+      name: "Timesheet Calculator",
+      summary: "Calculate total worked time from a start time, end time, and break duration.",
     },
     {
       slug: "temperature-converter",
@@ -131,6 +177,18 @@ export const siteConfig = {
       featured: true,
     },
     {
+      slug: "weight-converter",
+      category: "conversions",
+      name: "Weight Converter",
+      summary: "Convert everyday weight and mass values across metric and imperial units.",
+    },
+    {
+      slug: "volume-converter",
+      category: "conversions",
+      name: "Volume Converter",
+      summary: "Convert common kitchen and household volume units quickly and clearly.",
+    },
+    {
       slug: "word-counter",
       category: "text",
       name: "Word Counter",
@@ -146,6 +204,12 @@ export const siteConfig = {
       featured: true,
     },
     {
+      slug: "reading-time-calculator",
+      category: "text",
+      name: "Reading Time Calculator",
+      summary: "Estimate reading time from pasted text using speed-based reading presets.",
+    },
+    {
       slug: "paint-calculator",
       category: "home",
       name: "Paint Calculator",
@@ -154,11 +218,29 @@ export const siteConfig = {
       featured: true,
     },
     {
+      slug: "tile-calculator",
+      category: "home",
+      name: "Tile Calculator",
+      summary: "Estimate tiles and tile packs needed for a floor or wall area.",
+    },
+    {
+      slug: "concrete-calculator",
+      category: "home",
+      name: "Concrete Calculator",
+      summary: "Estimate how much concrete is needed for a rectangular slab or filled volume.",
+    },
+    {
       slug: "square-footage-calculator",
       category: "home",
       name: "Square Footage Calculator",
       summary: "Calculate floor or room area for planning, estimating, and shopping.",
       featured: true,
+    },
+    {
+      slug: "bmi-calculator",
+      category: "health",
+      name: "BMI Calculator",
+      summary: "Estimate body mass index from height and weight using metric or imperial units.",
     },
   ] satisfies ToolDefinition[],
 } as const;

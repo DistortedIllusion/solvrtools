@@ -28,6 +28,28 @@ test("calculateCompoundInterest returns growth values", () => {
   assert.equal(result.finalAmount, 16470.09);
 });
 
+test("calculateTip returns expected gratuity", () => {
+  const result = logic.calculateTip({
+    billTotal: 85.5,
+    tipPercentage: 18,
+  });
+
+  assert.equal(result.tipAmount, 15.39);
+  assert.equal(result.tipLabel, "18% tip on $85.50");
+});
+
+test("calculateSavingsGoal returns expected contribution timeline", () => {
+  const result = logic.calculateSavingsGoal({
+    goalAmount: 5000,
+    contributionAmount: 200,
+    frequency: "monthly",
+  });
+
+  assert.equal(result.contributionsNeeded, 25);
+  assert.equal(result.estimatedMonths, 25);
+  assert.equal(result.estimatedTimeText, "2 years and 1 months");
+});
+
 test("calculateDateDifference returns absolute days", () => {
   const result = logic.calculateDateDifference({
     startDate: "2026-01-01",
@@ -150,6 +172,123 @@ test("convertLength handles meters to feet", () => {
   assert.equal(result.convertedValue, 32.8084);
 });
 
+test("convertWeight handles pounds to kilograms", () => {
+  const result = logic.convertWeight({
+    value: 150,
+    fromUnit: "pounds",
+    toUnit: "kilograms",
+  });
+
+  assert.equal(result.convertedValue, 68.0389);
+});
+
+test("convertVolume handles cups to milliliters", () => {
+  const result = logic.convertVolume({
+    value: 2,
+    fromUnit: "cups",
+    toUnit: "milliliters",
+  });
+
+  assert.equal(result.convertedValue, 473.1765);
+});
+
+test("generateRandomNumber respects inclusive range", () => {
+  const originalRandom = Math.random;
+  Math.random = () => 0.5;
+
+  const result = logic.generateRandomNumber({ min: 1, max: 10 });
+
+  assert.equal(result.randomNumber, 6);
+  assert.equal(result.rangeLabel, "Generated from 1 to 10.");
+  Math.random = originalRandom;
+});
+
+test("rollDie returns valid result for standard die", () => {
+  const originalRandom = Math.random;
+  Math.random = () => 0.5;
+
+  const result = logic.rollDie({ sides: 20 });
+
+  assert.equal(result.rollResult, 11);
+  assert.equal(result.diceLabel, "Rolled a d20.");
+  Math.random = originalRandom;
+});
+
+test("flipCoin returns tails when random is above threshold", () => {
+  const originalRandom = Math.random;
+  Math.random = () => 0.75;
+
+  const result = logic.flipCoin();
+
+  assert.equal(result.coinResult, "Tails");
+  assert.equal(result.flipLabel, "Single coin flip result.");
+  Math.random = originalRandom;
+});
+
+test("calculateTimeZoneDifference returns readable zone comparison", () => {
+  const result = logic.calculateTimeZoneDifference({
+    currentTimeZone: "UTC",
+    convertedTimeZone: "America/New_York",
+  });
+
+  assert.equal(typeof result.currentTimeZoneTime, "string");
+  assert.equal(typeof result.convertedTimeZoneTime, "string");
+  assert.equal(typeof result.hourDifference, "number");
+  assert.equal(typeof result.differenceLabel, "string");
+});
+
+test("calculateTimesheet subtracts breaks from worked time", () => {
+  const result = logic.calculateTimesheet({
+    startTime: "08:00",
+    endTime: "17:00",
+    breakMinutes: 30,
+  });
+
+  assert.equal(result.totalHours, 8);
+  assert.equal(result.totalMinutes, 30);
+  assert.equal(result.totalWorkedMinutes, 510);
+  assert.equal(result.workedTimeText, "8 hours 30 minutes");
+});
+
+test("calculateReadingTime returns word count and readable estimate", () => {
+  const result = logic.calculateReadingTime({
+    text: "one two three four five six seven eight nine ten",
+    readingSpeed: 200,
+  });
+
+  assert.equal(result.wordCount, 10);
+  assert.equal(result.readingTimeMinutes, 0.05);
+  assert.equal(result.readingTimeText, "3 seconds");
+  assert.equal(result.speedLabel, "200 words per minute reading speed used.");
+});
+
+test("calculateTile returns tile and pack counts", () => {
+  const result = logic.calculateTile({
+    areaInputMode: "dimensions",
+    length: 12,
+    width: 10,
+    tileLength: 12,
+    tileWidth: 12,
+    tilesPerPack: 10,
+  });
+
+  assert.equal(result.totalArea, 120);
+  assert.equal(result.tilesRequired, 120);
+  assert.equal(result.packsRequired, 12);
+});
+
+test("calculateConcrete returns common concrete volume units", () => {
+  const result = logic.calculateConcrete({
+    length: 10,
+    width: 10,
+    height: 0.5,
+  });
+
+  assert.equal(result.cubicFeet, 50);
+  assert.equal(result.cubicYards, 1.85);
+  assert.equal(result.cubicMeters, 1.42);
+});
+
 test("analyzeWordCount returns word and character counts", () => {
   const result = logic.analyzeWordCount({ text: "Hello SolvrTools world" });
   assert.equal(result.words, 3);
@@ -203,4 +342,33 @@ test("calculateSquareFootage returns area", () => {
   });
 
   assert.equal(result.squareFeet, 180);
+  assert.equal(result.areaLabel, "A 12 foot by 15 foot area covers 180 square feet.");
+});
+
+test("calculateBmi returns expected metric BMI and category", () => {
+  const result = logic.calculateBmi({
+    unitSystem: "metric",
+    heightCm: 178,
+    weightKg: 78,
+    heightFeet: 0,
+    heightInches: 0,
+    weightPounds: 0,
+  });
+
+  assert.equal(result.bmi, 24.6);
+  assert.equal(result.category, "Healthy weight");
+});
+
+test("calculateBmi returns expected imperial BMI and category", () => {
+  const result = logic.calculateBmi({
+    unitSystem: "imperial",
+    heightCm: 0,
+    weightKg: 0,
+    heightFeet: 5,
+    heightInches: 10,
+    weightPounds: 172,
+  });
+
+  assert.equal(result.bmi, 24.7);
+  assert.equal(result.category, "Healthy weight");
 });

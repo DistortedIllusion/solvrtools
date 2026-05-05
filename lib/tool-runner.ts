@@ -32,6 +32,17 @@ export function runToolCalculation(category: string, slug: string, values: Recor
         timesPerYear: parseNumber(values.timesPerYear),
         years: parseNumber(values.years),
       });
+    case "tip-calculator":
+      return logic.calculateTip({
+        billTotal: parseNumber(values.billTotal),
+        tipPercentage: parseNumber(values.tipPercentage),
+      });
+    case "savings-goal-calculator":
+      return logic.calculateSavingsGoal({
+        goalAmount: parseNumber(values.goalAmount),
+        contributionAmount: parseNumber(values.contributionAmount),
+        frequency: values.frequency,
+      });
     case "date-difference-calculator":
       return logic.calculateDateDifference({
         startDate: values.startDate,
@@ -47,6 +58,17 @@ export function runToolCalculation(category: string, slug: string, values: Recor
         startTime: values.startTime,
         endTime: values.endTime,
       });
+    case "time-zone-calculator":
+      return logic.calculateTimeZoneDifference({
+        currentTimeZone: values.currentTimeZone,
+        convertedTimeZone: values.convertedTimeZone,
+      });
+    case "timesheet-calculator":
+      return logic.calculateTimesheet({
+        startTime: values.startTime,
+        endTime: values.endTime,
+        breakMinutes: parseNumber(values.breakMinutes),
+      });
     case "temperature-converter":
       return logic.convertTemperature({
         value: parseNumber(values.value),
@@ -58,6 +80,50 @@ export function runToolCalculation(category: string, slug: string, values: Recor
         value: parseNumber(values.value),
         fromUnit: values.fromUnit,
         toUnit: values.toUnit,
+      });
+    case "weight-converter":
+      return logic.convertWeight({
+        value: parseNumber(values.value),
+        fromUnit: values.fromUnit,
+        toUnit: values.toUnit,
+      });
+    case "volume-converter":
+      return logic.convertVolume({
+        value: parseNumber(values.value),
+        fromUnit: values.fromUnit,
+        toUnit: values.toUnit,
+      });
+    case "random-number-generator":
+      return logic.generateRandomNumber({
+        min: parseNumber(values.min),
+        max: parseNumber(values.max),
+      });
+    case "dice-roller":
+      return logic.rollDie({
+        sides: parseNumber(values.sides),
+      });
+    case "coin-flipper":
+      return logic.flipCoin();
+    case "reading-time-calculator":
+      return logic.calculateReadingTime({
+        text: values.text,
+        readingSpeed: parseNumber(values.readingSpeed),
+      });
+    case "tile-calculator":
+      return logic.calculateTile({
+        areaInputMode: values.areaInputMode,
+        length: parseNumber(values.length),
+        width: parseNumber(values.width),
+        area: parseNumber(values.area),
+        tileLength: parseNumber(values.tileLength),
+        tileWidth: parseNumber(values.tileWidth),
+        tilesPerPack: parseNumber(values.tilesPerPack),
+      });
+    case "concrete-calculator":
+      return logic.calculateConcrete({
+        length: parseNumber(values.length),
+        width: parseNumber(values.width),
+        height: parseNumber(values.height),
       });
     case "word-counter":
       return logic.analyzeWordCount({ text: values.text });
@@ -77,6 +143,15 @@ export function runToolCalculation(category: string, slug: string, values: Recor
       return logic.calculateSquareFootage({
         length: parseNumber(values.length),
         width: parseNumber(values.width),
+      });
+    case "bmi-calculator":
+      return logic.calculateBmi({
+        unitSystem: values.unitSystem,
+        heightCm: parseNumber(values.heightCm),
+        weightKg: parseNumber(values.weightKg),
+        heightFeet: parseNumber(values.heightFeet),
+        heightInches: parseNumber(values.heightInches),
+        weightPounds: parseNumber(values.weightPounds),
       });
     default:
       throw new Error(`No calculator configured for ${slug}.`);

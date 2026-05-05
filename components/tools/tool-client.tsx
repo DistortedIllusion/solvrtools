@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { trackEvent } from "@/lib/analytics";
 import type { ToolDefinition } from "@/lib/tool-definitions";
@@ -52,6 +52,42 @@ function getDynamicOutputLabel(definition: ToolDefinition, outputKey: string, va
   return definition.outputs.find((output) => output.key === outputKey)?.label ?? outputKey;
 }
 
+function formatUnitValue(unit: string) {
+  const unitLabels: Record<string, string> = {
+    milligrams: "mg",
+    grams: "g",
+    kilograms: "kg",
+    ounces: "oz",
+    pounds: "lb",
+    tons: "tons",
+    milliliters: "mL",
+    liters: "L",
+    teaspoons: "tsp",
+    tablespoons: "tbsp",
+    cups: "cups",
+    fluidOunces: "fl oz",
+    pints: "pt",
+    quarts: "qt",
+    gallons: "gal",
+  };
+
+  return unitLabels[unit] ?? unit;
+}
+
+function getDynamicOutputSuffix(definition: ToolDefinition, outputKey: string, values: Record<string, string>) {
+  const output = definition.outputs.find((item) => item.key === outputKey);
+
+  if (!output?.suffix?.includes("{dynamic-unit}")) {
+    return output?.suffix;
+  }
+
+  if (["weight-converter", "volume-converter"].includes(definition.slug) && outputKey === "convertedValue") {
+    return ` ${formatUnitValue(values.toUnit ?? "")}`;
+  }
+
+  return output.suffix.replace("{dynamic-unit}", "").trim() ? output.suffix.replace("{dynamic-unit}", "") : undefined;
+}
+
 function buildInitialState(definition: ToolDefinition) {
   return definition.inputs.reduce<Record<string, string>>((acc, field) => {
     const exampleValue = definition.example.inputs[field.name];
@@ -81,6 +117,42 @@ function ToolInputForm({
   onSubmit: () => void;
   error: string | null;
 }) {
+  const visibleFields = definition.inputs.filter((field) => {
+    if (definition.slug === "bmi-calculator") {
+      const unitSystem = values.unitSystem ?? "metric";
+
+      if (["unitSystem"].includes(field.name)) {
+        return true;
+      }
+
+      if (unitSystem === "metric") {
+        return ["heightCm", "weightKg"].includes(field.name);
+      }
+
+      if (unitSystem === "imperial") {
+        return ["heightFeet", "heightInches", "weightPounds"].includes(field.name);
+      }
+    }
+
+    if (definition.slug === "tile-calculator") {
+      const areaInputMode = values.areaInputMode ?? "dimensions";
+
+      if (field.name === "areaInputMode") {
+        return true;
+      }
+
+      if (areaInputMode === "dimensions") {
+        return ["length", "width", "tileLength", "tileWidth", "tilesPerPack"].includes(field.name);
+      }
+
+      if (areaInputMode === "squareFeet") {
+        return ["area", "tileLength", "tileWidth", "tilesPerPack"].includes(field.name);
+      }
+    }
+
+    return true;
+  });
+
   return (
     <SurfaceCard>
       <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
@@ -97,7 +169,7 @@ function ToolInputForm({
         </div>
       ) : null}
       <div className="mt-6 grid gap-4 md:grid-cols-2">
-        {definition.inputs.map((field) => (
+        {visibleFields.map((field) => (
           <label key={field.name} className={field.type === "textarea" ? "md:col-span-2" : ""}>
             <span className="mb-2 block text-sm font-medium text-slate-300">
               {field.label}
@@ -161,11 +233,26 @@ function ToolResultDisplay({
   definition,
   values,
   results,
+  resultVersion,
 }: {
   definition: ToolDefinition;
   values: Record<string, string>;
   results: Record<string, string | number> | null;
+  resultVersion: number;
 }) {
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  useEffect(() => {
+    if (resultVersion === 0) {
+      return;
+    }
+
+    setIsRefreshing(true);
+    const timeout = window.setTimeout(() => setIsRefreshing(false), 450);
+
+    return () => window.clearTimeout(timeout);
+  }, [resultVersion]);
+
   return (
     <SurfaceCard>
       <h2 className="text-2xl font-semibold text-white">Results</h2>
@@ -174,10 +261,22 @@ function ToolResultDisplay({
       </p>
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         {definition.outputs.map((output) => (
-          <div key={output.key} className="rounded-2xl border border-white/10 bg-slate-950/60 p-4">
+          <div
+            key={output.key}
+            className={`rounded-2xl border p-4 transition duration-300 ${
+              isRefreshing
+                ? "border-cyan-300/50 bg-cyan-400/10 shadow-[0_0_0_1px_rgba(103,232,249,0.2)]"
+                : "border-white/10 bg-slate-950/60"
+            }`}
+          >
             <p className="text-sm text-slate-400">{getDynamicOutputLabel(definition, output.key, values)}</p>
             <p className="mt-2 break-words text-xl font-semibold text-white sm:text-2xl">
-              {formatValue(results?.[output.key], output.format, output.prefix, output.suffix)}
+              {formatValue(
+                results?.[output.key],
+                output.format,
+                output.prefix,
+                getDynamicOutputSuffix(definition, output.key, values),
+              )}
             </p>
             {output.description ? (
               <p className="mt-2 text-xs leading-5 text-slate-500">{output.description}</p>
@@ -205,6 +304,7 @@ export function ToolLayoutWrapper({
     }
   });
   const [error, setError] = useState<string | null>(null);
+  const [resultVersion, setResultVersion] = useState(0);
 
   const exampleList = useMemo(
     () =>
@@ -226,6 +326,7 @@ export function ToolLayoutWrapper({
       const nextResults = runToolCalculation(definition.category, definition.slug, values);
       setResults(nextResults);
       setError(null);
+      setResultVersion((current) => current + 1);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
     }
@@ -272,7 +373,12 @@ export function ToolLayoutWrapper({
             onSubmit={handleSubmit}
             error={error}
           />
-          <ToolResultDisplay definition={definition} values={values} results={results} />
+          <ToolResultDisplay
+            definition={definition}
+            values={values}
+            results={results}
+            resultVersion={resultVersion}
+          />
 
           <SurfaceCard>
             <SectionHeader
@@ -354,12 +460,14 @@ export function ToolLayoutWrapper({
             </ul>
           </SurfaceCard>
 
-          <div>
-            <SectionHeader title="Related tools" description="Nearby tools users may also want." />
-            <div className="mt-4">
-              <RelatedLinksSection links={related} />
+          {related.length > 0 ? (
+            <div>
+              <SectionHeader title="Related tools" description="Nearby tools users may also want." />
+              <div className="mt-4">
+                <RelatedLinksSection links={related} />
+              </div>
             </div>
-          </div>
+          ) : null}
 
           <SurfaceCard>
             <h2 className="text-lg font-semibold text-white">Keywords</h2>

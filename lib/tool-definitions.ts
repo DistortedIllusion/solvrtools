@@ -340,6 +340,168 @@ export const toolDefinitions: ToolDefinition[] = [
     },
   },
   {
+    slug: "tip-calculator",
+    title: "Tip Calculator",
+    category: "finance",
+    description: "Calculate how much to tip from a bill total and tip percentage.",
+    intro: [
+      "Use this tip calculator to quickly figure out how much gratuity to leave based on your bill total and preferred tip percentage. This is useful for restaurants, delivery orders, personal services, travel situations, and any everyday payment where you want a fast tip estimate without doing percentage math in your head.",
+      "Enter the bill total and tip percentage, and the calculator will instantly show the tip amount you should leave.",
+    ],
+    keywords: ["tip calculator", "how much to tip", "gratuity calculator"],
+    inputs: [
+      {
+        name: "billTotal",
+        label: "Bill total",
+        type: "number",
+        placeholder: "85.50",
+        helpText: "Enter the total bill amount before the tip is added.",
+        required: true,
+        min: 0,
+        step: 0.01,
+      },
+      {
+        name: "tipPercentage",
+        label: "Tip percentage (%)",
+        type: "number",
+        placeholder: "18",
+        helpText: "Use 15 for fifteen percent, 20 for twenty percent, and so on.",
+        required: true,
+        min: 0,
+        step: 0.01,
+      },
+    ],
+    outputs: [
+      { key: "tipAmount", label: "Tip amount", format: "currency", description: "How much gratuity to leave based on the selected percentage." },
+      { key: "tipLabel", label: "Tip summary", format: "text", description: "Readable summary of the tip percentage and bill total used." },
+    ],
+    faq: [
+      {
+        question: "What does this calculator show?",
+        answer: "It shows how much to tip based on the bill total and tip percentage you enter.",
+      },
+      {
+        question: "Can I use decimal bill totals and percentages?",
+        answer: "Yes. The calculator supports decimal bill amounts and decimal tip percentages.",
+      },
+      {
+        question: "When would I use a tip calculator?",
+        answer: "A tip calculator is useful for restaurants, food delivery, taxis, salons, hospitality, and other service situations where gratuity is based on a percentage of the bill.",
+      },
+      {
+        question: "How do I calculate a tip manually?",
+        answer: "To calculate a tip manually, divide the tip percentage by 100 and multiply it by the bill total. For example, 20% of an $80 bill is 0.20 × 80 = $16.",
+      },
+      {
+        question: "Can I use this for custom tip percentages?",
+        answer: "Yes. You can enter any percentage you want, whether that is 10%, 18%, 22%, or a custom decimal value.",
+      },
+      {
+        question: "Does this include splitting the bill?",
+        answer: "No. This first version focuses only on the tip amount itself. Bill splitting can be added later if needed.",
+      },
+    ],
+    relatedTools: ["percentage-calculator", "savings-goal-calculator", "compound-interest-calculator"],
+    formulaSummary:
+      "This tool calculates the tip amount by applying the selected tip percentage to the bill total.\n\nThe calculation works like this:\n\n- you enter the bill total\n- you enter the tip percentage\n- the calculator converts the percentage into a decimal\n- it multiplies that decimal by the bill total\n- it returns the tip amount\n\nFor example, an 18% tip on an $85.50 bill is $15.39.\n\nThis is helpful because percentage-based tip math is common but easy to miscalculate quickly when paying in person or on the go.",
+    example: {
+      inputs: { billTotal: 85.5, tipPercentage: 18 },
+      explanation:
+        "Calculate an 18% tip on a bill total of $85.50. This is a common real-world situation where you want to know the gratuity amount quickly without doing the percentage math yourself.",
+      results: [
+        { label: "Tip amount", value: "$15.39" },
+      ],
+    },
+  },
+  {
+    slug: "savings-goal-calculator",
+    title: "Savings Goal Calculator",
+    category: "finance",
+    description: "Estimate how long it will take to reach a savings goal using recurring contributions.",
+    intro: [
+      "Use this savings goal calculator to estimate how long it may take to reach a target savings amount based on a fixed recurring contribution. This is useful for planning vacations, emergency funds, larger purchases, short-term goals, and other savings targets where you want a simple timeline estimate without adding investment assumptions.",
+      "Enter your savings goal, contribution amount, and contribution frequency, and the calculator will estimate how many contributions and how much time it may take to reach the goal.",
+    ],
+    keywords: ["savings goal calculator", "how long to save", "savings timeline calculator"],
+    inputs: [
+      {
+        name: "goalAmount",
+        label: "Savings goal",
+        type: "number",
+        placeholder: "5000",
+        helpText: "Enter the total amount you want to save.",
+        required: true,
+        min: 0.01,
+        step: 0.01,
+      },
+      {
+        name: "contributionAmount",
+        label: "Contribution amount",
+        type: "number",
+        placeholder: "200",
+        helpText: "Enter the amount you plan to contribute each time.",
+        required: true,
+        min: 0.01,
+        step: 0.01,
+      },
+      {
+        name: "frequency",
+        label: "Contribution frequency",
+        type: "select",
+        helpText: "Choose how often you will make the contribution.",
+        required: true,
+        options: [
+          { label: "Weekly", value: "weekly" },
+          { label: "Biweekly", value: "biweekly" },
+          { label: "Monthly", value: "monthly" },
+        ],
+      },
+    ],
+    outputs: [
+      { key: "contributionsNeeded", label: "Contributions needed", format: "number", description: "How many recurring contributions are needed to reach the goal." },
+      { key: "estimatedTimeText", label: "Estimated time", format: "text", description: "Readable timeline estimate to reach the savings goal." },
+      { key: "frequencyLabel", label: "Savings summary", format: "text", description: "Summary of the number of contributions and the goal amount." },
+    ],
+    faq: [
+      {
+        question: "Does this include interest or investment growth?",
+        answer: "No. This first version is intentionally simple and estimates progress using recurring contributions only, without interest or returns.",
+      },
+      {
+        question: "What frequencies are included?",
+        answer: "This version supports weekly, biweekly, and monthly contribution schedules.",
+      },
+      {
+        question: "When would I use a savings goal calculator?",
+        answer: "A savings goal calculator is useful for planning vacations, emergency funds, larger purchases, seasonal expenses, and other goals where you want to estimate how long steady saving may take.",
+      },
+      {
+        question: "How is the timeline calculated?",
+        answer: "The calculator divides the savings goal by the recurring contribution amount to estimate how many contributions are needed, then translates that into an approximate timeline based on the selected contribution frequency.",
+      },
+      {
+        question: "Why is the result approximate?",
+        answer: "The result is approximate because weekly and biweekly contributions do not convert into whole months evenly. The tool gives a practical estimate rather than an exact calendar schedule.",
+      },
+      {
+        question: "Can I use this for debt payoff?",
+        answer: "This tool is designed for savings goals, but the same basic recurring-contribution logic can help estimate payoff timelines in simple cases without interest.",
+      },
+    ],
+    relatedTools: ["tip-calculator", "compound-interest-calculator", "loan-payment-calculator"],
+    formulaSummary:
+      "This tool estimates how long it will take to reach a savings goal by dividing the goal amount by the recurring contribution amount and then translating the required number of contributions into time based on the selected frequency.\n\nThe process works like this:\n\n- you enter the total savings goal\n- you enter the amount you will contribute each time\n- you choose the contribution frequency\n- the calculator estimates how many contributions are required\n- it converts that into an approximate timeline\n\nFor example, saving $200 per month toward a $5,000 goal would require 25 monthly contributions, which is about 25 months.\n\nThis is helpful for practical goal planning because it gives you a simple no-interest timeline without turning the calculation into a full investment model.",
+    example: {
+      inputs: { goalAmount: 5000, contributionAmount: 200, frequency: "monthly" },
+      explanation:
+        "Estimate how long it takes to save $5,000 by contributing $200 every month. This is a common planning scenario for a vacation, emergency fund, or major purchase where you want a simple timeline estimate based on steady saving.",
+      results: [
+        { label: "Contributions needed", value: "25" },
+        { label: "Estimated time", value: "25 months" },
+      ],
+    },
+  },
+  {
     slug: "date-difference-calculator",
     title: "Date Difference Calculator",
     category: "time",
@@ -569,6 +731,182 @@ export const toolDefinitions: ToolDefinition[] = [
     },
   },
   {
+    slug: "time-zone-calculator",
+    title: "Time Zone Calculator",
+    category: "time",
+    description: "Compare the live current time in two time zones and see the hour difference instantly.",
+    intro: [
+      "Use this time zone calculator to compare the real current time in two selected time zones. This is useful for scheduling calls, planning meetings, coordinating remote work, checking travel timing, and avoiding confusion when people are in different parts of the world.",
+      "By selecting a current time zone and a converted time zone, you can instantly see the live time in both places along with the current hour difference between them.",
+    ],
+    keywords: ["time zone calculator", "time difference between time zones", "world clock comparison"],
+    inputs: [
+      {
+        name: "currentTimeZone",
+        label: "Current time zone",
+        type: "select",
+        helpText: "Choose the time zone you want to compare from.",
+        required: true,
+        options: [
+          { label: "Eastern Time (America/New_York)", value: "America/New_York" },
+          { label: "Central Time (America/Chicago)", value: "America/Chicago" },
+          { label: "Mountain Time (America/Denver)", value: "America/Denver" },
+          { label: "Pacific Time (America/Los_Angeles)", value: "America/Los_Angeles" },
+          { label: "UTC", value: "UTC" },
+          { label: "London (Europe/London)", value: "Europe/London" },
+          { label: "Paris (Europe/Paris)", value: "Europe/Paris" },
+          { label: "Tokyo (Asia/Tokyo)", value: "Asia/Tokyo" },
+          { label: "Sydney (Australia/Sydney)", value: "Australia/Sydney" },
+          { label: "Regina (America/Regina)", value: "America/Regina" },
+        ],
+      },
+      {
+        name: "convertedTimeZone",
+        label: "Converted time zone",
+        type: "select",
+        helpText: "Choose the time zone you want to compare against.",
+        required: true,
+        options: [
+          { label: "Eastern Time (America/New_York)", value: "America/New_York" },
+          { label: "Central Time (America/Chicago)", value: "America/Chicago" },
+          { label: "Mountain Time (America/Denver)", value: "America/Denver" },
+          { label: "Pacific Time (America/Los_Angeles)", value: "America/Los_Angeles" },
+          { label: "UTC", value: "UTC" },
+          { label: "London (Europe/London)", value: "Europe/London" },
+          { label: "Paris (Europe/Paris)", value: "Europe/Paris" },
+          { label: "Tokyo (Asia/Tokyo)", value: "Asia/Tokyo" },
+          { label: "Sydney (Australia/Sydney)", value: "Australia/Sydney" },
+          { label: "Regina (America/Regina)", value: "America/Regina" },
+        ],
+      },
+    ],
+    outputs: [
+      { key: "currentTimeZoneTime", label: "Current time zone time", format: "text", description: "Live current time in the first selected time zone." },
+      { key: "convertedTimeZoneTime", label: "Converted time zone time", format: "text", description: "Live current time in the second selected time zone." },
+      { key: "hourDifference", label: "Hour difference", format: "number", description: "Current time offset difference between the two selected time zones.", suffix: " hours" },
+      { key: "differenceLabel", label: "Time difference summary", format: "text", description: "Readable explanation of which time zone is ahead or behind." },
+    ],
+    faq: [
+      {
+        question: "Does this show the real current time?",
+        answer: "Yes. This calculator is designed to show the live current time for each selected time zone when you run the calculation.",
+      },
+      {
+        question: "Does it account for daylight saving time?",
+        answer: "Yes, the current displayed time and offset difference reflect the selected zones as they are currently observed, including daylight saving time where applicable.",
+      },
+      {
+        question: "When would I use a time zone calculator?",
+        answer: "A time zone calculator is useful for scheduling meetings, remote work, customer support coverage, travel planning, and coordinating across regions without doing offset math manually.",
+      },
+      {
+        question: "Why can time differences change during the year?",
+        answer: "Some regions observe daylight saving time while others do not, so the offset between two places can change at different points in the year.",
+      },
+      {
+        question: "Can two time zones have the same current hour difference?",
+        answer: "Yes. Depending on the season and the places selected, two zones can temporarily line up with the same UTC offset even if they are normally different.",
+      },
+      {
+        question: "Why does this tool use selected time zones instead of typed city names?",
+        answer: "Using known time zone options helps keep the first version cleaner and more reliable without ambiguous location matching.",
+      },
+    ],
+    relatedTools: ["timesheet-calculator", "time-duration-calculator", "date-difference-calculator"],
+    formulaSummary:
+      "This tool compares two selected time zones using their live current times and current UTC offsets.\n\nThe process is simple:\n\n- you choose a starting time zone\n- you choose a comparison time zone\n- the calculator checks the live current time in each place\n- it measures the current hour difference between them\n\nThis is useful because time zone math is easy to get wrong, especially when daylight saving time changes are involved. A live comparison makes it easier to schedule meetings and plan shared availability with confidence.",
+    example: {
+      inputs: { currentTimeZone: "America/Chicago", convertedTimeZone: "Asia/Tokyo" },
+      explanation:
+        "Compare the live current time in Central Time and Tokyo time. This type of example is useful when planning a meeting, checking overlap windows, or figuring out whether someone is likely working, sleeping, or starting their day.",
+      results: [
+        { label: "Live output", value: "Shows the current real time in both selected zones plus the current hour difference." },
+      ],
+    },
+  },
+  {
+    slug: "timesheet-calculator",
+    title: "Timesheet Calculator",
+    category: "time",
+    description: "Calculate total worked time from a start time, end time, and break duration.",
+    intro: [
+      "Use this timesheet calculator to estimate the amount of time worked during a shift after subtracting breaks. This is useful for payroll checks, daily work logs, personal time tracking, shift planning, and simple timesheet review before submitting hours.",
+      "By entering the time you started working, the time you stopped, and the total break duration in minutes, you can quickly see your net worked time without calculating it by hand.",
+    ],
+    keywords: ["timesheet calculator", "hours worked calculator", "shift break calculator"],
+    inputs: [
+      {
+        name: "startTime",
+        label: "Start time",
+        type: "time",
+        helpText: "Enter when the shift started.",
+        required: true,
+      },
+      {
+        name: "endTime",
+        label: "End time",
+        type: "time",
+        helpText: "If the end time is earlier, the calculator treats it as the next day.",
+        required: true,
+      },
+      {
+        name: "breakMinutes",
+        label: "Total break duration (minutes)",
+        type: "number",
+        placeholder: "30",
+        helpText: "Enter the full break time to subtract from the shift length.",
+        required: true,
+        min: 0,
+        step: 1,
+      },
+    ],
+    outputs: [
+      { key: "totalHours", label: "Worked hours", format: "number", description: "Full worked hours after breaks are removed." },
+      { key: "totalMinutes", label: "Remaining worked minutes", format: "number", description: "Minutes left after full worked hours are counted." },
+      { key: "totalWorkedMinutes", label: "Total worked minutes", format: "number", description: "Net worked time converted fully into minutes." },
+      { key: "workedTimeText", label: "Worked time summary", format: "text", description: "Readable net worked time after subtracting breaks." },
+      { key: "shiftLabel", label: "Shift note", format: "text", description: "Summary of whether the shift stayed in one day or crossed midnight." },
+    ],
+    faq: [
+      {
+        question: "Does this subtract break time?",
+        answer: "Yes. The break duration you enter is subtracted from the total shift length to show net worked time.",
+      },
+      {
+        question: "Can it handle overnight shifts?",
+        answer: "Yes. If the end time is earlier than the start time, the calculator treats the shift as crossing midnight into the next day.",
+      },
+      {
+        question: "When would I use a timesheet calculator?",
+        answer: "A timesheet calculator is useful for checking payroll hours, reviewing time cards, logging work sessions, planning staffing, and estimating net work time after breaks.",
+      },
+      {
+        question: "What should I enter for break duration?",
+        answer: "Enter the total unpaid or deducted break time in minutes for the full shift. For example, a 30-minute lunch break should be entered as 30.",
+      },
+      {
+        question: "Can break time be longer than the shift?",
+        answer: "No. If break time is longer than the total shift length, the input should be corrected because net worked time cannot be negative.",
+      },
+      {
+        question: "Why show both hours and total minutes?",
+        answer: "Some timesheets and payroll systems use hours and minutes, while others rely on total minutes for easier conversion and reporting.",
+      },
+    ],
+    relatedTools: ["time-duration-calculator", "time-zone-calculator", "date-difference-calculator"],
+    formulaSummary:
+      "This tool calculates shift length from a start time and end time, then subtracts the break duration to return the net worked time.\n\nThe process works like this:\n\n- you enter the shift start time\n- you enter the shift end time\n- the calculator determines the full shift duration\n- if the shift crosses midnight, it accounts for that automatically\n- it subtracts the total entered break time\n- it returns the net time worked\n\nThis helps because work shifts are easy to miscalculate by hand, especially when overnight hours or deducted breaks are involved.",
+    example: {
+      inputs: { startTime: "08:00", endTime: "17:00", breakMinutes: 30 },
+      explanation:
+        "Calculate net worked time for a shift that starts at 8:00 AM, ends at 5:00 PM, and includes a 30-minute break. This is a common timesheet use case where the gross shift length needs to be reduced by the break before hours are reported.",
+      results: [
+        { label: "Worked time", value: "8 hours 30 minutes" },
+        { label: "Total worked minutes", value: "510" },
+      ],
+    },
+  },
+  {
     slug: "temperature-converter",
     title: "Temperature Converter",
     category: "conversions",
@@ -743,7 +1081,7 @@ export const toolDefinitions: ToolDefinition[] = [
         answer: "For everyday use, planning, and most projects, the level of precision provided is more than sufficient. For high-precision engineering or scientific work, you may want to confirm the required number of decimal places or significant figures for your specific application.",
       },
     ],
-    relatedTools: ["temperature-converter"],
+    relatedTools: ["temperature-converter", "weight-converter", "volume-converter"],
     formulaSummary:
       "This converter uses standard length conversion factors to translate a value from one unit to another.\n\nFor example:\n\n- Meters to feet: feet = meters × 3.28084\n- Kilometers to yards: yards = kilometers × 1093.61\n\nWhen you enter a value and select the from and to units, the tool:\n\n- takes your input value\n- multiplies it by the correct conversion factor\n- returns the converted distance in the target unit\n\nThis makes it easy to understand distances in the units you are most comfortable with, without doing the math by hand.",
     example: {
@@ -751,6 +1089,481 @@ export const toolDefinitions: ToolDefinition[] = [
       explanation:
         "Convert a distance from meters to feet. This example shows how a metric distance translates into imperial units. Knowing that 10 meters is a bit over 32 feet can help when reading building plans, equipment specs, or sports measurements that use different unit systems.",
       results: [{ label: "Converted length", value: "10 meters converts to approximately 32.8084 feet." }],
+    },
+  },
+  {
+    slug: "weight-converter",
+    title: "Weight Converter",
+    category: "conversions",
+    description: "Convert common weight and mass units for cooking, shipping, fitness, and everyday use.",
+    intro: [
+      "Use this weight converter to quickly convert between common metric and imperial weight units such as grams, kilograms, ounces, and pounds. This is useful for recipes, shipping estimates, gym tracking, travel, and product measurements that appear in a different unit system than the one you normally use.",
+      "By entering a value and choosing the from and to units, you can instantly convert weights without doing the math by hand or searching for conversion charts.",
+    ],
+    keywords: ["weight converter", "pounds to kilograms", "kg to lbs"],
+    inputs: [
+      {
+        name: "value",
+        label: "Weight value",
+        type: "number",
+        placeholder: "150",
+        helpText: "Enter the weight or mass you want to convert.",
+        required: true,
+        min: 0,
+        step: 0.01,
+      },
+      {
+        name: "fromUnit",
+        label: "Convert from",
+        type: "select",
+        required: true,
+        options: [
+          { label: "Milligrams", value: "milligrams" },
+          { label: "Grams", value: "grams" },
+          { label: "Kilograms", value: "kilograms" },
+          { label: "Ounces", value: "ounces" },
+          { label: "Pounds", value: "pounds" },
+          { label: "Tons", value: "tons" },
+        ],
+      },
+      {
+        name: "toUnit",
+        label: "Convert to",
+        type: "select",
+        required: true,
+        options: [
+          { label: "Milligrams", value: "milligrams" },
+          { label: "Grams", value: "grams" },
+          { label: "Kilograms", value: "kilograms" },
+          { label: "Ounces", value: "ounces" },
+          { label: "Pounds", value: "pounds" },
+          { label: "Tons", value: "tons" },
+        ],
+      },
+    ],
+    outputs: [
+      { key: "convertedValue", label: "Converted weight", format: "number", description: "Converted result in the selected destination unit.", suffix: " {dynamic-unit}" },
+    ],
+    faq: [
+      {
+        question: "What weight units are included?",
+        answer: "This version supports common metric and imperial units including milligrams, grams, kilograms, ounces, pounds, and tons.",
+      },
+      {
+        question: "Can I convert decimal values?",
+        answer: "Yes. Decimal values are useful for food measurements, shipping weights, and product specifications.",
+      },
+      {
+        question: "When would I use a weight converter?",
+        answer: "A weight converter is useful for cooking, shipping, gym and fitness tracking, travel luggage limits, and product measurements from international stores or instructions.",
+      },
+      {
+        question: "How do pounds and kilograms compare?",
+        answer: "One kilogram is equal to about 2.20462 pounds. That is why weights in kilograms usually look smaller than the same weight expressed in pounds.",
+      },
+      {
+        question: "Why do some tools say weight and others say mass?",
+        answer: "In everyday use, people often say weight even when they mean mass. For general conversion tools like this one, the practical unit conversion is what matters most.",
+      },
+      {
+        question: "Does this tool round the result?",
+        answer: "Yes. The displayed value may be rounded to a practical number of decimal places so it is easier to read while still staying accurate for everyday use.",
+      },
+      {
+        question: "Is this accurate enough for everyday decisions?",
+        answer: "Yes. For household, shopping, cooking, shipping, and general planning use cases, the conversion precision provided here is more than sufficient.",
+      },
+    ],
+    relatedTools: ["volume-converter", "length-converter", "temperature-converter"],
+    formulaSummary:
+      "This weight converter uses standard conversion factors to translate a value from one unit into another.\n\nFor example:\n\n- Kilograms to pounds: pounds = kilograms × 2.20462\n- Pounds to kilograms: kilograms = pounds ÷ 2.20462\n\nThe calculator works by:\n\n- taking your input value\n- converting it into a base unit behind the scenes\n- applying the correct factor for the destination unit\n- returning the converted result\n\nThis approach keeps the conversion consistent and makes it easy to compare weights across metric and imperial systems without doing manual calculations.",
+    example: {
+      inputs: { value: 150, fromUnit: "pounds", toUnit: "kilograms" },
+      explanation:
+        "Convert a body weight or package weight from pounds to kilograms. This example is useful because people often see weights expressed in pounds in one country and kilograms in another. Knowing that 150 pounds is about 68 kilograms makes international comparisons much easier.",
+      results: [{ label: "Converted weight", value: "150 pounds converts to approximately 68.0389 kilograms." }],
+    },
+  },
+  {
+    slug: "volume-converter",
+    title: "Volume Converter",
+    category: "conversions",
+    description: "Convert common kitchen and household volume units quickly and clearly.",
+    intro: [
+      "Use this volume converter to quickly convert between common liquid and kitchen volume units such as milliliters, liters, cups, tablespoons, and gallons. This is useful for cooking, baking, meal prep, product comparisons, and everyday household measurements that use different unit systems.",
+      "By entering a value and choosing the from and to units, you can instantly convert volume measurements without relying on memory or manual conversion charts.",
+    ],
+    keywords: ["volume converter", "cups to ml", "liters to gallons"],
+    inputs: [
+      {
+        name: "value",
+        label: "Volume value",
+        type: "number",
+        placeholder: "2",
+        helpText: "Enter the volume you want to convert.",
+        required: true,
+        min: 0,
+        step: 0.01,
+      },
+      {
+        name: "fromUnit",
+        label: "Convert from",
+        type: "select",
+        required: true,
+        options: [
+          { label: "Milliliters", value: "milliliters" },
+          { label: "Liters", value: "liters" },
+          { label: "Teaspoons", value: "teaspoons" },
+          { label: "Tablespoons", value: "tablespoons" },
+          { label: "Cups", value: "cups" },
+          { label: "Fluid Ounces", value: "fluidOunces" },
+          { label: "Pints", value: "pints" },
+          { label: "Quarts", value: "quarts" },
+          { label: "Gallons", value: "gallons" },
+        ],
+      },
+      {
+        name: "toUnit",
+        label: "Convert to",
+        type: "select",
+        required: true,
+        options: [
+          { label: "Milliliters", value: "milliliters" },
+          { label: "Liters", value: "liters" },
+          { label: "Teaspoons", value: "teaspoons" },
+          { label: "Tablespoons", value: "tablespoons" },
+          { label: "Cups", value: "cups" },
+          { label: "Fluid Ounces", value: "fluidOunces" },
+          { label: "Pints", value: "pints" },
+          { label: "Quarts", value: "quarts" },
+          { label: "Gallons", value: "gallons" },
+        ],
+      },
+    ],
+    outputs: [
+      { key: "convertedValue", label: "Converted volume", format: "number", description: "Converted result in the selected destination unit.", suffix: " {dynamic-unit}" },
+    ],
+    faq: [
+      {
+        question: "What volume units are included?",
+        answer: "This version supports common kitchen and household units including milliliters, liters, teaspoons, tablespoons, cups, fluid ounces, pints, quarts, and gallons.",
+      },
+      {
+        question: "Can I use this for recipes?",
+        answer: "Yes. This tool is especially useful for cooking and baking when a recipe uses a different measurement system than the one you normally use.",
+      },
+      {
+        question: "Why are cups and fluid ounces useful to convert?",
+        answer: "Many recipes, packaging labels, and kitchen tools use cups or fluid ounces, while others use metric units such as milliliters or liters. A converter helps bridge that gap quickly.",
+      },
+      {
+        question: "Can I convert decimal values?",
+        answer: "Yes. Decimal values are common in recipes, liquids, supplements, and product measurement labels.",
+      },
+      {
+        question: "Does this handle kitchen and household use well?",
+        answer: "Yes. The first version is designed to focus on practical day-to-day volume units rather than trying to include every specialized industrial or scientific unit.",
+      },
+      {
+        question: "Does this tool round the result?",
+        answer: "Yes. The displayed result may be rounded to a practical number of decimal places so it stays readable while remaining accurate for normal use.",
+      },
+      {
+        question: "Is this enough precision for everyday conversion?",
+        answer: "Yes. For recipes, drinks, household liquids, and product measurement comparisons, the precision here is more than sufficient.",
+      },
+    ],
+    relatedTools: ["weight-converter", "temperature-converter", "length-converter"],
+    formulaSummary:
+      "This volume converter uses standard unit factors to translate one liquid or kitchen measurement into another.\n\nFor example:\n\n- Cups to milliliters: milliliters = cups × 236.5882365\n- Liters to gallons: gallons = liters ÷ 3.78541\n\nThe tool works by:\n\n- taking your input value\n- converting it into a base unit behind the scenes\n- applying the correct factor for the target unit\n- returning the converted volume\n\nThis makes it easier to work across metric and imperial recipe measurements, packaging labels, and everyday household conversions without doing the math manually.",
+    example: {
+      inputs: { value: 2, fromUnit: "cups", toUnit: "milliliters" },
+      explanation:
+        "Convert a kitchen measurement from cups to milliliters. This is a common real-world conversion when following recipes from different countries. Knowing that 2 cups is about 473.1765 milliliters helps when your measuring tools use metric markings.",
+      results: [{ label: "Converted volume", value: "2 cups converts to approximately 473.1765 milliliters." }],
+    },
+  },
+  {
+    slug: "random-number-generator",
+    title: "Random Number Generator",
+    category: "utility",
+    description: "Generate a random whole number between a user-defined lower and upper range.",
+    intro: [
+      "Use this random number generator to quickly generate a random whole number between a minimum and maximum value that you choose. This is useful for simple games, giveaways, classroom activities, number picking, testing, and quick decision-making.",
+      "By entering a lower and upper bound, you can instantly generate a random result without relying on manual picks or outside tools.",
+    ],
+    keywords: ["random number generator", "number picker", "random number between two numbers"],
+    inputs: [
+      {
+        name: "min",
+        label: "Lower range",
+        type: "number",
+        placeholder: "1",
+        helpText: "Enter the smallest whole number allowed in the result.",
+        required: true,
+        step: 1,
+      },
+      {
+        name: "max",
+        label: "Upper range",
+        type: "number",
+        placeholder: "100",
+        helpText: "Enter the largest whole number allowed in the result.",
+        required: true,
+        step: 1,
+      },
+    ],
+    outputs: [
+      { key: "randomNumber", label: "Random number", format: "number", description: "One randomly generated whole number within the selected range." },
+      { key: "rangeLabel", label: "Range note", format: "text", description: "Quick confirmation of the range used for the generated result." },
+    ],
+    faq: [
+      {
+        question: "Can I choose my own range?",
+        answer: "Yes. You can enter your own lower and upper whole-number values and generate a result inside that range.",
+      },
+      {
+        question: "Does this include both the minimum and maximum values?",
+        answer: "Yes. The generated result can be equal to either the lower or upper value if those numbers fall inside the selected range.",
+      },
+      {
+        question: "Can I use decimal values?",
+        answer: "No. This first version is intended for whole-number generation only so the output stays simple and predictable.",
+      },
+      {
+        question: "When would I use a random number generator?",
+        answer: "A random number generator is useful for classroom picks, giveaways, simple games, practice drills, test data, and any situation where you want a quick unbiased number choice.",
+      },
+      {
+        question: "Will the same number appear more than once if I try again?",
+        answer: "Yes. Each click generates a fresh random result, so repeated numbers can happen naturally.",
+      },
+      {
+        question: "Can I use this for contests or small picks?",
+        answer: "Yes, for informal use. It is useful for quick random selection, but formal or regulated use cases may require more specific tooling or auditing rules.",
+      },
+    ],
+    relatedTools: ["dice-roller", "coin-flipper"],
+    formulaSummary:
+      "This tool generates one random whole number inside the range you provide.\n\nThe process is simple:\n\n- you enter a minimum value\n- you enter a maximum value\n- the generator picks one whole number within that range\n\nThe result can match either endpoint if the lower and upper values are valid.\n\nThis kind of tool is useful because it gives you a quick random pick without needing to write numbers down, shuffle slips of paper, or do the selection manually.",
+    example: {
+      inputs: { min: 1, max: 50 },
+      explanation:
+        "Generate a random whole number between 1 and 50. This kind of setup is common for small classroom activities, simple raffles, practice drills, or quick number picks where every whole number in the range is allowed.",
+      results: [
+        { label: "Possible result", value: "Any whole number from 1 to 50" },
+      ],
+    },
+  },
+  {
+    slug: "dice-roller",
+    title: "Dice Roller",
+    category: "utility",
+    description: "Roll a virtual die using a standard dice side count such as d6, d20, or d100.",
+    intro: [
+      "Use this dice roller to generate a random result based on a standard die size. This is useful for tabletop games, classroom activities, probability demos, quick choices, and any situation where you need a simple die roll without physical dice nearby.",
+      "Choose a standard dice side count and the tool will generate one random roll result from 1 up to the number of sides selected.",
+    ],
+    keywords: ["dice roller", "virtual dice", "d20 roller"],
+    inputs: [
+      {
+        name: "sides",
+        label: "Dice sides",
+        type: "select",
+        helpText: "Choose a standard die size for the roll.",
+        required: true,
+        options: [
+          { label: "4-sided die (d4)", value: "4" },
+          { label: "6-sided die (d6)", value: "6" },
+          { label: "8-sided die (d8)", value: "8" },
+          { label: "10-sided die (d10)", value: "10" },
+          { label: "12-sided die (d12)", value: "12" },
+          { label: "20-sided die (d20)", value: "20" },
+          { label: "100-sided die (d100)", value: "100" },
+        ],
+      },
+    ],
+    outputs: [
+      { key: "rollResult", label: "Roll result", format: "number", description: "Random result from 1 up to the number of sides selected." },
+      { key: "diceLabel", label: "Roll note", format: "text", description: "Quick confirmation of which die was rolled." },
+    ],
+    faq: [
+      {
+        question: "What dice types are included?",
+        answer: "This first version supports standard dice sizes: d4, d6, d8, d10, d12, d20, and d100.",
+      },
+      {
+        question: "Can I roll any custom number of sides?",
+        answer: "No. This first version intentionally stays limited to standard dice side counts so the tool remains simple and predictable.",
+      },
+      {
+        question: "When would I use a dice roller?",
+        answer: "A dice roller is useful for tabletop games, classroom activities, practice drills, random choices, and probability demonstrations.",
+      },
+      {
+        question: "Does the roll include every number on the die?",
+        answer: "Yes. The result can be any whole number from 1 up to the number of sides on the selected die.",
+      },
+      {
+        question: "Can I roll more than one die at once?",
+        answer: "Not in this first version. The initial release is focused on one clean single-die roll at a time.",
+      },
+      {
+        question: "Why use a virtual die instead of a physical one?",
+        answer: "A virtual die is convenient when you do not have physical dice nearby or when you want a quick result on a phone or computer.",
+      },
+    ],
+    relatedTools: ["random-number-generator", "coin-flipper"],
+    formulaSummary:
+      "This tool simulates a standard die roll by generating one random whole number from 1 up to the selected number of sides.\n\nFor example:\n\n- a d6 can return any whole number from 1 to 6\n- a d20 can return any whole number from 1 to 20\n\nThe tool keeps the first version simple by supporting only standard dice sizes. That makes it useful for common gaming and classroom scenarios without adding extra setup complexity.",
+    example: {
+      inputs: { sides: 20 },
+      explanation:
+        "Roll a standard 20-sided die. This example reflects one of the most common virtual dice use cases for tabletop gaming and simple random event checks.",
+      results: [
+        { label: "Possible result", value: "Any whole number from 1 to 20" },
+      ],
+    },
+  },
+  {
+    slug: "coin-flipper",
+    title: "Coin Flipper",
+    category: "utility",
+    description: "Flip a virtual coin and get a simple Heads or Tails result instantly.",
+    intro: [
+      "Use this coin flipper to get a quick random Heads or Tails result with a single click. This is useful for simple decisions, games, classroom activities, tie-breakers, and any moment where you want a fast fair-feeling two-option choice.",
+      "The first version keeps things intentionally simple. There are no extra settings, just one click and one result.",
+    ],
+    keywords: ["coin flipper", "flip a coin", "heads or tails"],
+    inputs: [],
+    outputs: [
+      { key: "coinResult", label: "Coin result", format: "text", description: "Random result showing either Heads or Tails." },
+      { key: "flipLabel", label: "Flip note", format: "text", description: "Simple confirmation of what the tool just did." },
+    ],
+    faq: [
+      {
+        question: "Do I need to enter anything before flipping?",
+        answer: "No. This tool is intentionally simple, so you can click and get a result immediately.",
+      },
+      {
+        question: "What results can it return?",
+        answer: "The result is either Heads or Tails.",
+      },
+      {
+        question: "When would I use a coin flipper?",
+        answer: "A coin flipper is useful for simple decisions, tie-breakers, quick games, classroom choices, and any small two-option random pick.",
+      },
+      {
+        question: "Can I flip more than one coin at a time?",
+        answer: "Not in this first version. The initial release is focused on one clean one-click coin flip.",
+      },
+      {
+        question: "Can I get the same result repeatedly?",
+        answer: "Yes. Each flip is independent, so repeated Heads or repeated Tails can happen naturally.",
+      },
+      {
+        question: "Why use this instead of a real coin?",
+        answer: "A virtual coin flipper is convenient when you do not have a real coin nearby or just want a fast result on your device.",
+      },
+    ],
+    relatedTools: ["random-number-generator", "dice-roller"],
+    formulaSummary:
+      "This tool simulates a simple coin flip by randomly returning one of two outcomes: Heads or Tails.\n\nBecause there are only two possible results, the tool is useful for quick decisions, tie-breakers, and simple games where you want a fast binary choice without extra setup.",
+    example: {
+      inputs: {},
+      explanation:
+        "Flip a coin to make a quick two-option decision. This is one of the simplest randomization use cases and works well for tie-breakers, informal picks, and small games.",
+      results: [
+        { label: "Possible results", value: "Heads or Tails" },
+      ],
+    },
+  },
+  {
+    slug: "reading-time-calculator",
+    title: "Reading Time Calculator",
+    category: "text",
+    description: "Estimate how long a piece of text will take to read using speed-based reading presets.",
+    intro: [
+      "Use this reading time calculator to estimate how long it may take to read a block of text based on its word count and a selected reading speed. This is useful for blog drafts, newsletters, scripts, reports, study material, and any content where quick time expectations help with planning.",
+      "Paste your text, choose a reading-speed preset, and the tool will estimate the reading time without forcing you to count words or guess manually.",
+    ],
+    keywords: ["reading time calculator", "estimated reading time", "how long to read text"],
+    inputs: [
+      {
+        name: "text",
+        label: "Text to analyze",
+        type: "textarea",
+        placeholder: "Paste or type text here",
+        helpText: "Paste the full text you want to estimate reading time for.",
+        required: true,
+      },
+      {
+        name: "readingSpeed",
+        label: "Reading speed",
+        type: "select",
+        helpText: "Choose the reading pace that best fits the audience or situation.",
+        required: true,
+        options: [
+          { label: "Early reader (75 wpm)", value: "75" },
+          { label: "Developing reader (125 wpm)", value: "125" },
+          { label: "Careful reader (150 wpm)", value: "150" },
+          { label: "Average reader (200 wpm)", value: "200" },
+          { label: "Fast reader (300 wpm)", value: "300" },
+          { label: "Skimming (400 wpm)", value: "400" },
+        ],
+      },
+    ],
+    outputs: [
+      { key: "wordCount", label: "Word count", format: "number", description: "Total words detected in the provided text." },
+      { key: "readingTimeMinutes", label: "Estimated reading time (minutes)", format: "number", description: "Estimated reading time shown as decimal minutes." },
+      { key: "readingTimeText", label: "Estimated reading time", format: "text", description: "Readable time estimate based on the selected reading speed." },
+      { key: "speedLabel", label: "Reading speed used", format: "text", description: "The speed preset used to estimate the reading time." },
+    ],
+    faq: [
+      {
+        question: "What does this calculator measure?",
+        answer: "This calculator estimates reading time by counting the words in your text and applying the selected reading-speed preset in words per minute.",
+      },
+      {
+        question: "Why use speed presets instead of reading levels like grade or education labels?",
+        answer: "Speed presets make the estimate clearer and more honest because the tool is estimating pace, not reading ability or comprehension level. They also make it easier to choose slower or faster reading scenarios for planning.",
+      },
+      {
+        question: "When would I use a reading time calculator?",
+        answer: "A reading time calculator is useful for blog writing, email planning, training material, scripts, study prep, presentations, and any content where you want to estimate audience time commitment.",
+      },
+      {
+        question: "Does this include comprehension time?",
+        answer: "No. This is a reading-speed estimate based on word count only. Dense material, technical content, and rereading may take longer.",
+      },
+      {
+        question: "Why might the real reading time be different?",
+        answer: "Actual reading time can vary based on text difficulty, reader familiarity, distractions, formatting, and whether the person is reading carefully or skimming.",
+      },
+      {
+        question: "Can teachers use this for different classroom reading levels?",
+        answer: "Yes. The slower reading-speed presets are useful for estimating how long a passage may take for early or developing readers, while faster presets can help with older or more confident readers.",
+      },
+      {
+        question: "Can I use this for short text too?",
+        answer: "Yes. Very short text may produce a result in seconds instead of full minutes, which is often more helpful for quick copy or UI text.",
+      },
+      {
+        question: "Does the tool also show word count?",
+        answer: "Yes. The first version includes both word count and estimated reading time so the result is more useful for writing and planning.",
+      },
+    ],
+    relatedTools: ["word-counter", "case-converter"],
+    formulaSummary:
+      "This tool estimates reading time by counting the words in your text and dividing that count by the selected reading speed in words per minute.\n\nThe process works like this:\n\n- you paste or type the text\n- the calculator counts the words\n- it applies the selected reading-speed preset\n- it returns the estimated reading time in a readable format\n\nFor example, a 400-word article at 200 words per minute would take about 2 minutes to read.\n\nThis is useful for planning content length, audience expectations, speaking prep, and general writing workflow decisions.",
+    example: {
+      inputs: { text: "SolvrTools helps people solve practical problems with quick online tools.", readingSpeed: 200 },
+      explanation:
+        "Estimate the reading time for a short piece of text using an average reading pace of 200 words per minute. This shows how the calculator combines word count and selected pace to produce a quick planning estimate.",
+      results: [
+        { label: "Word count", value: "10" },
+        { label: "Estimated reading time", value: "about 3 seconds" },
+      ],
     },
   },
   {
@@ -896,6 +1709,220 @@ export const toolDefinitions: ToolDefinition[] = [
       explanation:
         "Convert the text 'solvrtools makes text cleanup easy' into title case. This example shows how title case changes the text into a more heading-ready format by capitalizing the main words in the sentence.",
       results: [{ label: "Converted text", value: "Solvrtools Makes Text Cleanup Easy" }],
+    },
+  },
+  {
+    slug: "tile-calculator",
+    title: "Tile Calculator",
+    category: "home",
+    description: "Estimate how many tiles and tile packs are needed for a floor or wall area.",
+    intro: [
+      "Use this tile calculator to estimate the number of tiles and tile packs needed for a project area. This is useful for flooring, backsplashes, bathrooms, kitchens, and other home projects where you want a quick planning estimate before buying materials.",
+      "You can enter the area dimensions directly or use a total square footage value, then add the size of one tile and the number of tiles in a pack to estimate how much material to buy.",
+    ],
+    keywords: ["tile calculator", "how many tiles do I need", "tile pack calculator"],
+    inputs: [
+      {
+        name: "areaInputMode",
+        label: "Area input method",
+        type: "select",
+        helpText: "Choose whether to enter dimensions or total square footage.",
+        required: true,
+        options: [
+          { label: "Length and width", value: "dimensions" },
+          { label: "Total square footage", value: "squareFeet" },
+        ],
+      },
+      {
+        name: "length",
+        label: "Area length (feet)",
+        type: "number",
+        placeholder: "12",
+        helpText: "Measure the length of the area to be tiled in feet.",
+        required: true,
+        min: 0.1,
+        step: 0.1,
+      },
+      {
+        name: "width",
+        label: "Area width (feet)",
+        type: "number",
+        placeholder: "10",
+        helpText: "Measure the width of the area to be tiled in feet.",
+        required: true,
+        min: 0.1,
+        step: 0.1,
+      },
+      {
+        name: "area",
+        label: "Total square footage",
+        type: "number",
+        placeholder: "120",
+        helpText: "Enter the total area directly if you already know it in square feet.",
+        required: true,
+        min: 0.1,
+        step: 0.1,
+      },
+      {
+        name: "tileLength",
+        label: "Tile length (inches)",
+        type: "number",
+        placeholder: "12",
+        helpText: "Enter the length of a single tile in inches.",
+        required: true,
+        min: 0.1,
+        step: 0.1,
+      },
+      {
+        name: "tileWidth",
+        label: "Tile width (inches)",
+        type: "number",
+        placeholder: "12",
+        helpText: "Enter the width of a single tile in inches.",
+        required: true,
+        min: 0.1,
+        step: 0.1,
+      },
+      {
+        name: "tilesPerPack",
+        label: "Tiles per pack",
+        type: "number",
+        placeholder: "10",
+        helpText: "Enter how many tiles come in one pack or box.",
+        required: true,
+        min: 1,
+        step: 1,
+      },
+    ],
+    outputs: [
+      { key: "totalArea", label: "Area to tile", format: "number", description: "Total square footage used for the tile estimate.", suffix: " sq ft" },
+      { key: "tilesRequired", label: "Tiles required", format: "number", description: "Estimated number of tiles needed to cover the area." },
+      { key: "packsRequired", label: "Tile packs required", format: "number", description: "Number of packs needed, rounded up to a full pack." },
+      { key: "tileAreaLabel", label: "Tile coverage note", format: "text", description: "Shows how much area one tile covers." },
+    ],
+    faq: [
+      {
+        question: "Can I enter dimensions instead of square footage?",
+        answer: "Yes. This version lets you either enter length and width or provide the total square footage directly.",
+      },
+      {
+        question: "Why do tile dimensions use inches while area uses feet?",
+        answer: "That reflects common real-world shopping and measuring patterns in home projects. Area is often measured in square feet, while tile size is often listed in inches.",
+      },
+      {
+        question: "When would I use a tile calculator?",
+        answer: "A tile calculator is useful for flooring, showers, backsplashes, kitchens, bathrooms, and other tile projects where you want to estimate materials before buying.",
+      },
+      {
+        question: "Why does the pack count round up?",
+        answer: "Tile is usually sold by the box or pack, so if you need part of a pack, you still need to buy the next full pack.",
+      },
+      {
+        question: "Does this include extra tile for cuts or waste?",
+        answer: "No. This first version focuses on base coverage only. If you want extra for cuts, damage, or future repairs, you should plan to buy additional material.",
+      },
+      {
+        question: "Can I use this for wall tile too?",
+        answer: "Yes. The same area-based logic works for both floor and wall tile planning as long as your measurements are correct.",
+      },
+    ],
+    relatedTools: ["square-footage-calculator", "concrete-calculator", "paint-calculator"],
+    formulaSummary:
+      "This tool estimates the number of tiles needed by dividing the total area to be covered by the area of a single tile. It then divides the tile count by the number of tiles per pack and rounds up to the next full pack.\n\nThe process works like this:\n\n- you enter the total area, either by dimensions or total square footage\n- you enter the size of one tile\n- the calculator converts the tile dimensions into square feet\n- it estimates how many tiles are needed to cover the area\n- it estimates how many full packs are needed\n\nThis helps with practical buying decisions because tile is sold individually in theory but often purchased by the pack or box in real projects.",
+    example: {
+      inputs: { areaInputMode: "dimensions", length: 12, width: 10, tileLength: 12, tileWidth: 12, tilesPerPack: 10 },
+      explanation:
+        "Estimate tile needs for a 12 foot by 10 foot area using 12 inch by 12 inch tiles sold in packs of 10. This is a simple real-world planning case where you want both the tile count and the number of boxes to buy.",
+      results: [
+        { label: "Tiles required", value: "120" },
+        { label: "Tile packs required", value: "12" },
+      ],
+    },
+  },
+  {
+    slug: "concrete-calculator",
+    title: "Concrete Calculator",
+    category: "home",
+    description: "Estimate how much concrete is needed for a rectangular slab or filled volume.",
+    intro: [
+      "Use this concrete calculator to estimate the amount of concrete needed for a rectangular slab, pad, or filled volume. This is useful for patios, walkways, shed pads, small foundations, posts, and other projects where you need a quick material estimate before ordering or mixing concrete.",
+      "Enter the length, width, and height of the space to be filled, and the calculator will estimate the required volume in common concrete ordering units.",
+    ],
+    keywords: ["concrete calculator", "how much concrete do I need", "cubic yard concrete calculator"],
+    inputs: [
+      {
+        name: "length",
+        label: "Length (feet)",
+        type: "number",
+        placeholder: "10",
+        helpText: "Enter the length of the slab or filled area in feet.",
+        required: true,
+        min: 0.1,
+        step: 0.1,
+      },
+      {
+        name: "width",
+        label: "Width (feet)",
+        type: "number",
+        placeholder: "10",
+        helpText: "Enter the width of the slab or filled area in feet.",
+        required: true,
+        min: 0.1,
+        step: 0.1,
+      },
+      {
+        name: "height",
+        label: "Height or depth (feet)",
+        type: "number",
+        placeholder: "0.5",
+        helpText: "Enter the thickness or depth of the concrete pour in feet.",
+        required: true,
+        min: 0.1,
+        step: 0.01,
+      },
+    ],
+    outputs: [
+      { key: "cubicFeet", label: "Concrete needed (cubic feet)", format: "number", description: "Total volume in cubic feet." },
+      { key: "cubicYards", label: "Concrete needed (cubic yards)", format: "number", description: "Common concrete ordering unit in the United States." },
+      { key: "cubicMeters", label: "Concrete needed (cubic meters)", format: "number", description: "Common concrete ordering unit in many metric regions." },
+      { key: "concreteLabel", label: "Concrete ordering note", format: "text", description: "Quick note about the most practical concrete units." },
+    ],
+    faq: [
+      {
+        question: "What units should I use when ordering concrete?",
+        answer: "In many US home projects, concrete is commonly ordered in cubic yards. In many metric regions, cubic meters are more common. This tool shows both for convenience.",
+      },
+      {
+        question: "When would I use a concrete calculator?",
+        answer: "A concrete calculator is useful for patios, pads, walkways, slabs, footings, and other projects where you need to estimate pour volume before ordering material.",
+      },
+      {
+        question: "Why show cubic feet too?",
+        answer: "Cubic feet can help with smaller projects, quick volume checks, or situations where you are comparing bagged concrete amounts or rough dimensional calculations.",
+      },
+      {
+        question: "Does this tool handle shapes other than a rectangle?",
+        answer: "No. This first version is intentionally limited to a simple rectangular slab or filled volume so the estimate stays clear and reliable.",
+      },
+      {
+        question: "Should I order exactly the calculated amount?",
+        answer: "Many real projects benefit from ordering a little extra to account for uneven ground, spillage, or small planning differences. This first version gives the base volume estimate only.",
+      },
+      {
+        question: "Can I use this for depth in inches?",
+        answer: "You should convert inches into feet before entering the depth. For example, 6 inches is 0.5 feet.",
+      },
+    ],
+    relatedTools: ["tile-calculator", "square-footage-calculator", "paint-calculator"],
+    formulaSummary:
+      "This tool estimates concrete volume by multiplying the length, width, and height of a rectangular space to get the total filled volume.\n\nThe process works like this:\n\n- you enter the length\n- you enter the width\n- you enter the depth or height\n- the calculator multiplies those values to get cubic feet\n- it converts that volume into cubic yards and cubic meters\n\nThis is helpful because concrete is often planned dimensionally but ordered volumetrically, and the ordering unit can vary by region or supplier.",
+    example: {
+      inputs: { length: 10, width: 10, height: 0.5 },
+      explanation:
+        "Estimate concrete for a 10 foot by 10 foot slab poured 6 inches deep. This is a common patio or pad planning case where you want a quick base volume estimate before contacting a supplier or buying bagged material.",
+      results: [
+        { label: "Concrete needed", value: "50 cubic feet, about 1.85 cubic yards, or about 1.42 cubic meters" },
+      ],
     },
   },
   {
@@ -1063,6 +2090,7 @@ export const toolDefinitions: ToolDefinition[] = [
     ],
     outputs: [
       { key: "squareFeet", label: "Total square footage", format: "number", suffix: " sq ft", description: "Area of the rectangular surface or room." },
+      { key: "areaLabel", label: "Area summary", format: "text", description: "Readable square footage summary for the entered dimensions." },
     ],
     faq: [
       {
@@ -1098,7 +2126,7 @@ export const toolDefinitions: ToolDefinition[] = [
         answer: "Square footage helps you estimate how much material you need, compare costs, and avoid overbuying or underbuying supplies for a project.",
       },
     ],
-    relatedTools: ["paint-calculator"],
+    relatedTools: ["tile-calculator", "concrete-calculator", "paint-calculator"],
     formulaSummary:
       "This calculator finds the area of a rectangular space using a simple formula:\n\nArea = length × width\n\nThe result is expressed in square units, such as square feet, when the measurements are entered in feet.\n\nThis type of calculation is commonly used for:\n\n- flooring estimates\n- paint and wall coverage planning\n- tile and carpet measurement\n- room sizing\n- basic renovation planning\n\nSquare footage is one of the most common ways to estimate the size of a space, and even a simple room measurement can be useful when planning materials, pricing, or layout decisions.",
     example: {
@@ -1106,6 +2134,151 @@ export const toolDefinitions: ToolDefinition[] = [
       explanation:
         "Find the square footage of a room that is 12 feet long and 15 feet wide. This example shows how square footage is calculated by multiplying length by width. The result can then be used to estimate materials such as flooring, paint coverage, or carpet for the space.",
       results: [{ label: "Area", value: "180 square feet" }],
+    },
+  },
+  {
+    slug: "bmi-calculator",
+    title: "BMI Calculator",
+    category: "health",
+    description: "Calculate body mass index using metric or imperial height and weight measurements.",
+    intro: [
+      "Use this BMI calculator to estimate your body mass index from height and weight. BMI, short for body mass index, is a common screening tool used to place adult body size into broad ranges such as underweight, healthy weight, overweight, and obesity.",
+      "This calculator supports both metric and imperial units, so you can enter centimeters and kilograms or feet, inches, and pounds. It is useful for getting a quick estimate, comparing changes over time, or understanding where a result falls within standard adult BMI ranges.",
+      "BMI is best treated as a starting point rather than a full health assessment. It can be helpful for general screening, but it does not directly measure body fat, muscle mass, or overall health status.",
+    ],
+    keywords: ["bmi calculator", "body mass index calculator", "calculate bmi", "healthy bmi range"],
+    inputs: [
+      {
+        name: "unitSystem",
+        label: "Unit system",
+        type: "select",
+        required: true,
+        options: [
+          { label: "Metric (cm, kg)", value: "metric" },
+          { label: "Imperial (ft, in, lb)", value: "imperial" },
+        ],
+      },
+      {
+        name: "heightCm",
+        label: "Height (cm)",
+        type: "number",
+        placeholder: "178",
+        helpText: "Enter your height in centimeters when using metric units.",
+        required: true,
+        min: 1,
+        step: 0.1,
+      },
+      {
+        name: "weightKg",
+        label: "Weight (kg)",
+        type: "number",
+        placeholder: "78",
+        helpText: "Enter your body weight in kilograms when using metric units.",
+        required: true,
+        min: 0.1,
+        step: 0.1,
+      },
+      {
+        name: "heightFeet",
+        label: "Height (feet)",
+        type: "number",
+        placeholder: "5",
+        helpText: "Enter the feet portion of your height when using imperial units.",
+        required: true,
+        min: 0,
+        step: 1,
+      },
+      {
+        name: "heightInches",
+        label: "Additional height (inches)",
+        type: "number",
+        placeholder: "10",
+        helpText: "Enter the remaining inches beyond full feet for imperial height.",
+        required: true,
+        min: 0,
+        step: 0.1,
+      },
+      {
+        name: "weightPounds",
+        label: "Weight (lb)",
+        type: "number",
+        placeholder: "172",
+        helpText: "Enter your body weight in pounds when using imperial units.",
+        required: true,
+        min: 0.1,
+        step: 0.1,
+      },
+    ],
+    outputs: [
+      {
+        key: "bmi",
+        label: "BMI",
+        format: "number",
+        description: "Estimated body mass index based on the selected height and weight inputs.",
+      },
+      {
+        key: "category",
+        label: "BMI category",
+        format: "text",
+        description: "General adult BMI category based on the calculated result.",
+      },
+      {
+        key: "healthyRange",
+        label: "Reference note",
+        format: "text",
+        description: "General adult BMI guidance commonly used for quick interpretation.",
+      },
+    ],
+    faq: [
+      {
+        question: "What is BMI?",
+        answer: "BMI stands for body mass index. It is a simple screening measurement that compares weight to height to estimate whether body size falls into a common adult reference range.",
+      },
+      {
+        question: "How do I calculate BMI?",
+        answer: "BMI is calculated by dividing body weight by height squared. In metric form, that means kilograms divided by meters squared. If you use imperial inputs, the calculator converts them first and then performs the same calculation behind the scenes.",
+      },
+      {
+        question: "Can I use metric or imperial units?",
+        answer: "Yes. This calculator supports both centimeters and kilograms as well as feet, inches, and pounds.",
+      },
+      {
+        question: "What BMI range is usually considered healthy?",
+        answer: "For most adults, a BMI from 18.5 to 24.9 is commonly considered a healthy range. Under 18.5 is often classified as underweight, 25 to 29.9 as overweight, and 30 or higher as obesity.",
+      },
+      {
+        question: "Is BMI accurate for everyone?",
+        answer: "Not always. BMI is a broad screening tool and does not directly measure body fat, muscle mass, bone density, or health conditions. People with more muscle or other body composition differences may find BMI less representative.",
+      },
+      {
+        question: "Should BMI be used as a medical diagnosis?",
+        answer: "No. BMI is useful as a quick screening estimate, but it should not replace professional medical advice or a more complete health evaluation.",
+      },
+      {
+        question: "Why might someone check BMI over time?",
+        answer: "BMI can be useful for tracking broad trends over time, especially when weight or lifestyle changes are happening. It is often more useful for comparison and screening than as a one-time verdict.",
+      },
+    ],
+    relatedTools: [],
+    formulaSummary:
+      "BMI is calculated by dividing body weight by height squared. This creates a simple ratio that helps estimate whether weight is broadly low, typical, high, or very high relative to height.\n\nMetric formula:\nBMI = weight in kilograms ÷ (height in meters × height in meters)\n\nIf you use imperial measurements, the calculator first converts feet, inches, and pounds into metric values and then applies the same formula.\n\nGeneral adult BMI categories are commonly interpreted as:\n\n- Under 18.5: Underweight\n- 18.5 to 24.9: Healthy weight\n- 25 to 29.9: Overweight\n- 30 and above: Obesity\n\nBMI is popular because it is fast and easy to calculate, but it has important limits. It does not distinguish between fat and muscle, and it does not capture the full picture of health. That means the result is most useful as a screening estimate, not as a complete diagnosis.",
+    example: {
+      inputs: {
+        unitSystem: "metric",
+        heightCm: 178,
+        weightKg: 78,
+        heightFeet: 5,
+        heightInches: 10,
+        weightPounds: 172,
+      },
+      explanation:
+        "Estimate BMI for someone who is 178 centimeters tall and weighs 78 kilograms. Convert height to meters, square it, and divide the body weight by that number. The result shows how the person’s weight compares to common adult BMI reference ranges.",
+      results: [
+        { label: "Height", value: "178 cm" },
+        { label: "Weight", value: "78 kg" },
+        { label: "BMI", value: "24.6" },
+        { label: "Category", value: "Healthy weight" },
+      ],
     },
   },
 ];
