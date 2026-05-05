@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { trackEvent } from "@/lib/analytics";
 import type { ToolDefinition } from "@/lib/tool-definitions";
@@ -219,11 +219,26 @@ function ToolResultDisplay({
   definition,
   values,
   results,
+  resultVersion,
 }: {
   definition: ToolDefinition;
   values: Record<string, string>;
   results: Record<string, string | number> | null;
+  resultVersion: number;
 }) {
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  useEffect(() => {
+    if (resultVersion === 0) {
+      return;
+    }
+
+    setIsRefreshing(true);
+    const timeout = window.setTimeout(() => setIsRefreshing(false), 450);
+
+    return () => window.clearTimeout(timeout);
+  }, [resultVersion]);
+
   return (
     <SurfaceCard>
       <h2 className="text-2xl font-semibold text-white">Results</h2>
@@ -232,7 +247,14 @@ function ToolResultDisplay({
       </p>
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         {definition.outputs.map((output) => (
-          <div key={output.key} className="rounded-2xl border border-white/10 bg-slate-950/60 p-4">
+          <div
+            key={output.key}
+            className={`rounded-2xl border p-4 transition duration-300 ${
+              isRefreshing
+                ? "border-cyan-300/50 bg-cyan-400/10 shadow-[0_0_0_1px_rgba(103,232,249,0.2)]"
+                : "border-white/10 bg-slate-950/60"
+            }`}
+          >
             <p className="text-sm text-slate-400">{getDynamicOutputLabel(definition, output.key, values)}</p>
             <p className="mt-2 break-words text-xl font-semibold text-white sm:text-2xl">
               {formatValue(
@@ -268,6 +290,7 @@ export function ToolLayoutWrapper({
     }
   });
   const [error, setError] = useState<string | null>(null);
+  const [resultVersion, setResultVersion] = useState(0);
 
   const exampleList = useMemo(
     () =>
@@ -289,6 +312,7 @@ export function ToolLayoutWrapper({
       const nextResults = runToolCalculation(definition.category, definition.slug, values);
       setResults(nextResults);
       setError(null);
+      setResultVersion((current) => current + 1);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
     }
@@ -335,7 +359,12 @@ export function ToolLayoutWrapper({
             onSubmit={handleSubmit}
             error={error}
           />
-          <ToolResultDisplay definition={definition} values={values} results={results} />
+          <ToolResultDisplay
+            definition={definition}
+            values={values}
+            results={results}
+            resultVersion={resultVersion}
+          />
 
           <SurfaceCard>
             <SectionHeader

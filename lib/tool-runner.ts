@@ -71,6 +71,17 @@ export function runToolCalculation(category: string, slug: string, values: Recor
         fromUnit: values.fromUnit,
         toUnit: values.toUnit,
       });
+    case "random-number-generator":
+      return logic.generateRandomNumber({
+        min: parseNumber(values.min),
+        max: parseNumber(values.max),
+      });
+    case "dice-roller":
+      return logic.rollDie({
+        sides: parseNumber(values.sides),
+      });
+    case "coin-flipper":
+      return logic.flipCoin();
     case "word-counter":
       return logic.analyzeWordCount({ text: values.text });
     case "case-converter":

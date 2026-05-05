@@ -946,6 +946,201 @@ export const toolDefinitions: ToolDefinition[] = [
     },
   },
   {
+    slug: "random-number-generator",
+    title: "Random Number Generator",
+    category: "utility",
+    description: "Generate a random whole number between a user-defined lower and upper range.",
+    intro: [
+      "Use this random number generator to quickly generate a random whole number between a minimum and maximum value that you choose. This is useful for simple games, giveaways, classroom activities, number picking, testing, and quick decision-making.",
+      "By entering a lower and upper bound, you can instantly generate a random result without relying on manual picks or outside tools.",
+    ],
+    keywords: ["random number generator", "number picker", "random number between two numbers"],
+    inputs: [
+      {
+        name: "min",
+        label: "Lower range",
+        type: "number",
+        placeholder: "1",
+        helpText: "Enter the smallest whole number allowed in the result.",
+        required: true,
+        step: 1,
+      },
+      {
+        name: "max",
+        label: "Upper range",
+        type: "number",
+        placeholder: "100",
+        helpText: "Enter the largest whole number allowed in the result.",
+        required: true,
+        step: 1,
+      },
+    ],
+    outputs: [
+      { key: "randomNumber", label: "Random number", format: "number", description: "One randomly generated whole number within the selected range." },
+      { key: "rangeLabel", label: "Range note", format: "text", description: "Quick confirmation of the range used for the generated result." },
+    ],
+    faq: [
+      {
+        question: "Can I choose my own range?",
+        answer: "Yes. You can enter your own lower and upper whole-number values and generate a result inside that range.",
+      },
+      {
+        question: "Does this include both the minimum and maximum values?",
+        answer: "Yes. The generated result can be equal to either the lower or upper value if those numbers fall inside the selected range.",
+      },
+      {
+        question: "Can I use decimal values?",
+        answer: "No. This first version is intended for whole-number generation only so the output stays simple and predictable.",
+      },
+      {
+        question: "When would I use a random number generator?",
+        answer: "A random number generator is useful for classroom picks, giveaways, simple games, practice drills, test data, and any situation where you want a quick unbiased number choice.",
+      },
+      {
+        question: "Will the same number appear more than once if I try again?",
+        answer: "Yes. Each click generates a fresh random result, so repeated numbers can happen naturally.",
+      },
+      {
+        question: "Can I use this for contests or small picks?",
+        answer: "Yes, for informal use. It is useful for quick random selection, but formal or regulated use cases may require more specific tooling or auditing rules.",
+      },
+    ],
+    relatedTools: ["dice-roller", "coin-flipper"],
+    formulaSummary:
+      "This tool generates one random whole number inside the range you provide.\n\nThe process is simple:\n\n- you enter a minimum value\n- you enter a maximum value\n- the generator picks one whole number within that range\n\nThe result can match either endpoint if the lower and upper values are valid.\n\nThis kind of tool is useful because it gives you a quick random pick without needing to write numbers down, shuffle slips of paper, or do the selection manually.",
+    example: {
+      inputs: { min: 1, max: 50 },
+      explanation:
+        "Generate a random whole number between 1 and 50. This kind of setup is common for small classroom activities, simple raffles, practice drills, or quick number picks where every whole number in the range is allowed.",
+      results: [
+        { label: "Possible result", value: "Any whole number from 1 to 50" },
+      ],
+    },
+  },
+  {
+    slug: "dice-roller",
+    title: "Dice Roller",
+    category: "utility",
+    description: "Roll a virtual die using a standard dice side count such as d6, d20, or d100.",
+    intro: [
+      "Use this dice roller to generate a random result based on a standard die size. This is useful for tabletop games, classroom activities, probability demos, quick choices, and any situation where you need a simple die roll without physical dice nearby.",
+      "Choose a standard dice side count and the tool will generate one random roll result from 1 up to the number of sides selected.",
+    ],
+    keywords: ["dice roller", "virtual dice", "d20 roller"],
+    inputs: [
+      {
+        name: "sides",
+        label: "Dice sides",
+        type: "select",
+        helpText: "Choose a standard die size for the roll.",
+        required: true,
+        options: [
+          { label: "4-sided die (d4)", value: "4" },
+          { label: "6-sided die (d6)", value: "6" },
+          { label: "8-sided die (d8)", value: "8" },
+          { label: "10-sided die (d10)", value: "10" },
+          { label: "12-sided die (d12)", value: "12" },
+          { label: "20-sided die (d20)", value: "20" },
+          { label: "100-sided die (d100)", value: "100" },
+        ],
+      },
+    ],
+    outputs: [
+      { key: "rollResult", label: "Roll result", format: "number", description: "Random result from 1 up to the number of sides selected." },
+      { key: "diceLabel", label: "Roll note", format: "text", description: "Quick confirmation of which die was rolled." },
+    ],
+    faq: [
+      {
+        question: "What dice types are included?",
+        answer: "This first version supports standard dice sizes: d4, d6, d8, d10, d12, d20, and d100.",
+      },
+      {
+        question: "Can I roll any custom number of sides?",
+        answer: "No. This first version intentionally stays limited to standard dice side counts so the tool remains simple and predictable.",
+      },
+      {
+        question: "When would I use a dice roller?",
+        answer: "A dice roller is useful for tabletop games, classroom activities, practice drills, random choices, and probability demonstrations.",
+      },
+      {
+        question: "Does the roll include every number on the die?",
+        answer: "Yes. The result can be any whole number from 1 up to the number of sides on the selected die.",
+      },
+      {
+        question: "Can I roll more than one die at once?",
+        answer: "Not in this first version. The initial release is focused on one clean single-die roll at a time.",
+      },
+      {
+        question: "Why use a virtual die instead of a physical one?",
+        answer: "A virtual die is convenient when you do not have physical dice nearby or when you want a quick result on a phone or computer.",
+      },
+    ],
+    relatedTools: ["random-number-generator", "coin-flipper"],
+    formulaSummary:
+      "This tool simulates a standard die roll by generating one random whole number from 1 up to the selected number of sides.\n\nFor example:\n\n- a d6 can return any whole number from 1 to 6\n- a d20 can return any whole number from 1 to 20\n\nThe tool keeps the first version simple by supporting only standard dice sizes. That makes it useful for common gaming and classroom scenarios without adding extra setup complexity.",
+    example: {
+      inputs: { sides: 20 },
+      explanation:
+        "Roll a standard 20-sided die. This example reflects one of the most common virtual dice use cases for tabletop gaming and simple random event checks.",
+      results: [
+        { label: "Possible result", value: "Any whole number from 1 to 20" },
+      ],
+    },
+  },
+  {
+    slug: "coin-flipper",
+    title: "Coin Flipper",
+    category: "utility",
+    description: "Flip a virtual coin and get a simple Heads or Tails result instantly.",
+    intro: [
+      "Use this coin flipper to get a quick random Heads or Tails result with a single click. This is useful for simple decisions, games, classroom activities, tie-breakers, and any moment where you want a fast fair-feeling two-option choice.",
+      "The first version keeps things intentionally simple. There are no extra settings, just one click and one result.",
+    ],
+    keywords: ["coin flipper", "flip a coin", "heads or tails"],
+    inputs: [],
+    outputs: [
+      { key: "coinResult", label: "Coin result", format: "text", description: "Random result showing either Heads or Tails." },
+      { key: "flipLabel", label: "Flip note", format: "text", description: "Simple confirmation of what the tool just did." },
+    ],
+    faq: [
+      {
+        question: "Do I need to enter anything before flipping?",
+        answer: "No. This tool is intentionally simple, so you can click and get a result immediately.",
+      },
+      {
+        question: "What results can it return?",
+        answer: "The result is either Heads or Tails.",
+      },
+      {
+        question: "When would I use a coin flipper?",
+        answer: "A coin flipper is useful for simple decisions, tie-breakers, quick games, classroom choices, and any small two-option random pick.",
+      },
+      {
+        question: "Can I flip more than one coin at a time?",
+        answer: "Not in this first version. The initial release is focused on one clean one-click coin flip.",
+      },
+      {
+        question: "Can I get the same result repeatedly?",
+        answer: "Yes. Each flip is independent, so repeated Heads or repeated Tails can happen naturally.",
+      },
+      {
+        question: "Why use this instead of a real coin?",
+        answer: "A virtual coin flipper is convenient when you do not have a real coin nearby or just want a fast result on your device.",
+      },
+    ],
+    relatedTools: ["random-number-generator", "dice-roller"],
+    formulaSummary:
+      "This tool simulates a simple coin flip by randomly returning one of two outcomes: Heads or Tails.\n\nBecause there are only two possible results, the tool is useful for quick decisions, tie-breakers, and simple games where you want a fast binary choice without extra setup.",
+    example: {
+      inputs: {},
+      explanation:
+        "Flip a coin to make a quick two-option decision. This is one of the simplest randomization use cases and works well for tie-breakers, informal picks, and small games.",
+      results: [
+        { label: "Possible results", value: "Heads or Tails" },
+      ],
+    },
+  },
+  {
     slug: "word-counter",
     title: "Word Counter",
     category: "text",

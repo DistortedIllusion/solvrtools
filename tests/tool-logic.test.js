@@ -170,6 +170,39 @@ test("convertVolume handles cups to milliliters", () => {
   assert.equal(result.convertedValue, 473.1765);
 });
 
+test("generateRandomNumber respects inclusive range", () => {
+  const originalRandom = Math.random;
+  Math.random = () => 0.5;
+
+  const result = logic.generateRandomNumber({ min: 1, max: 10 });
+
+  assert.equal(result.randomNumber, 6);
+  assert.equal(result.rangeLabel, "Generated from 1 to 10.");
+  Math.random = originalRandom;
+});
+
+test("rollDie returns valid result for standard die", () => {
+  const originalRandom = Math.random;
+  Math.random = () => 0.5;
+
+  const result = logic.rollDie({ sides: 20 });
+
+  assert.equal(result.rollResult, 11);
+  assert.equal(result.diceLabel, "Rolled a d20.");
+  Math.random = originalRandom;
+});
+
+test("flipCoin returns tails when random is above threshold", () => {
+  const originalRandom = Math.random;
+  Math.random = () => 0.75;
+
+  const result = logic.flipCoin();
+
+  assert.equal(result.coinResult, "Tails");
+  assert.equal(result.flipLabel, "Single coin flip result.");
+  Math.random = originalRandom;
+});
+
 test("analyzeWordCount returns word and character counts", () => {
   const result = logic.analyzeWordCount({ text: "Hello SolvrTools world" });
   assert.equal(result.words, 3);

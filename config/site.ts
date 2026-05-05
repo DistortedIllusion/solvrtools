@@ -93,6 +93,17 @@ export const siteConfig = {
         "Body Fat Calculator",
       ],
     },
+    {
+      slug: "utility",
+      name: "Utility",
+      description: "Simple utility tools for quick randomization, small decisions, and everyday helper actions.",
+      examples: [
+        "Random Number Generator",
+        "Dice Roller",
+        "Coin Flipper",
+        "Simple Picker",
+      ],
+    },
   ] satisfies CategoryDefinition[],
   featuredTools: [
     {
