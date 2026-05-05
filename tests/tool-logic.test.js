@@ -204,3 +204,31 @@ test("calculateSquareFootage returns area", () => {
 
   assert.equal(result.squareFeet, 180);
 });
+
+test("calculateBmi returns expected metric BMI and category", () => {
+  const result = logic.calculateBmi({
+    unitSystem: "metric",
+    heightCm: 178,
+    weightKg: 78,
+    heightFeet: 0,
+    heightInches: 0,
+    weightPounds: 0,
+  });
+
+  assert.equal(result.bmi, 24.6);
+  assert.equal(result.category, "Healthy weight");
+});
+
+test("calculateBmi returns expected imperial BMI and category", () => {
+  const result = logic.calculateBmi({
+    unitSystem: "imperial",
+    heightCm: 0,
+    weightKg: 0,
+    heightFeet: 5,
+    heightInches: 10,
+    weightPounds: 172,
+  });
+
+  assert.equal(result.bmi, 24.7);
+  assert.equal(result.category, "Healthy weight");
+});

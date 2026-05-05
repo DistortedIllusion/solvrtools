@@ -82,6 +82,17 @@ export const siteConfig = {
         "Concrete Calculator",
       ],
     },
+    {
+      slug: "health",
+      name: "Health",
+      description: "Health and wellness tools for body measurements, daily planning, and simple fitness-related calculations.",
+      examples: [
+        "BMI Calculator",
+        "Calorie Calculator",
+        "Water Intake Calculator",
+        "Body Fat Calculator",
+      ],
+    },
   ] satisfies CategoryDefinition[],
   featuredTools: [
     {
@@ -158,6 +169,14 @@ export const siteConfig = {
       category: "home",
       name: "Square Footage Calculator",
       summary: "Calculate floor or room area for planning, estimating, and shopping.",
+      featured: true,
+    },
+    {
+      slug: "bmi-calculator",
+      category: "health",
+      name: "BMI Calculator",
+      summary: "Estimate body mass index from height and weight using metric or imperial units.",
+      popular: true,
       featured: true,
     },
   ] satisfies ToolDefinition[],

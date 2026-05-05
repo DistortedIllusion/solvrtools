@@ -78,6 +78,15 @@ export function runToolCalculation(category: string, slug: string, values: Recor
         length: parseNumber(values.length),
         width: parseNumber(values.width),
       });
+    case "bmi-calculator":
+      return logic.calculateBmi({
+        unitSystem: values.unitSystem,
+        heightCm: parseNumber(values.heightCm),
+        weightKg: parseNumber(values.weightKg),
+        heightFeet: parseNumber(values.heightFeet),
+        heightInches: parseNumber(values.heightInches),
+        weightPounds: parseNumber(values.weightPounds),
+      });
     default:
       throw new Error(`No calculator configured for ${slug}.`);
   }
