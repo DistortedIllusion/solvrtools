@@ -142,6 +142,18 @@ export const siteConfig = {
       featured: true,
     },
     {
+      slug: "weight-converter",
+      category: "conversions",
+      name: "Weight Converter",
+      summary: "Convert everyday weight and mass values across metric and imperial units.",
+    },
+    {
+      slug: "volume-converter",
+      category: "conversions",
+      name: "Volume Converter",
+      summary: "Convert common kitchen and household volume units quickly and clearly.",
+    },
+    {
       slug: "word-counter",
       category: "text",
       name: "Word Counter",

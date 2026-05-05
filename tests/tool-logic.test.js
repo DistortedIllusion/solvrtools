@@ -150,6 +150,26 @@ test("convertLength handles meters to feet", () => {
   assert.equal(result.convertedValue, 32.8084);
 });
 
+test("convertWeight handles pounds to kilograms", () => {
+  const result = logic.convertWeight({
+    value: 150,
+    fromUnit: "pounds",
+    toUnit: "kilograms",
+  });
+
+  assert.equal(result.convertedValue, 68.0389);
+});
+
+test("convertVolume handles cups to milliliters", () => {
+  const result = logic.convertVolume({
+    value: 2,
+    fromUnit: "cups",
+    toUnit: "milliliters",
+  });
+
+  assert.equal(result.convertedValue, 473.1765);
+});
+
 test("analyzeWordCount returns word and character counts", () => {
   const result = logic.analyzeWordCount({ text: "Hello SolvrTools world" });
   assert.equal(result.words, 3);

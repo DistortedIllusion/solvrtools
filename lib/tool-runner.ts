@@ -59,6 +59,18 @@ export function runToolCalculation(category: string, slug: string, values: Recor
         fromUnit: values.fromUnit,
         toUnit: values.toUnit,
       });
+    case "weight-converter":
+      return logic.convertWeight({
+        value: parseNumber(values.value),
+        fromUnit: values.fromUnit,
+        toUnit: values.toUnit,
+      });
+    case "volume-converter":
+      return logic.convertVolume({
+        value: parseNumber(values.value),
+        fromUnit: values.fromUnit,
+        toUnit: values.toUnit,
+      });
     case "word-counter":
       return logic.analyzeWordCount({ text: values.text });
     case "case-converter":

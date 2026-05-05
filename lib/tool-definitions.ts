@@ -743,7 +743,7 @@ export const toolDefinitions: ToolDefinition[] = [
         answer: "For everyday use, planning, and most projects, the level of precision provided is more than sufficient. For high-precision engineering or scientific work, you may want to confirm the required number of decimal places or significant figures for your specific application.",
       },
     ],
-    relatedTools: ["temperature-converter"],
+    relatedTools: ["temperature-converter", "weight-converter", "volume-converter"],
     formulaSummary:
       "This converter uses standard length conversion factors to translate a value from one unit to another.\n\nFor example:\n\n- Meters to feet: feet = meters × 3.28084\n- Kilometers to yards: yards = kilometers × 1093.61\n\nWhen you enter a value and select the from and to units, the tool:\n\n- takes your input value\n- multiplies it by the correct conversion factor\n- returns the converted distance in the target unit\n\nThis makes it easy to understand distances in the units you are most comfortable with, without doing the math by hand.",
     example: {
@@ -751,6 +751,198 @@ export const toolDefinitions: ToolDefinition[] = [
       explanation:
         "Convert a distance from meters to feet. This example shows how a metric distance translates into imperial units. Knowing that 10 meters is a bit over 32 feet can help when reading building plans, equipment specs, or sports measurements that use different unit systems.",
       results: [{ label: "Converted length", value: "10 meters converts to approximately 32.8084 feet." }],
+    },
+  },
+  {
+    slug: "weight-converter",
+    title: "Weight Converter",
+    category: "conversions",
+    description: "Convert common weight and mass units for cooking, shipping, fitness, and everyday use.",
+    intro: [
+      "Use this weight converter to quickly convert between common metric and imperial weight units such as grams, kilograms, ounces, and pounds. This is useful for recipes, shipping estimates, gym tracking, travel, and product measurements that appear in a different unit system than the one you normally use.",
+      "By entering a value and choosing the from and to units, you can instantly convert weights without doing the math by hand or searching for conversion charts.",
+    ],
+    keywords: ["weight converter", "pounds to kilograms", "kg to lbs"],
+    inputs: [
+      {
+        name: "value",
+        label: "Weight value",
+        type: "number",
+        placeholder: "150",
+        helpText: "Enter the weight or mass you want to convert.",
+        required: true,
+        min: 0,
+        step: 0.01,
+      },
+      {
+        name: "fromUnit",
+        label: "Convert from",
+        type: "select",
+        required: true,
+        options: [
+          { label: "Milligrams", value: "milligrams" },
+          { label: "Grams", value: "grams" },
+          { label: "Kilograms", value: "kilograms" },
+          { label: "Ounces", value: "ounces" },
+          { label: "Pounds", value: "pounds" },
+          { label: "Tons", value: "tons" },
+        ],
+      },
+      {
+        name: "toUnit",
+        label: "Convert to",
+        type: "select",
+        required: true,
+        options: [
+          { label: "Milligrams", value: "milligrams" },
+          { label: "Grams", value: "grams" },
+          { label: "Kilograms", value: "kilograms" },
+          { label: "Ounces", value: "ounces" },
+          { label: "Pounds", value: "pounds" },
+          { label: "Tons", value: "tons" },
+        ],
+      },
+    ],
+    outputs: [
+      { key: "convertedValue", label: "Converted weight", format: "number", description: "Converted result in the selected destination unit.", suffix: " {dynamic-unit}" },
+    ],
+    faq: [
+      {
+        question: "What weight units are included?",
+        answer: "This version supports common metric and imperial units including milligrams, grams, kilograms, ounces, pounds, and tons.",
+      },
+      {
+        question: "Can I convert decimal values?",
+        answer: "Yes. Decimal values are useful for food measurements, shipping weights, and product specifications.",
+      },
+      {
+        question: "When would I use a weight converter?",
+        answer: "A weight converter is useful for cooking, shipping, gym and fitness tracking, travel luggage limits, and product measurements from international stores or instructions.",
+      },
+      {
+        question: "How do pounds and kilograms compare?",
+        answer: "One kilogram is equal to about 2.20462 pounds. That is why weights in kilograms usually look smaller than the same weight expressed in pounds.",
+      },
+      {
+        question: "Why do some tools say weight and others say mass?",
+        answer: "In everyday use, people often say weight even when they mean mass. For general conversion tools like this one, the practical unit conversion is what matters most.",
+      },
+      {
+        question: "Does this tool round the result?",
+        answer: "Yes. The displayed value may be rounded to a practical number of decimal places so it is easier to read while still staying accurate for everyday use.",
+      },
+      {
+        question: "Is this accurate enough for everyday decisions?",
+        answer: "Yes. For household, shopping, cooking, shipping, and general planning use cases, the conversion precision provided here is more than sufficient.",
+      },
+    ],
+    relatedTools: ["volume-converter", "length-converter", "temperature-converter"],
+    formulaSummary:
+      "This weight converter uses standard conversion factors to translate a value from one unit into another.\n\nFor example:\n\n- Kilograms to pounds: pounds = kilograms × 2.20462\n- Pounds to kilograms: kilograms = pounds ÷ 2.20462\n\nThe calculator works by:\n\n- taking your input value\n- converting it into a base unit behind the scenes\n- applying the correct factor for the destination unit\n- returning the converted result\n\nThis approach keeps the conversion consistent and makes it easy to compare weights across metric and imperial systems without doing manual calculations.",
+    example: {
+      inputs: { value: 150, fromUnit: "pounds", toUnit: "kilograms" },
+      explanation:
+        "Convert a body weight or package weight from pounds to kilograms. This example is useful because people often see weights expressed in pounds in one country and kilograms in another. Knowing that 150 pounds is about 68 kilograms makes international comparisons much easier.",
+      results: [{ label: "Converted weight", value: "150 pounds converts to approximately 68.0389 kilograms." }],
+    },
+  },
+  {
+    slug: "volume-converter",
+    title: "Volume Converter",
+    category: "conversions",
+    description: "Convert common kitchen and household volume units quickly and clearly.",
+    intro: [
+      "Use this volume converter to quickly convert between common liquid and kitchen volume units such as milliliters, liters, cups, tablespoons, and gallons. This is useful for cooking, baking, meal prep, product comparisons, and everyday household measurements that use different unit systems.",
+      "By entering a value and choosing the from and to units, you can instantly convert volume measurements without relying on memory or manual conversion charts.",
+    ],
+    keywords: ["volume converter", "cups to ml", "liters to gallons"],
+    inputs: [
+      {
+        name: "value",
+        label: "Volume value",
+        type: "number",
+        placeholder: "2",
+        helpText: "Enter the volume you want to convert.",
+        required: true,
+        min: 0,
+        step: 0.01,
+      },
+      {
+        name: "fromUnit",
+        label: "Convert from",
+        type: "select",
+        required: true,
+        options: [
+          { label: "Milliliters", value: "milliliters" },
+          { label: "Liters", value: "liters" },
+          { label: "Teaspoons", value: "teaspoons" },
+          { label: "Tablespoons", value: "tablespoons" },
+          { label: "Cups", value: "cups" },
+          { label: "Fluid Ounces", value: "fluidOunces" },
+          { label: "Pints", value: "pints" },
+          { label: "Quarts", value: "quarts" },
+          { label: "Gallons", value: "gallons" },
+        ],
+      },
+      {
+        name: "toUnit",
+        label: "Convert to",
+        type: "select",
+        required: true,
+        options: [
+          { label: "Milliliters", value: "milliliters" },
+          { label: "Liters", value: "liters" },
+          { label: "Teaspoons", value: "teaspoons" },
+          { label: "Tablespoons", value: "tablespoons" },
+          { label: "Cups", value: "cups" },
+          { label: "Fluid Ounces", value: "fluidOunces" },
+          { label: "Pints", value: "pints" },
+          { label: "Quarts", value: "quarts" },
+          { label: "Gallons", value: "gallons" },
+        ],
+      },
+    ],
+    outputs: [
+      { key: "convertedValue", label: "Converted volume", format: "number", description: "Converted result in the selected destination unit.", suffix: " {dynamic-unit}" },
+    ],
+    faq: [
+      {
+        question: "What volume units are included?",
+        answer: "This version supports common kitchen and household units including milliliters, liters, teaspoons, tablespoons, cups, fluid ounces, pints, quarts, and gallons.",
+      },
+      {
+        question: "Can I use this for recipes?",
+        answer: "Yes. This tool is especially useful for cooking and baking when a recipe uses a different measurement system than the one you normally use.",
+      },
+      {
+        question: "Why are cups and fluid ounces useful to convert?",
+        answer: "Many recipes, packaging labels, and kitchen tools use cups or fluid ounces, while others use metric units such as milliliters or liters. A converter helps bridge that gap quickly.",
+      },
+      {
+        question: "Can I convert decimal values?",
+        answer: "Yes. Decimal values are common in recipes, liquids, supplements, and product measurement labels.",
+      },
+      {
+        question: "Does this handle kitchen and household use well?",
+        answer: "Yes. The first version is designed to focus on practical day-to-day volume units rather than trying to include every specialized industrial or scientific unit.",
+      },
+      {
+        question: "Does this tool round the result?",
+        answer: "Yes. The displayed result may be rounded to a practical number of decimal places so it stays readable while remaining accurate for normal use.",
+      },
+      {
+        question: "Is this enough precision for everyday conversion?",
+        answer: "Yes. For recipes, drinks, household liquids, and product measurement comparisons, the precision here is more than sufficient.",
+      },
+    ],
+    relatedTools: ["weight-converter", "temperature-converter", "length-converter"],
+    formulaSummary:
+      "This volume converter uses standard unit factors to translate one liquid or kitchen measurement into another.\n\nFor example:\n\n- Cups to milliliters: milliliters = cups × 236.5882365\n- Liters to gallons: gallons = liters ÷ 3.78541\n\nThe tool works by:\n\n- taking your input value\n- converting it into a base unit behind the scenes\n- applying the correct factor for the target unit\n- returning the converted volume\n\nThis makes it easier to work across metric and imperial recipe measurements, packaging labels, and everyday household conversions without doing the math manually.",
+    example: {
+      inputs: { value: 2, fromUnit: "cups", toUnit: "milliliters" },
+      explanation:
+        "Convert a kitchen measurement from cups to milliliters. This is a common real-world conversion when following recipes from different countries. Knowing that 2 cups is about 473.1765 milliliters helps when your measuring tools use metric markings.",
+      results: [{ label: "Converted volume", value: "2 cups converts to approximately 473.1765 milliliters." }],
     },
   },
   {
