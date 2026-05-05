@@ -52,6 +52,42 @@ function getDynamicOutputLabel(definition: ToolDefinition, outputKey: string, va
   return definition.outputs.find((output) => output.key === outputKey)?.label ?? outputKey;
 }
 
+function formatUnitValue(unit: string) {
+  const unitLabels: Record<string, string> = {
+    milligrams: "mg",
+    grams: "g",
+    kilograms: "kg",
+    ounces: "oz",
+    pounds: "lb",
+    tons: "tons",
+    milliliters: "mL",
+    liters: "L",
+    teaspoons: "tsp",
+    tablespoons: "tbsp",
+    cups: "cups",
+    fluidOunces: "fl oz",
+    pints: "pt",
+    quarts: "qt",
+    gallons: "gal",
+  };
+
+  return unitLabels[unit] ?? unit;
+}
+
+function getDynamicOutputSuffix(definition: ToolDefinition, outputKey: string, values: Record<string, string>) {
+  const output = definition.outputs.find((item) => item.key === outputKey);
+
+  if (!output?.suffix?.includes("{dynamic-unit}")) {
+    return output?.suffix;
+  }
+
+  if (["weight-converter", "volume-converter"].includes(definition.slug) && outputKey === "convertedValue") {
+    return ` ${formatUnitValue(values.toUnit ?? "")}`;
+  }
+
+  return output.suffix.replace("{dynamic-unit}", "").trim() ? output.suffix.replace("{dynamic-unit}", "") : undefined;
+}
+
 function buildInitialState(definition: ToolDefinition) {
   return definition.inputs.reduce<Record<string, string>>((acc, field) => {
     const exampleValue = definition.example.inputs[field.name];
@@ -199,7 +235,12 @@ function ToolResultDisplay({
           <div key={output.key} className="rounded-2xl border border-white/10 bg-slate-950/60 p-4">
             <p className="text-sm text-slate-400">{getDynamicOutputLabel(definition, output.key, values)}</p>
             <p className="mt-2 break-words text-xl font-semibold text-white sm:text-2xl">
-              {formatValue(results?.[output.key], output.format, output.prefix, output.suffix)}
+              {formatValue(
+                results?.[output.key],
+                output.format,
+                output.prefix,
+                getDynamicOutputSuffix(definition, output.key, values),
+              )}
             </p>
             {output.description ? (
               <p className="mt-2 text-xs leading-5 text-slate-500">{output.description}</p>
