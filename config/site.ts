@@ -176,8 +176,6 @@ export const siteConfig = {
       category: "health",
       name: "BMI Calculator",
       summary: "Estimate body mass index from height and weight using metric or imperial units.",
-      popular: true,
-      featured: true,
     },
   ] satisfies ToolDefinition[],
 } as const;

@@ -1222,7 +1222,7 @@ export const toolDefinitions: ToolDefinition[] = [
         answer: "No. BMI can be a helpful starting point, but it should not replace professional medical advice or a more complete health assessment.",
       },
     ],
-    relatedTools: ["square-footage-calculator", "age-calculator"],
+    relatedTools: [],
     formulaSummary:
       "BMI is calculated by dividing body weight by height squared.\n\nMetric formula:\nBMI = weight in kilograms ÷ (height in meters × height in meters)\n\nImperial measurements are first converted into metric values behind the scenes before the BMI result is calculated.\n\nGeneral adult BMI categories are commonly interpreted as:\n\n- Under 18.5: Underweight\n- 18.5 to 24.9: Healthy weight\n- 25 to 29.9: Overweight\n- 30 and above: Obesity\n\nBMI is useful because it is simple and fast, but it should be treated as a screening estimate rather than a complete measure of health.",
     example: {

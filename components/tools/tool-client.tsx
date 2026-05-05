@@ -81,6 +81,28 @@ function ToolInputForm({
   onSubmit: () => void;
   error: string | null;
 }) {
+  const visibleFields = definition.inputs.filter((field) => {
+    if (definition.slug !== "bmi-calculator") {
+      return true;
+    }
+
+    const unitSystem = values.unitSystem ?? "metric";
+
+    if (["unitSystem"].includes(field.name)) {
+      return true;
+    }
+
+    if (unitSystem === "metric") {
+      return ["heightCm", "weightKg"].includes(field.name);
+    }
+
+    if (unitSystem === "imperial") {
+      return ["heightFeet", "heightInches", "weightPounds"].includes(field.name);
+    }
+
+    return true;
+  });
+
   return (
     <SurfaceCard>
       <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
@@ -97,7 +119,7 @@ function ToolInputForm({
         </div>
       ) : null}
       <div className="mt-6 grid gap-4 md:grid-cols-2">
-        {definition.inputs.map((field) => (
+        {visibleFields.map((field) => (
           <label key={field.name} className={field.type === "textarea" ? "md:col-span-2" : ""}>
             <span className="mb-2 block text-sm font-medium text-slate-300">
               {field.label}
@@ -354,12 +376,14 @@ export function ToolLayoutWrapper({
             </ul>
           </SurfaceCard>
 
-          <div>
-            <SectionHeader title="Related tools" description="Nearby tools users may also want." />
-            <div className="mt-4">
-              <RelatedLinksSection links={related} />
+          {related.length > 0 ? (
+            <div>
+              <SectionHeader title="Related tools" description="Nearby tools users may also want." />
+              <div className="mt-4">
+                <RelatedLinksSection links={related} />
+              </div>
             </div>
-          </div>
+          ) : null}
 
           <SurfaceCard>
             <h2 className="text-lg font-semibold text-white">Keywords</h2>
