@@ -203,6 +203,31 @@ test("flipCoin returns tails when random is above threshold", () => {
   Math.random = originalRandom;
 });
 
+test("calculateTimeZoneDifference returns readable zone comparison", () => {
+  const result = logic.calculateTimeZoneDifference({
+    currentTimeZone: "UTC",
+    convertedTimeZone: "America/New_York",
+  });
+
+  assert.equal(typeof result.currentTimeZoneTime, "string");
+  assert.equal(typeof result.convertedTimeZoneTime, "string");
+  assert.equal(typeof result.hourDifference, "number");
+  assert.equal(typeof result.differenceLabel, "string");
+});
+
+test("calculateTimesheet subtracts breaks from worked time", () => {
+  const result = logic.calculateTimesheet({
+    startTime: "08:00",
+    endTime: "17:00",
+    breakMinutes: 30,
+  });
+
+  assert.equal(result.totalHours, 8);
+  assert.equal(result.totalMinutes, 30);
+  assert.equal(result.totalWorkedMinutes, 510);
+  assert.equal(result.workedTimeText, "8 hours 30 minutes");
+});
+
 test("analyzeWordCount returns word and character counts", () => {
   const result = logic.analyzeWordCount({ text: "Hello SolvrTools world" });
   assert.equal(result.words, 3);

@@ -47,6 +47,17 @@ export function runToolCalculation(category: string, slug: string, values: Recor
         startTime: values.startTime,
         endTime: values.endTime,
       });
+    case "time-zone-calculator":
+      return logic.calculateTimeZoneDifference({
+        currentTimeZone: values.currentTimeZone,
+        convertedTimeZone: values.convertedTimeZone,
+      });
+    case "timesheet-calculator":
+      return logic.calculateTimesheet({
+        startTime: values.startTime,
+        endTime: values.endTime,
+        breakMinutes: parseNumber(values.breakMinutes),
+      });
     case "temperature-converter":
       return logic.convertTemperature({
         value: parseNumber(values.value),

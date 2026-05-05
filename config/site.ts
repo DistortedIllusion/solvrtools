@@ -138,6 +138,18 @@ export const siteConfig = {
       featured: true,
     },
     {
+      slug: "time-zone-calculator",
+      category: "time",
+      name: "Time Zone Calculator",
+      summary: "Compare the live current time in two time zones and see the hour difference instantly.",
+    },
+    {
+      slug: "timesheet-calculator",
+      category: "time",
+      name: "Timesheet Calculator",
+      summary: "Calculate total worked time from a start time, end time, and break duration.",
+    },
+    {
       slug: "temperature-converter",
       category: "conversions",
       name: "Temperature Converter",

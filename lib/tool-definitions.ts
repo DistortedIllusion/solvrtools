@@ -569,6 +569,182 @@ export const toolDefinitions: ToolDefinition[] = [
     },
   },
   {
+    slug: "time-zone-calculator",
+    title: "Time Zone Calculator",
+    category: "time",
+    description: "Compare the live current time in two time zones and see the hour difference instantly.",
+    intro: [
+      "Use this time zone calculator to compare the real current time in two selected time zones. This is useful for scheduling calls, planning meetings, coordinating remote work, checking travel timing, and avoiding confusion when people are in different parts of the world.",
+      "By selecting a current time zone and a converted time zone, you can instantly see the live time in both places along with the current hour difference between them.",
+    ],
+    keywords: ["time zone calculator", "time difference between time zones", "world clock comparison"],
+    inputs: [
+      {
+        name: "currentTimeZone",
+        label: "Current time zone",
+        type: "select",
+        helpText: "Choose the time zone you want to compare from.",
+        required: true,
+        options: [
+          { label: "Eastern Time (America/New_York)", value: "America/New_York" },
+          { label: "Central Time (America/Chicago)", value: "America/Chicago" },
+          { label: "Mountain Time (America/Denver)", value: "America/Denver" },
+          { label: "Pacific Time (America/Los_Angeles)", value: "America/Los_Angeles" },
+          { label: "UTC", value: "UTC" },
+          { label: "London (Europe/London)", value: "Europe/London" },
+          { label: "Paris (Europe/Paris)", value: "Europe/Paris" },
+          { label: "Tokyo (Asia/Tokyo)", value: "Asia/Tokyo" },
+          { label: "Sydney (Australia/Sydney)", value: "Australia/Sydney" },
+          { label: "Regina (America/Regina)", value: "America/Regina" },
+        ],
+      },
+      {
+        name: "convertedTimeZone",
+        label: "Converted time zone",
+        type: "select",
+        helpText: "Choose the time zone you want to compare against.",
+        required: true,
+        options: [
+          { label: "Eastern Time (America/New_York)", value: "America/New_York" },
+          { label: "Central Time (America/Chicago)", value: "America/Chicago" },
+          { label: "Mountain Time (America/Denver)", value: "America/Denver" },
+          { label: "Pacific Time (America/Los_Angeles)", value: "America/Los_Angeles" },
+          { label: "UTC", value: "UTC" },
+          { label: "London (Europe/London)", value: "Europe/London" },
+          { label: "Paris (Europe/Paris)", value: "Europe/Paris" },
+          { label: "Tokyo (Asia/Tokyo)", value: "Asia/Tokyo" },
+          { label: "Sydney (Australia/Sydney)", value: "Australia/Sydney" },
+          { label: "Regina (America/Regina)", value: "America/Regina" },
+        ],
+      },
+    ],
+    outputs: [
+      { key: "currentTimeZoneTime", label: "Current time zone time", format: "text", description: "Live current time in the first selected time zone." },
+      { key: "convertedTimeZoneTime", label: "Converted time zone time", format: "text", description: "Live current time in the second selected time zone." },
+      { key: "hourDifference", label: "Hour difference", format: "number", description: "Current time offset difference between the two selected time zones.", suffix: " hours" },
+      { key: "differenceLabel", label: "Time difference summary", format: "text", description: "Readable explanation of which time zone is ahead or behind." },
+    ],
+    faq: [
+      {
+        question: "Does this show the real current time?",
+        answer: "Yes. This calculator is designed to show the live current time for each selected time zone when you run the calculation.",
+      },
+      {
+        question: "Does it account for daylight saving time?",
+        answer: "Yes, the current displayed time and offset difference reflect the selected zones as they are currently observed, including daylight saving time where applicable.",
+      },
+      {
+        question: "When would I use a time zone calculator?",
+        answer: "A time zone calculator is useful for scheduling meetings, remote work, customer support coverage, travel planning, and coordinating across regions without doing offset math manually.",
+      },
+      {
+        question: "Why can time differences change during the year?",
+        answer: "Some regions observe daylight saving time while others do not, so the offset between two places can change at different points in the year.",
+      },
+      {
+        question: "Can two time zones have the same current hour difference?",
+        answer: "Yes. Depending on the season and the places selected, two zones can temporarily line up with the same UTC offset even if they are normally different.",
+      },
+      {
+        question: "Why does this tool use selected time zones instead of typed city names?",
+        answer: "Using known time zone options helps keep the first version cleaner and more reliable without ambiguous location matching.",
+      },
+    ],
+    relatedTools: ["timesheet-calculator", "time-duration-calculator", "date-difference-calculator"],
+    formulaSummary:
+      "This tool compares two selected time zones using their live current times and current UTC offsets.\n\nThe process is simple:\n\n- you choose a starting time zone\n- you choose a comparison time zone\n- the calculator checks the live current time in each place\n- it measures the current hour difference between them\n\nThis is useful because time zone math is easy to get wrong, especially when daylight saving time changes are involved. A live comparison makes it easier to schedule meetings and plan shared availability with confidence.",
+    example: {
+      inputs: { currentTimeZone: "America/Chicago", convertedTimeZone: "Asia/Tokyo" },
+      explanation:
+        "Compare the live current time in Central Time and Tokyo time. This type of example is useful when planning a meeting, checking overlap windows, or figuring out whether someone is likely working, sleeping, or starting their day.",
+      results: [
+        { label: "Live output", value: "Shows the current real time in both selected zones plus the current hour difference." },
+      ],
+    },
+  },
+  {
+    slug: "timesheet-calculator",
+    title: "Timesheet Calculator",
+    category: "time",
+    description: "Calculate total worked time from a start time, end time, and break duration.",
+    intro: [
+      "Use this timesheet calculator to estimate the amount of time worked during a shift after subtracting breaks. This is useful for payroll checks, daily work logs, personal time tracking, shift planning, and simple timesheet review before submitting hours.",
+      "By entering the time you started working, the time you stopped, and the total break duration in minutes, you can quickly see your net worked time without calculating it by hand.",
+    ],
+    keywords: ["timesheet calculator", "hours worked calculator", "shift break calculator"],
+    inputs: [
+      {
+        name: "startTime",
+        label: "Start time",
+        type: "time",
+        helpText: "Enter when the shift started.",
+        required: true,
+      },
+      {
+        name: "endTime",
+        label: "End time",
+        type: "time",
+        helpText: "If the end time is earlier, the calculator treats it as the next day.",
+        required: true,
+      },
+      {
+        name: "breakMinutes",
+        label: "Total break duration (minutes)",
+        type: "number",
+        placeholder: "30",
+        helpText: "Enter the full break time to subtract from the shift length.",
+        required: true,
+        min: 0,
+        step: 1,
+      },
+    ],
+    outputs: [
+      { key: "totalHours", label: "Worked hours", format: "number", description: "Full worked hours after breaks are removed." },
+      { key: "totalMinutes", label: "Remaining worked minutes", format: "number", description: "Minutes left after full worked hours are counted." },
+      { key: "totalWorkedMinutes", label: "Total worked minutes", format: "number", description: "Net worked time converted fully into minutes." },
+      { key: "workedTimeText", label: "Worked time summary", format: "text", description: "Readable net worked time after subtracting breaks." },
+      { key: "shiftLabel", label: "Shift note", format: "text", description: "Summary of whether the shift stayed in one day or crossed midnight." },
+    ],
+    faq: [
+      {
+        question: "Does this subtract break time?",
+        answer: "Yes. The break duration you enter is subtracted from the total shift length to show net worked time.",
+      },
+      {
+        question: "Can it handle overnight shifts?",
+        answer: "Yes. If the end time is earlier than the start time, the calculator treats the shift as crossing midnight into the next day.",
+      },
+      {
+        question: "When would I use a timesheet calculator?",
+        answer: "A timesheet calculator is useful for checking payroll hours, reviewing time cards, logging work sessions, planning staffing, and estimating net work time after breaks.",
+      },
+      {
+        question: "What should I enter for break duration?",
+        answer: "Enter the total unpaid or deducted break time in minutes for the full shift. For example, a 30-minute lunch break should be entered as 30.",
+      },
+      {
+        question: "Can break time be longer than the shift?",
+        answer: "No. If break time is longer than the total shift length, the input should be corrected because net worked time cannot be negative.",
+      },
+      {
+        question: "Why show both hours and total minutes?",
+        answer: "Some timesheets and payroll systems use hours and minutes, while others rely on total minutes for easier conversion and reporting.",
+      },
+    ],
+    relatedTools: ["time-duration-calculator", "time-zone-calculator", "date-difference-calculator"],
+    formulaSummary:
+      "This tool calculates shift length from a start time and end time, then subtracts the break duration to return the net worked time.\n\nThe process works like this:\n\n- you enter the shift start time\n- you enter the shift end time\n- the calculator determines the full shift duration\n- if the shift crosses midnight, it accounts for that automatically\n- it subtracts the total entered break time\n- it returns the net time worked\n\nThis helps because work shifts are easy to miscalculate by hand, especially when overnight hours or deducted breaks are involved.",
+    example: {
+      inputs: { startTime: "08:00", endTime: "17:00", breakMinutes: 30 },
+      explanation:
+        "Calculate net worked time for a shift that starts at 8:00 AM, ends at 5:00 PM, and includes a 30-minute break. This is a common timesheet use case where the gross shift length needs to be reduced by the break before hours are reported.",
+      results: [
+        { label: "Worked time", value: "8 hours 30 minutes" },
+        { label: "Total worked minutes", value: "510" },
+      ],
+    },
+  },
+  {
     slug: "temperature-converter",
     title: "Temperature Converter",
     category: "conversions",
