@@ -340,6 +340,168 @@ export const toolDefinitions: ToolDefinition[] = [
     },
   },
   {
+    slug: "tip-calculator",
+    title: "Tip Calculator",
+    category: "finance",
+    description: "Calculate how much to tip from a bill total and tip percentage.",
+    intro: [
+      "Use this tip calculator to quickly figure out how much gratuity to leave based on your bill total and preferred tip percentage. This is useful for restaurants, delivery orders, personal services, travel situations, and any everyday payment where you want a fast tip estimate without doing percentage math in your head.",
+      "Enter the bill total and tip percentage, and the calculator will instantly show the tip amount you should leave.",
+    ],
+    keywords: ["tip calculator", "how much to tip", "gratuity calculator"],
+    inputs: [
+      {
+        name: "billTotal",
+        label: "Bill total",
+        type: "number",
+        placeholder: "85.50",
+        helpText: "Enter the total bill amount before the tip is added.",
+        required: true,
+        min: 0,
+        step: 0.01,
+      },
+      {
+        name: "tipPercentage",
+        label: "Tip percentage (%)",
+        type: "number",
+        placeholder: "18",
+        helpText: "Use 15 for fifteen percent, 20 for twenty percent, and so on.",
+        required: true,
+        min: 0,
+        step: 0.01,
+      },
+    ],
+    outputs: [
+      { key: "tipAmount", label: "Tip amount", format: "currency", description: "How much gratuity to leave based on the selected percentage." },
+      { key: "tipLabel", label: "Tip summary", format: "text", description: "Readable summary of the tip percentage and bill total used." },
+    ],
+    faq: [
+      {
+        question: "What does this calculator show?",
+        answer: "It shows how much to tip based on the bill total and tip percentage you enter.",
+      },
+      {
+        question: "Can I use decimal bill totals and percentages?",
+        answer: "Yes. The calculator supports decimal bill amounts and decimal tip percentages.",
+      },
+      {
+        question: "When would I use a tip calculator?",
+        answer: "A tip calculator is useful for restaurants, food delivery, taxis, salons, hospitality, and other service situations where gratuity is based on a percentage of the bill.",
+      },
+      {
+        question: "How do I calculate a tip manually?",
+        answer: "To calculate a tip manually, divide the tip percentage by 100 and multiply it by the bill total. For example, 20% of an $80 bill is 0.20 × 80 = $16.",
+      },
+      {
+        question: "Can I use this for custom tip percentages?",
+        answer: "Yes. You can enter any percentage you want, whether that is 10%, 18%, 22%, or a custom decimal value.",
+      },
+      {
+        question: "Does this include splitting the bill?",
+        answer: "No. This first version focuses only on the tip amount itself. Bill splitting can be added later if needed.",
+      },
+    ],
+    relatedTools: ["percentage-calculator", "savings-goal-calculator", "compound-interest-calculator"],
+    formulaSummary:
+      "This tool calculates the tip amount by applying the selected tip percentage to the bill total.\n\nThe calculation works like this:\n\n- you enter the bill total\n- you enter the tip percentage\n- the calculator converts the percentage into a decimal\n- it multiplies that decimal by the bill total\n- it returns the tip amount\n\nFor example, an 18% tip on an $85.50 bill is $15.39.\n\nThis is helpful because percentage-based tip math is common but easy to miscalculate quickly when paying in person or on the go.",
+    example: {
+      inputs: { billTotal: 85.5, tipPercentage: 18 },
+      explanation:
+        "Calculate an 18% tip on a bill total of $85.50. This is a common real-world situation where you want to know the gratuity amount quickly without doing the percentage math yourself.",
+      results: [
+        { label: "Tip amount", value: "$15.39" },
+      ],
+    },
+  },
+  {
+    slug: "savings-goal-calculator",
+    title: "Savings Goal Calculator",
+    category: "finance",
+    description: "Estimate how long it will take to reach a savings goal using recurring contributions.",
+    intro: [
+      "Use this savings goal calculator to estimate how long it may take to reach a target savings amount based on a fixed recurring contribution. This is useful for planning vacations, emergency funds, larger purchases, short-term goals, and other savings targets where you want a simple timeline estimate without adding investment assumptions.",
+      "Enter your savings goal, contribution amount, and contribution frequency, and the calculator will estimate how many contributions and how much time it may take to reach the goal.",
+    ],
+    keywords: ["savings goal calculator", "how long to save", "savings timeline calculator"],
+    inputs: [
+      {
+        name: "goalAmount",
+        label: "Savings goal",
+        type: "number",
+        placeholder: "5000",
+        helpText: "Enter the total amount you want to save.",
+        required: true,
+        min: 0.01,
+        step: 0.01,
+      },
+      {
+        name: "contributionAmount",
+        label: "Contribution amount",
+        type: "number",
+        placeholder: "200",
+        helpText: "Enter the amount you plan to contribute each time.",
+        required: true,
+        min: 0.01,
+        step: 0.01,
+      },
+      {
+        name: "frequency",
+        label: "Contribution frequency",
+        type: "select",
+        helpText: "Choose how often you will make the contribution.",
+        required: true,
+        options: [
+          { label: "Weekly", value: "weekly" },
+          { label: "Biweekly", value: "biweekly" },
+          { label: "Monthly", value: "monthly" },
+        ],
+      },
+    ],
+    outputs: [
+      { key: "contributionsNeeded", label: "Contributions needed", format: "number", description: "How many recurring contributions are needed to reach the goal." },
+      { key: "estimatedTimeText", label: "Estimated time", format: "text", description: "Readable timeline estimate to reach the savings goal." },
+      { key: "frequencyLabel", label: "Savings summary", format: "text", description: "Summary of the number of contributions and the goal amount." },
+    ],
+    faq: [
+      {
+        question: "Does this include interest or investment growth?",
+        answer: "No. This first version is intentionally simple and estimates progress using recurring contributions only, without interest or returns.",
+      },
+      {
+        question: "What frequencies are included?",
+        answer: "This version supports weekly, biweekly, and monthly contribution schedules.",
+      },
+      {
+        question: "When would I use a savings goal calculator?",
+        answer: "A savings goal calculator is useful for planning vacations, emergency funds, larger purchases, seasonal expenses, and other goals where you want to estimate how long steady saving may take.",
+      },
+      {
+        question: "How is the timeline calculated?",
+        answer: "The calculator divides the savings goal by the recurring contribution amount to estimate how many contributions are needed, then translates that into an approximate timeline based on the selected contribution frequency.",
+      },
+      {
+        question: "Why is the result approximate?",
+        answer: "The result is approximate because weekly and biweekly contributions do not convert into whole months evenly. The tool gives a practical estimate rather than an exact calendar schedule.",
+      },
+      {
+        question: "Can I use this for debt payoff?",
+        answer: "This tool is designed for savings goals, but the same basic recurring-contribution logic can help estimate payoff timelines in simple cases without interest.",
+      },
+    ],
+    relatedTools: ["tip-calculator", "compound-interest-calculator", "loan-payment-calculator"],
+    formulaSummary:
+      "This tool estimates how long it will take to reach a savings goal by dividing the goal amount by the recurring contribution amount and then translating the required number of contributions into time based on the selected frequency.\n\nThe process works like this:\n\n- you enter the total savings goal\n- you enter the amount you will contribute each time\n- you choose the contribution frequency\n- the calculator estimates how many contributions are required\n- it converts that into an approximate timeline\n\nFor example, saving $200 per month toward a $5,000 goal would require 25 monthly contributions, which is about 25 months.\n\nThis is helpful for practical goal planning because it gives you a simple no-interest timeline without turning the calculation into a full investment model.",
+    example: {
+      inputs: { goalAmount: 5000, contributionAmount: 200, frequency: "monthly" },
+      explanation:
+        "Estimate how long it takes to save $5,000 by contributing $200 every month. This is a common planning scenario for a vacation, emergency fund, or major purchase where you want a simple timeline estimate based on steady saving.",
+      results: [
+        { label: "Contributions needed", value: "25" },
+        { label: "Estimated time", value: "25 months" },
+      ],
+    },
+  },
+  {
     slug: "date-difference-calculator",
     title: "Date Difference Calculator",
     category: "time",

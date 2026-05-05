@@ -28,6 +28,28 @@ test("calculateCompoundInterest returns growth values", () => {
   assert.equal(result.finalAmount, 16470.09);
 });
 
+test("calculateTip returns expected gratuity", () => {
+  const result = logic.calculateTip({
+    billTotal: 85.5,
+    tipPercentage: 18,
+  });
+
+  assert.equal(result.tipAmount, 15.39);
+  assert.equal(result.tipLabel, "18% tip on $85.50");
+});
+
+test("calculateSavingsGoal returns expected contribution timeline", () => {
+  const result = logic.calculateSavingsGoal({
+    goalAmount: 5000,
+    contributionAmount: 200,
+    frequency: "monthly",
+  });
+
+  assert.equal(result.contributionsNeeded, 25);
+  assert.equal(result.estimatedMonths, 25);
+  assert.equal(result.estimatedTimeText, "2 years and 1 months");
+});
+
 test("calculateDateDifference returns absolute days", () => {
   const result = logic.calculateDateDifference({
     startDate: "2026-01-01",

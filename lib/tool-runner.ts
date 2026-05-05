@@ -32,6 +32,17 @@ export function runToolCalculation(category: string, slug: string, values: Recor
         timesPerYear: parseNumber(values.timesPerYear),
         years: parseNumber(values.years),
       });
+    case "tip-calculator":
+      return logic.calculateTip({
+        billTotal: parseNumber(values.billTotal),
+        tipPercentage: parseNumber(values.tipPercentage),
+      });
+    case "savings-goal-calculator":
+      return logic.calculateSavingsGoal({
+        goalAmount: parseNumber(values.goalAmount),
+        contributionAmount: parseNumber(values.contributionAmount),
+        frequency: values.frequency,
+      });
     case "date-difference-calculator":
       return logic.calculateDateDifference({
         startDate: values.startDate,

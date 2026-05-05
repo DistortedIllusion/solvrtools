@@ -123,6 +123,18 @@ export const siteConfig = {
       featured: true,
     },
     {
+      slug: "tip-calculator",
+      category: "finance",
+      name: "Tip Calculator",
+      summary: "Calculate how much to tip from a bill total and tip percentage.",
+    },
+    {
+      slug: "savings-goal-calculator",
+      category: "finance",
+      name: "Savings Goal Calculator",
+      summary: "Estimate how long it will take to reach a savings goal using recurring contributions.",
+    },
+    {
       slug: "time-duration-calculator",
       category: "time",
       name: "Time Duration Calculator",
