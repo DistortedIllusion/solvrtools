@@ -218,6 +218,18 @@ export const siteConfig = {
       featured: true,
     },
     {
+      slug: "tile-calculator",
+      category: "home",
+      name: "Tile Calculator",
+      summary: "Estimate tiles and tile packs needed for a floor or wall area.",
+    },
+    {
+      slug: "concrete-calculator",
+      category: "home",
+      name: "Concrete Calculator",
+      summary: "Estimate how much concrete is needed for a rectangular slab or filled volume.",
+    },
+    {
       slug: "square-footage-calculator",
       category: "home",
       name: "Square Footage Calculator",

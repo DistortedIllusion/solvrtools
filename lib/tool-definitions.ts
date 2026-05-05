@@ -1712,6 +1712,220 @@ export const toolDefinitions: ToolDefinition[] = [
     },
   },
   {
+    slug: "tile-calculator",
+    title: "Tile Calculator",
+    category: "home",
+    description: "Estimate how many tiles and tile packs are needed for a floor or wall area.",
+    intro: [
+      "Use this tile calculator to estimate the number of tiles and tile packs needed for a project area. This is useful for flooring, backsplashes, bathrooms, kitchens, and other home projects where you want a quick planning estimate before buying materials.",
+      "You can enter the area dimensions directly or use a total square footage value, then add the size of one tile and the number of tiles in a pack to estimate how much material to buy.",
+    ],
+    keywords: ["tile calculator", "how many tiles do I need", "tile pack calculator"],
+    inputs: [
+      {
+        name: "areaInputMode",
+        label: "Area input method",
+        type: "select",
+        helpText: "Choose whether to enter dimensions or total square footage.",
+        required: true,
+        options: [
+          { label: "Length and width", value: "dimensions" },
+          { label: "Total square footage", value: "squareFeet" },
+        ],
+      },
+      {
+        name: "length",
+        label: "Area length (feet)",
+        type: "number",
+        placeholder: "12",
+        helpText: "Measure the length of the area to be tiled in feet.",
+        required: true,
+        min: 0.1,
+        step: 0.1,
+      },
+      {
+        name: "width",
+        label: "Area width (feet)",
+        type: "number",
+        placeholder: "10",
+        helpText: "Measure the width of the area to be tiled in feet.",
+        required: true,
+        min: 0.1,
+        step: 0.1,
+      },
+      {
+        name: "area",
+        label: "Total square footage",
+        type: "number",
+        placeholder: "120",
+        helpText: "Enter the total area directly if you already know it in square feet.",
+        required: true,
+        min: 0.1,
+        step: 0.1,
+      },
+      {
+        name: "tileLength",
+        label: "Tile length (inches)",
+        type: "number",
+        placeholder: "12",
+        helpText: "Enter the length of a single tile in inches.",
+        required: true,
+        min: 0.1,
+        step: 0.1,
+      },
+      {
+        name: "tileWidth",
+        label: "Tile width (inches)",
+        type: "number",
+        placeholder: "12",
+        helpText: "Enter the width of a single tile in inches.",
+        required: true,
+        min: 0.1,
+        step: 0.1,
+      },
+      {
+        name: "tilesPerPack",
+        label: "Tiles per pack",
+        type: "number",
+        placeholder: "10",
+        helpText: "Enter how many tiles come in one pack or box.",
+        required: true,
+        min: 1,
+        step: 1,
+      },
+    ],
+    outputs: [
+      { key: "totalArea", label: "Area to tile", format: "number", description: "Total square footage used for the tile estimate.", suffix: " sq ft" },
+      { key: "tilesRequired", label: "Tiles required", format: "number", description: "Estimated number of tiles needed to cover the area." },
+      { key: "packsRequired", label: "Tile packs required", format: "number", description: "Number of packs needed, rounded up to a full pack." },
+      { key: "tileAreaLabel", label: "Tile coverage note", format: "text", description: "Shows how much area one tile covers." },
+    ],
+    faq: [
+      {
+        question: "Can I enter dimensions instead of square footage?",
+        answer: "Yes. This version lets you either enter length and width or provide the total square footage directly.",
+      },
+      {
+        question: "Why do tile dimensions use inches while area uses feet?",
+        answer: "That reflects common real-world shopping and measuring patterns in home projects. Area is often measured in square feet, while tile size is often listed in inches.",
+      },
+      {
+        question: "When would I use a tile calculator?",
+        answer: "A tile calculator is useful for flooring, showers, backsplashes, kitchens, bathrooms, and other tile projects where you want to estimate materials before buying.",
+      },
+      {
+        question: "Why does the pack count round up?",
+        answer: "Tile is usually sold by the box or pack, so if you need part of a pack, you still need to buy the next full pack.",
+      },
+      {
+        question: "Does this include extra tile for cuts or waste?",
+        answer: "No. This first version focuses on base coverage only. If you want extra for cuts, damage, or future repairs, you should plan to buy additional material.",
+      },
+      {
+        question: "Can I use this for wall tile too?",
+        answer: "Yes. The same area-based logic works for both floor and wall tile planning as long as your measurements are correct.",
+      },
+    ],
+    relatedTools: ["square-footage-calculator", "concrete-calculator", "paint-calculator"],
+    formulaSummary:
+      "This tool estimates the number of tiles needed by dividing the total area to be covered by the area of a single tile. It then divides the tile count by the number of tiles per pack and rounds up to the next full pack.\n\nThe process works like this:\n\n- you enter the total area, either by dimensions or total square footage\n- you enter the size of one tile\n- the calculator converts the tile dimensions into square feet\n- it estimates how many tiles are needed to cover the area\n- it estimates how many full packs are needed\n\nThis helps with practical buying decisions because tile is sold individually in theory but often purchased by the pack or box in real projects.",
+    example: {
+      inputs: { areaInputMode: "dimensions", length: 12, width: 10, tileLength: 12, tileWidth: 12, tilesPerPack: 10 },
+      explanation:
+        "Estimate tile needs for a 12 foot by 10 foot area using 12 inch by 12 inch tiles sold in packs of 10. This is a simple real-world planning case where you want both the tile count and the number of boxes to buy.",
+      results: [
+        { label: "Tiles required", value: "120" },
+        { label: "Tile packs required", value: "12" },
+      ],
+    },
+  },
+  {
+    slug: "concrete-calculator",
+    title: "Concrete Calculator",
+    category: "home",
+    description: "Estimate how much concrete is needed for a rectangular slab or filled volume.",
+    intro: [
+      "Use this concrete calculator to estimate the amount of concrete needed for a rectangular slab, pad, or filled volume. This is useful for patios, walkways, shed pads, small foundations, posts, and other projects where you need a quick material estimate before ordering or mixing concrete.",
+      "Enter the length, width, and height of the space to be filled, and the calculator will estimate the required volume in common concrete ordering units.",
+    ],
+    keywords: ["concrete calculator", "how much concrete do I need", "cubic yard concrete calculator"],
+    inputs: [
+      {
+        name: "length",
+        label: "Length (feet)",
+        type: "number",
+        placeholder: "10",
+        helpText: "Enter the length of the slab or filled area in feet.",
+        required: true,
+        min: 0.1,
+        step: 0.1,
+      },
+      {
+        name: "width",
+        label: "Width (feet)",
+        type: "number",
+        placeholder: "10",
+        helpText: "Enter the width of the slab or filled area in feet.",
+        required: true,
+        min: 0.1,
+        step: 0.1,
+      },
+      {
+        name: "height",
+        label: "Height or depth (feet)",
+        type: "number",
+        placeholder: "0.5",
+        helpText: "Enter the thickness or depth of the concrete pour in feet.",
+        required: true,
+        min: 0.1,
+        step: 0.01,
+      },
+    ],
+    outputs: [
+      { key: "cubicFeet", label: "Concrete needed (cubic feet)", format: "number", description: "Total volume in cubic feet." },
+      { key: "cubicYards", label: "Concrete needed (cubic yards)", format: "number", description: "Common concrete ordering unit in the United States." },
+      { key: "cubicMeters", label: "Concrete needed (cubic meters)", format: "number", description: "Common concrete ordering unit in many metric regions." },
+      { key: "concreteLabel", label: "Concrete ordering note", format: "text", description: "Quick note about the most practical concrete units." },
+    ],
+    faq: [
+      {
+        question: "What units should I use when ordering concrete?",
+        answer: "In many US home projects, concrete is commonly ordered in cubic yards. In many metric regions, cubic meters are more common. This tool shows both for convenience.",
+      },
+      {
+        question: "When would I use a concrete calculator?",
+        answer: "A concrete calculator is useful for patios, pads, walkways, slabs, footings, and other projects where you need to estimate pour volume before ordering material.",
+      },
+      {
+        question: "Why show cubic feet too?",
+        answer: "Cubic feet can help with smaller projects, quick volume checks, or situations where you are comparing bagged concrete amounts or rough dimensional calculations.",
+      },
+      {
+        question: "Does this tool handle shapes other than a rectangle?",
+        answer: "No. This first version is intentionally limited to a simple rectangular slab or filled volume so the estimate stays clear and reliable.",
+      },
+      {
+        question: "Should I order exactly the calculated amount?",
+        answer: "Many real projects benefit from ordering a little extra to account for uneven ground, spillage, or small planning differences. This first version gives the base volume estimate only.",
+      },
+      {
+        question: "Can I use this for depth in inches?",
+        answer: "You should convert inches into feet before entering the depth. For example, 6 inches is 0.5 feet.",
+      },
+    ],
+    relatedTools: ["tile-calculator", "square-footage-calculator", "paint-calculator"],
+    formulaSummary:
+      "This tool estimates concrete volume by multiplying the length, width, and height of a rectangular space to get the total filled volume.\n\nThe process works like this:\n\n- you enter the length\n- you enter the width\n- you enter the depth or height\n- the calculator multiplies those values to get cubic feet\n- it converts that volume into cubic yards and cubic meters\n\nThis is helpful because concrete is often planned dimensionally but ordered volumetrically, and the ordering unit can vary by region or supplier.",
+    example: {
+      inputs: { length: 10, width: 10, height: 0.5 },
+      explanation:
+        "Estimate concrete for a 10 foot by 10 foot slab poured 6 inches deep. This is a common patio or pad planning case where you want a quick base volume estimate before contacting a supplier or buying bagged material.",
+      results: [
+        { label: "Concrete needed", value: "50 cubic feet, about 1.85 cubic yards, or about 1.42 cubic meters" },
+      ],
+    },
+  },
+  {
     slug: "paint-calculator",
     title: "Paint Calculator",
     category: "home",
@@ -1876,6 +2090,7 @@ export const toolDefinitions: ToolDefinition[] = [
     ],
     outputs: [
       { key: "squareFeet", label: "Total square footage", format: "number", suffix: " sq ft", description: "Area of the rectangular surface or room." },
+      { key: "areaLabel", label: "Area summary", format: "text", description: "Readable square footage summary for the entered dimensions." },
     ],
     faq: [
       {
@@ -1911,7 +2126,7 @@ export const toolDefinitions: ToolDefinition[] = [
         answer: "Square footage helps you estimate how much material you need, compare costs, and avoid overbuying or underbuying supplies for a project.",
       },
     ],
-    relatedTools: ["paint-calculator"],
+    relatedTools: ["tile-calculator", "concrete-calculator", "paint-calculator"],
     formulaSummary:
       "This calculator finds the area of a rectangular space using a simple formula:\n\nArea = length × width\n\nThe result is expressed in square units, such as square feet, when the measurements are entered in feet.\n\nThis type of calculation is commonly used for:\n\n- flooring estimates\n- paint and wall coverage planning\n- tile and carpet measurement\n- room sizing\n- basic renovation planning\n\nSquare footage is one of the most common ways to estimate the size of a space, and even a simple room measurement can be useful when planning materials, pricing, or layout decisions.",
     example: {

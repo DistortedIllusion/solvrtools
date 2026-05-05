@@ -262,6 +262,33 @@ test("calculateReadingTime returns word count and readable estimate", () => {
   assert.equal(result.speedLabel, "200 words per minute reading speed used.");
 });
 
+test("calculateTile returns tile and pack counts", () => {
+  const result = logic.calculateTile({
+    areaInputMode: "dimensions",
+    length: 12,
+    width: 10,
+    tileLength: 12,
+    tileWidth: 12,
+    tilesPerPack: 10,
+  });
+
+  assert.equal(result.totalArea, 120);
+  assert.equal(result.tilesRequired, 120);
+  assert.equal(result.packsRequired, 12);
+});
+
+test("calculateConcrete returns common concrete volume units", () => {
+  const result = logic.calculateConcrete({
+    length: 10,
+    width: 10,
+    height: 0.5,
+  });
+
+  assert.equal(result.cubicFeet, 50);
+  assert.equal(result.cubicYards, 1.85);
+  assert.equal(result.cubicMeters, 1.42);
+});
+
 test("analyzeWordCount returns word and character counts", () => {
   const result = logic.analyzeWordCount({ text: "Hello SolvrTools world" });
   assert.equal(result.words, 3);
@@ -315,6 +342,7 @@ test("calculateSquareFootage returns area", () => {
   });
 
   assert.equal(result.squareFeet, 180);
+  assert.equal(result.areaLabel, "A 12 foot by 15 foot area covers 180 square feet.");
 });
 
 test("calculateBmi returns expected metric BMI and category", () => {

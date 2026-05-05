@@ -109,6 +109,22 @@ export function runToolCalculation(category: string, slug: string, values: Recor
         text: values.text,
         readingSpeed: parseNumber(values.readingSpeed),
       });
+    case "tile-calculator":
+      return logic.calculateTile({
+        areaInputMode: values.areaInputMode,
+        length: parseNumber(values.length),
+        width: parseNumber(values.width),
+        area: parseNumber(values.area),
+        tileLength: parseNumber(values.tileLength),
+        tileWidth: parseNumber(values.tileWidth),
+        tilesPerPack: parseNumber(values.tilesPerPack),
+      });
+    case "concrete-calculator":
+      return logic.calculateConcrete({
+        length: parseNumber(values.length),
+        width: parseNumber(values.width),
+        height: parseNumber(values.height),
+      });
     case "word-counter":
       return logic.analyzeWordCount({ text: values.text });
     case "case-converter":

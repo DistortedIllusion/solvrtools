@@ -118,22 +118,36 @@ function ToolInputForm({
   error: string | null;
 }) {
   const visibleFields = definition.inputs.filter((field) => {
-    if (definition.slug !== "bmi-calculator") {
-      return true;
+    if (definition.slug === "bmi-calculator") {
+      const unitSystem = values.unitSystem ?? "metric";
+
+      if (["unitSystem"].includes(field.name)) {
+        return true;
+      }
+
+      if (unitSystem === "metric") {
+        return ["heightCm", "weightKg"].includes(field.name);
+      }
+
+      if (unitSystem === "imperial") {
+        return ["heightFeet", "heightInches", "weightPounds"].includes(field.name);
+      }
     }
 
-    const unitSystem = values.unitSystem ?? "metric";
+    if (definition.slug === "tile-calculator") {
+      const areaInputMode = values.areaInputMode ?? "dimensions";
 
-    if (["unitSystem"].includes(field.name)) {
-      return true;
-    }
+      if (field.name === "areaInputMode") {
+        return true;
+      }
 
-    if (unitSystem === "metric") {
-      return ["heightCm", "weightKg"].includes(field.name);
-    }
+      if (areaInputMode === "dimensions") {
+        return ["length", "width", "tileLength", "tileWidth", "tilesPerPack"].includes(field.name);
+      }
 
-    if (unitSystem === "imperial") {
-      return ["heightFeet", "heightInches", "weightPounds"].includes(field.name);
+      if (areaInputMode === "squareFeet") {
+        return ["area", "tileLength", "tileWidth", "tilesPerPack"].includes(field.name);
+      }
     }
 
     return true;
