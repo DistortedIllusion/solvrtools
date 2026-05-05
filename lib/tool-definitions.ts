@@ -1112,12 +1112,13 @@ export const toolDefinitions: ToolDefinition[] = [
     slug: "bmi-calculator",
     title: "BMI Calculator",
     category: "health",
-    description: "Estimate body mass index using metric or imperial measurements for height and weight.",
+    description: "Calculate body mass index using metric or imperial height and weight measurements.",
     intro: [
-      "Use this BMI calculator to estimate body mass index from your height and weight. BMI is a quick screening measurement often used to group weight status into broad categories such as underweight, healthy weight, overweight, and obesity.",
-      "This tool supports both metric and imperial inputs so you can calculate BMI using centimeters and kilograms or feet, inches, and pounds. It is most useful as a rough starting point rather than a full health assessment.",
+      "Use this BMI calculator to estimate your body mass index from height and weight. BMI, short for body mass index, is a common screening tool used to place adult body size into broad ranges such as underweight, healthy weight, overweight, and obesity.",
+      "This calculator supports both metric and imperial units, so you can enter centimeters and kilograms or feet, inches, and pounds. It is useful for getting a quick estimate, comparing changes over time, or understanding where a result falls within standard adult BMI ranges.",
+      "BMI is best treated as a starting point rather than a full health assessment. It can be helpful for general screening, but it does not directly measure body fat, muscle mass, or overall health status.",
     ],
-    keywords: ["bmi calculator", "body mass index calculator", "healthy weight calculator"],
+    keywords: ["bmi calculator", "body mass index calculator", "calculate bmi", "healthy bmi range"],
     inputs: [
       {
         name: "unitSystem",
@@ -1134,7 +1135,7 @@ export const toolDefinitions: ToolDefinition[] = [
         label: "Height (cm)",
         type: "number",
         placeholder: "178",
-        helpText: "Use this field when calculating with metric units.",
+        helpText: "Enter your height in centimeters when using metric units.",
         required: true,
         min: 1,
         step: 0.1,
@@ -1144,7 +1145,7 @@ export const toolDefinitions: ToolDefinition[] = [
         label: "Weight (kg)",
         type: "number",
         placeholder: "78",
-        helpText: "Use this field when calculating with metric units.",
+        helpText: "Enter your body weight in kilograms when using metric units.",
         required: true,
         min: 0.1,
         step: 0.1,
@@ -1154,7 +1155,7 @@ export const toolDefinitions: ToolDefinition[] = [
         label: "Height (feet)",
         type: "number",
         placeholder: "5",
-        helpText: "Use this field when calculating with imperial units.",
+        helpText: "Enter the feet portion of your height when using imperial units.",
         required: true,
         min: 0,
         step: 1,
@@ -1164,7 +1165,7 @@ export const toolDefinitions: ToolDefinition[] = [
         label: "Additional height (inches)",
         type: "number",
         placeholder: "10",
-        helpText: "Enter the remaining inches after feet for imperial height.",
+        helpText: "Enter the remaining inches beyond full feet for imperial height.",
         required: true,
         min: 0,
         step: 0.1,
@@ -1174,7 +1175,7 @@ export const toolDefinitions: ToolDefinition[] = [
         label: "Weight (lb)",
         type: "number",
         placeholder: "172",
-        helpText: "Use this field when calculating with imperial units.",
+        helpText: "Enter your body weight in pounds when using imperial units.",
         required: true,
         min: 0.1,
         step: 0.1,
@@ -1185,7 +1186,7 @@ export const toolDefinitions: ToolDefinition[] = [
         key: "bmi",
         label: "BMI",
         format: "number",
-        description: "Your estimated body mass index based on the selected inputs.",
+        description: "Estimated body mass index based on the selected height and weight inputs.",
       },
       {
         key: "category",
@@ -1197,34 +1198,42 @@ export const toolDefinitions: ToolDefinition[] = [
         key: "healthyRange",
         label: "Reference note",
         format: "text",
-        description: "General adult reference range often used alongside BMI.",
+        description: "General adult BMI guidance commonly used for quick interpretation.",
       },
     ],
     faq: [
       {
-        question: "What does BMI measure?",
-        answer: "BMI estimates body mass relative to height. It is a quick screening tool, not a full picture of overall health.",
+        question: "What is BMI?",
+        answer: "BMI stands for body mass index. It is a simple screening measurement that compares weight to height to estimate whether body size falls into a common adult reference range.",
+      },
+      {
+        question: "How do I calculate BMI?",
+        answer: "BMI is calculated by dividing body weight by height squared. In metric form, that means kilograms divided by meters squared. If you use imperial inputs, the calculator converts them first and then performs the same calculation behind the scenes.",
       },
       {
         question: "Can I use metric or imperial units?",
-        answer: "Yes. This calculator accepts either centimeters and kilograms or feet, inches, and pounds.",
-      },
-      {
-        question: "Is BMI always accurate for every person?",
-        answer: "No. BMI is a broad screening method and does not directly measure muscle mass, body composition, or health conditions. Athletic builds, age, and other factors can make BMI less useful on its own.",
+        answer: "Yes. This calculator supports both centimeters and kilograms as well as feet, inches, and pounds.",
       },
       {
         question: "What BMI range is usually considered healthy?",
         answer: "For most adults, a BMI from 18.5 to 24.9 is commonly considered a healthy range. Under 18.5 is often classified as underweight, 25 to 29.9 as overweight, and 30 or higher as obesity.",
       },
       {
-        question: "Should I use BMI as a medical diagnosis?",
-        answer: "No. BMI can be a helpful starting point, but it should not replace professional medical advice or a more complete health assessment.",
+        question: "Is BMI accurate for everyone?",
+        answer: "Not always. BMI is a broad screening tool and does not directly measure body fat, muscle mass, bone density, or health conditions. People with more muscle or other body composition differences may find BMI less representative.",
+      },
+      {
+        question: "Should BMI be used as a medical diagnosis?",
+        answer: "No. BMI is useful as a quick screening estimate, but it should not replace professional medical advice or a more complete health evaluation.",
+      },
+      {
+        question: "Why might someone check BMI over time?",
+        answer: "BMI can be useful for tracking broad trends over time, especially when weight or lifestyle changes are happening. It is often more useful for comparison and screening than as a one-time verdict.",
       },
     ],
     relatedTools: [],
     formulaSummary:
-      "BMI is calculated by dividing body weight by height squared.\n\nMetric formula:\nBMI = weight in kilograms ÷ (height in meters × height in meters)\n\nImperial measurements are first converted into metric values behind the scenes before the BMI result is calculated.\n\nGeneral adult BMI categories are commonly interpreted as:\n\n- Under 18.5: Underweight\n- 18.5 to 24.9: Healthy weight\n- 25 to 29.9: Overweight\n- 30 and above: Obesity\n\nBMI is useful because it is simple and fast, but it should be treated as a screening estimate rather than a complete measure of health.",
+      "BMI is calculated by dividing body weight by height squared. This creates a simple ratio that helps estimate whether weight is broadly low, typical, high, or very high relative to height.\n\nMetric formula:\nBMI = weight in kilograms ÷ (height in meters × height in meters)\n\nIf you use imperial measurements, the calculator first converts feet, inches, and pounds into metric values and then applies the same formula.\n\nGeneral adult BMI categories are commonly interpreted as:\n\n- Under 18.5: Underweight\n- 18.5 to 24.9: Healthy weight\n- 25 to 29.9: Overweight\n- 30 and above: Obesity\n\nBMI is popular because it is fast and easy to calculate, but it has important limits. It does not distinguish between fat and muscle, and it does not capture the full picture of health. That means the result is most useful as a screening estimate, not as a complete diagnosis.",
     example: {
       inputs: {
         unitSystem: "metric",
@@ -1235,8 +1244,10 @@ export const toolDefinitions: ToolDefinition[] = [
         weightPounds: 172,
       },
       explanation:
-        "Estimate BMI for someone who is 178 centimeters tall and weighs 78 kilograms. This example shows how BMI gives a quick weight-to-height screening estimate and then places the result into a broad adult category.",
+        "Estimate BMI for someone who is 178 centimeters tall and weighs 78 kilograms. Convert height to meters, square it, and divide the body weight by that number. The result shows how the person’s weight compares to common adult BMI reference ranges.",
       results: [
+        { label: "Height", value: "178 cm" },
+        { label: "Weight", value: "78 kg" },
         { label: "BMI", value: "24.6" },
         { label: "Category", value: "Healthy weight" },
       ],
