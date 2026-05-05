@@ -192,6 +192,12 @@ export const siteConfig = {
       featured: true,
     },
     {
+      slug: "reading-time-calculator",
+      category: "text",
+      name: "Reading Time Calculator",
+      summary: "Estimate reading time from pasted text using speed-based reading presets.",
+    },
+    {
       slug: "paint-calculator",
       category: "home",
       name: "Paint Calculator",

@@ -1317,6 +1317,94 @@ export const toolDefinitions: ToolDefinition[] = [
     },
   },
   {
+    slug: "reading-time-calculator",
+    title: "Reading Time Calculator",
+    category: "text",
+    description: "Estimate how long a piece of text will take to read using speed-based reading presets.",
+    intro: [
+      "Use this reading time calculator to estimate how long it may take to read a block of text based on its word count and a selected reading speed. This is useful for blog drafts, newsletters, scripts, reports, study material, and any content where quick time expectations help with planning.",
+      "Paste your text, choose a reading-speed preset, and the tool will estimate the reading time without forcing you to count words or guess manually.",
+    ],
+    keywords: ["reading time calculator", "estimated reading time", "how long to read text"],
+    inputs: [
+      {
+        name: "text",
+        label: "Text to analyze",
+        type: "textarea",
+        placeholder: "Paste or type text here",
+        helpText: "Paste the full text you want to estimate reading time for.",
+        required: true,
+      },
+      {
+        name: "readingSpeed",
+        label: "Reading speed",
+        type: "select",
+        helpText: "Choose the reading pace that best fits the audience or situation.",
+        required: true,
+        options: [
+          { label: "Early reader (75 wpm)", value: "75" },
+          { label: "Developing reader (125 wpm)", value: "125" },
+          { label: "Careful reader (150 wpm)", value: "150" },
+          { label: "Average reader (200 wpm)", value: "200" },
+          { label: "Fast reader (300 wpm)", value: "300" },
+          { label: "Skimming (400 wpm)", value: "400" },
+        ],
+      },
+    ],
+    outputs: [
+      { key: "wordCount", label: "Word count", format: "number", description: "Total words detected in the provided text." },
+      { key: "readingTimeMinutes", label: "Estimated reading time (minutes)", format: "number", description: "Estimated reading time shown as decimal minutes." },
+      { key: "readingTimeText", label: "Estimated reading time", format: "text", description: "Readable time estimate based on the selected reading speed." },
+      { key: "speedLabel", label: "Reading speed used", format: "text", description: "The speed preset used to estimate the reading time." },
+    ],
+    faq: [
+      {
+        question: "What does this calculator measure?",
+        answer: "This calculator estimates reading time by counting the words in your text and applying the selected reading-speed preset in words per minute.",
+      },
+      {
+        question: "Why use speed presets instead of reading levels like grade or education labels?",
+        answer: "Speed presets make the estimate clearer and more honest because the tool is estimating pace, not reading ability or comprehension level. They also make it easier to choose slower or faster reading scenarios for planning.",
+      },
+      {
+        question: "When would I use a reading time calculator?",
+        answer: "A reading time calculator is useful for blog writing, email planning, training material, scripts, study prep, presentations, and any content where you want to estimate audience time commitment.",
+      },
+      {
+        question: "Does this include comprehension time?",
+        answer: "No. This is a reading-speed estimate based on word count only. Dense material, technical content, and rereading may take longer.",
+      },
+      {
+        question: "Why might the real reading time be different?",
+        answer: "Actual reading time can vary based on text difficulty, reader familiarity, distractions, formatting, and whether the person is reading carefully or skimming.",
+      },
+      {
+        question: "Can teachers use this for different classroom reading levels?",
+        answer: "Yes. The slower reading-speed presets are useful for estimating how long a passage may take for early or developing readers, while faster presets can help with older or more confident readers.",
+      },
+      {
+        question: "Can I use this for short text too?",
+        answer: "Yes. Very short text may produce a result in seconds instead of full minutes, which is often more helpful for quick copy or UI text.",
+      },
+      {
+        question: "Does the tool also show word count?",
+        answer: "Yes. The first version includes both word count and estimated reading time so the result is more useful for writing and planning.",
+      },
+    ],
+    relatedTools: ["word-counter", "case-converter"],
+    formulaSummary:
+      "This tool estimates reading time by counting the words in your text and dividing that count by the selected reading speed in words per minute.\n\nThe process works like this:\n\n- you paste or type the text\n- the calculator counts the words\n- it applies the selected reading-speed preset\n- it returns the estimated reading time in a readable format\n\nFor example, a 400-word article at 200 words per minute would take about 2 minutes to read.\n\nThis is useful for planning content length, audience expectations, speaking prep, and general writing workflow decisions.",
+    example: {
+      inputs: { text: "SolvrTools helps people solve practical problems with quick online tools.", readingSpeed: 200 },
+      explanation:
+        "Estimate the reading time for a short piece of text using an average reading pace of 200 words per minute. This shows how the calculator combines word count and selected pace to produce a quick planning estimate.",
+      results: [
+        { label: "Word count", value: "10" },
+        { label: "Estimated reading time", value: "about 3 seconds" },
+      ],
+    },
+  },
+  {
     slug: "word-counter",
     title: "Word Counter",
     category: "text",

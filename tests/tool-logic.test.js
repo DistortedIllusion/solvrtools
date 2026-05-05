@@ -228,6 +228,18 @@ test("calculateTimesheet subtracts breaks from worked time", () => {
   assert.equal(result.workedTimeText, "8 hours 30 minutes");
 });
 
+test("calculateReadingTime returns word count and readable estimate", () => {
+  const result = logic.calculateReadingTime({
+    text: "one two three four five six seven eight nine ten",
+    readingSpeed: 200,
+  });
+
+  assert.equal(result.wordCount, 10);
+  assert.equal(result.readingTimeMinutes, 0.05);
+  assert.equal(result.readingTimeText, "3 seconds");
+  assert.equal(result.speedLabel, "200 words per minute reading speed used.");
+});
+
 test("analyzeWordCount returns word and character counts", () => {
   const result = logic.analyzeWordCount({ text: "Hello SolvrTools world" });
   assert.equal(result.words, 3);

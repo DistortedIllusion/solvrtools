@@ -93,6 +93,11 @@ export function runToolCalculation(category: string, slug: string, values: Recor
       });
     case "coin-flipper":
       return logic.flipCoin();
+    case "reading-time-calculator":
+      return logic.calculateReadingTime({
+        text: values.text,
+        readingSpeed: parseNumber(values.readingSpeed),
+      });
     case "word-counter":
       return logic.analyzeWordCount({ text: values.text });
     case "case-converter":
